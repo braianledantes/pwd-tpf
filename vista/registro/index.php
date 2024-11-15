@@ -14,7 +14,7 @@ if ($sesion->estaActiva()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
-    <link rel="icon" href="../../favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="../assets/imagenes/favicon-32x32.png" type="image/png" sizes="32x32">
 
     <!-- bootstrap -->
     <?php include_once("../estructura/bootstrap.php"); ?>

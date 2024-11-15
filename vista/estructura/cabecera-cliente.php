@@ -14,7 +14,7 @@ if (!$session->esAdministrador() && !$session->esCliente()) {
         <div class="container-fluid">
             <a class="nav-link" href="/pwd-tpf/index.php">
                 <div class="d-flex align-items-center">
-                    <img class="ms-auto me-3" style="height: 80px; width: auto;" src="/pwd-tpf/angelwings.png" alt="logo Angel Wings">
+                    <img class="ms-auto me-3" style="height: 80px; width: auto;" src="/pwd-tpf/vista/assets/imagenes/angelwings.png" alt="logo Angel Wings">
                     <h3 class="mb-0 text-white">Angel Wings Jewelry</h3>
                 </div>
             </a>
