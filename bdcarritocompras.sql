@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2024 a las 15:43:31
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.3.11
+-- Tiempo de generación: 16-11-2024 a las 00:44:42
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -160,9 +160,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
-(1, 'braian1686', '$2y$10$Nn.hT7xcm6.IXp9RkEFQEOTc3Kbipc/n0lVJ7luuk5..8OdKWapnC', 'braian.ledantes@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
-(2, 'luci3075', '$2y$10$L7RGLhARJ6cfTsPaW9ttmOP1kJVNNouKSvb4tipYJzpHeMUXQqTKu', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
-(3, 'clara4938', '$2y$10$.U3SHqaR5fgVS2bLQQi.YePF6d8bxlyOvm9/Tiw1TODAAI5tcpUKe', 'clara.pelozo@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00');
+(1, 'braian1686', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'braian.ledantes@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
+(2, 'clara4938', '$2y$10$Fiqc9ebHmi0Ql4NXA/bJjea4fwpzY8SCDk7IcRVTFWujYm3cl8dBW', 'clara.pelozo@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
+(3, 'luci3075', '$2y$10$xqy5KXxA7qQh0qIlKzO//.uXn.Re9iVbgcAEnLFln/nM237ejflZq', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -180,10 +180,9 @@ CREATE TABLE `usuariorol` (
 --
 
 INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
-
 (1, 1),
 (2, 2),
-(3, 3);
+(3, 2);
 
 --
 -- Índices para tablas volcadas
@@ -309,7 +308,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Restricciones para tablas volcadas
