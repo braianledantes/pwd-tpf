@@ -62,7 +62,6 @@ class ABMUsuarioRol
         $arrayUs = $abmUs->buscar(['idusuario' => $param['idusuario']]);
         $abmRol = new ABMRol();
         $objRol = $abmRol->buscar(['idrol' => $param['idrol']]);
-        var_dump($objRol);
         $objUsuarioRol->setear($arrayUs[0], $objRol[0]);
 
         if ($objUsuarioRol->insertar()) {

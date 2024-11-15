@@ -1,6 +1,6 @@
 <?php
 include_once("../configuracion.php");
-$session = new Session();
+$session = new Sesion();
 ?>
 
 <!DOCTYPE html>

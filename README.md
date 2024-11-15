@@ -19,7 +19,7 @@
 4. Iniciar el servidor MySql
 5. Crear la base de datos *dbcarritocompras*
 6. Importar el contenido de la base de datos del archivo *bdcarritocompras.sql*
-7. Ingresar en el navegador la URL: http://localhost/pwd-tp-final/.
+7. Ingresar en el navegador la URL: http://localhost/pwd-tpf/.
 
 # Enunciado
 ## Objetivo

@@ -1,8 +1,8 @@
 <?php
 include_once '../../configuracion.php';
 $datos = data_submitted();
-$sesion = new session();
-if ($sesion->activa()) {
+$sesion = new Sesion();
+if ($sesion->estaActiva()) {
     header("Location: $PROJECT_PATH/Vista/home");
     exit;
 }
@@ -18,6 +18,8 @@ if ($sesion->activa()) {
 
     <!-- bootstrap -->
     <?php include_once("../estructura/bootstrap.php"); ?>
+    <!-- JQuery -->
+    <?php include_once("../estructura/jquery.php"); ?>
 
     <link rel="stylesheet" href="../css/estilos.css">
 
@@ -49,7 +51,7 @@ if ($sesion->activa()) {
         <div class="container mt-3">
             <div class="d-flex justify-content-center">
                 <div class="col d-flex justify-content-center" style="max-width: 800px;">
-                    <form action="../accion/accionRegistro.php" method="post" class="col-md-6 mt-3 " id="datosUsuario" name="usuarioNuevo">
+                    <form action="./accionRegistro.php" method="post" class="col-md-6 mt-3 " id="datosUsuario" name="usuarioNuevo">
                         <h1 class="h3 text-center">Registrarse</h1>
                         <div class="col-md-12">
                             <div class="mt-3">
@@ -97,15 +99,29 @@ if ($sesion->activa()) {
 
     <?php include_once("../estructura/footer.php"); ?>
 
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- jQuery Validate CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="../js/validacIones.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#nombre").focus();
 
-    <!-- bootstrap -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-        <script src="../js/validacIones.js"></script>
+            $("form").submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "./accionRegistro.php",
+                    method: "post",
+                    data: $("form").serialize(),
+                    success: function(respuesta) {
+                        console.log(respuesta);
+                        if (respuesta.status == "ok") {
+                            window.location.href = "../";
+                        } else {
+                            alert(respuesta.message);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

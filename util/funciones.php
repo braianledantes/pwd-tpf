@@ -27,12 +27,28 @@ function verEstructura($e)
     echo "</pre>";
 }
 
+/**
+ * Función que hashea la contraseña.
+ */
+function hashearContrasenia($constrasenia)
+{
+    return password_hash($constrasenia, PASSWORD_DEFAULT);
+}
+
+/**
+ * Función que verifica si la contraseña es correcta.
+ */
+function verificarContrasenia($contrasenia, $hash)
+{
+    return password_verify($contrasenia, $hash);
+}
+
 spl_autoload_register(function ($class_name) {
     //echo "class ".$class_name ;
     $directorys = array(
-        $GLOBALS['ROOT'] . 'Modelo/',
-        $GLOBALS['ROOT'] . 'Modelo/Conector/',
-        $GLOBALS['ROOT'] . 'Control/',
+        $GLOBALS['ROOT'] . 'modelo/',
+        $GLOBALS['ROOT'] . 'modelo/conector/',
+        $GLOBALS['ROOT'] . 'control/',
         //  $GLOBALS['ROOT'].'util/class/',
     );
 

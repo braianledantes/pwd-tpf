@@ -87,6 +87,11 @@ class ABMUsuario
     public function alta($param)
     {
         $resp = false;
+        
+        // hasheo de contraseña
+        $passHasheada = hashearContrasenia($param['uspass']);
+        $param['uspass'] = $passHasheada;
+
         $objUsuario = $this->cargarObjeto($param);
 
         if ($objUsuario->insertar()) {
@@ -190,7 +195,8 @@ class ABMUsuario
             if (isset($param['usdeshabilitado']))
                 $where .= " and usdeshabilitado ='" . $param['usdeshabilitado'] . "'";
         }
-        $arreglo = usuario::listar($where);
+        $usuario = new Usuario();
+        $arreglo = $usuario->listar($where);
         return $arreglo;
     }
 
