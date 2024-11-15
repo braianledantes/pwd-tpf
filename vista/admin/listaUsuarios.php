@@ -1,7 +1,7 @@
 <?php
 include_once '../../configuracion.php';
 $datos = data_submitted();
-$sesion = new Session(); 
+$sesion = new Sesion(); 
 
 if (!$sesion->esAdministrador()) {
     header('Location: ../index.php?messageErr=' . urlencode("No tiene los permisos para acceder"));

@@ -3,7 +3,7 @@ include_once '../../configuracion.php';
 
 $datos = data_submitted();
 var_dump($datos);
-$sesion = new session();
+$sesion = new Sesion();
 $abmUsuario = new abmusuario();
 $lista = $abmUsuario->buscar($datos);
 $idUsuario = $_SESSION['idusuario'];
