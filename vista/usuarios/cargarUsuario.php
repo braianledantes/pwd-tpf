@@ -1,11 +1,11 @@
 <?php
 include_once '../../configuracion.php';
 $datos = data_submitted();
-$sesion = new Sesion(); 
+$sesion = new Sesion();
 
 if (!$sesion->esAdministrador()) {
     header('Location: ../index.php?messageErr=' . urlencode("No tiene los permisos para acceder"));
-    exit; 
+    exit;
 }
 ?>
 
@@ -26,7 +26,7 @@ if (!$sesion->esAdministrador()) {
 </head>
 
 <body>
-    <?php include_once("../estructura/cabecera-admin.php"); ?>
+    <?php include_once("../estructura/cabecera.php"); ?>
 
     <main>
         <?php
@@ -87,25 +87,19 @@ if (!$sesion->esAdministrador()) {
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="mt-4">
+                            <div class="col-md-6">
+                                <div class="mt-4 d-flex justify-content-end">
                                     <input class="form-check-input" id="cliente" name="idrol" type="radio" value="2" checked>
                                     <label for="cliente">Cliente</label>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="mt-4">
-                                    <input class="form-check-input" id="deposito" name="idrol" type="radio" value="3">
-                                    <label for="deposito">Depósito</label>
+                            <div class="col-md-6">
+                                <div class="mt-4 d-flex justify-content-start">
+                                    <input class="form-check-input" id="admin" name="idrol" type="radio" value="1">
+                                    <label for="admin">Admin</label>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                            <div class="mt-4">
-                                <input class="form-check-input" id="admin" name="idrol" type="radio" value="1">
-                                <label for="admin">Admin</label>
-                            </div>
                         </div>
-                    </div>
 
                         <div class=" mt-4">
                             <div class="d-grid">
@@ -127,9 +121,9 @@ if (!$sesion->esAdministrador()) {
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 
     <!-- bootstrap -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-        <script src="../js/validacIones.js"></script>
+    <script src="../js/validacIones.js"></script>
 </body>
 
 </html>

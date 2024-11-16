@@ -89,8 +89,8 @@ class AbmMenu
 
         if ($this->seteadosCamposClaves($param)) {
             $elObjtTabla = $this->cargarObjetoConClave($param);
-            if ($elObjtTabla != null and $elObjtTabla->eliminar()) {
-                $resp = true;
+            if ($elObjtTabla != null) {
+                $resp = $elObjtTabla->eliminar();
             }
         }
 
@@ -118,7 +118,6 @@ class AbmMenu
     /**
      * permite buscar un objeto
      * @param array $param
-     * @return boolean
      */
     public function buscar($param)
     {

@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <?php include_once("../estructura/cabecera-cliente.php") ?>
+    <?php include_once("../estructura/cabecera.php"); ?>
 
     <main>
         <div class="contenedor">

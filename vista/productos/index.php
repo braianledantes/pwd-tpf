@@ -18,26 +18,18 @@ $session = new Sesion();
 </head>
 
 <body>
-    <?php
-    if ($session->esAdministrador()) {
-        include_once("../estructura/cabecera-admin.php");
-    } else if ($session->esCliente()) {
-        include_once("../estructura/cabecera-cliente.php");
-    } else {
-        include_once("../estructura/cabecera-publica.php");
-    }
-    ?>
+    <?php include_once("./estructura/cabecera.php"); ?>
 
-<h2>Productos</h2>
+    <h2>Productos</h2>
 
-<table border>  
-    <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Stock</th>
-                </tr>
+    <table border>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Stock</th>
+            </tr>
         </thead>
         <tbody>
             <tr>
@@ -47,7 +39,7 @@ $session = new Sesion();
                 <td>Stock1</td>
             </tr>
         </tbody>
-</table>
+    </table>
 
     <?php include_once("../estructura/footer.php"); ?>
 </body>

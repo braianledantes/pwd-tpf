@@ -1,18 +1,18 @@
 <?php
 include_once '../../configuracion.php';
 $datos = data_submitted();
-$sesion = new Sesion(); 
+$sesion = new Sesion();
 
 if (!$sesion->esAdministrador()) {
     header('Location: ../index.php?messageErr=' . urlencode("No tiene los permisos para acceder"));
-    exit; 
+    exit;
 }
 $abmUsuario = new abmusuario();
 $lista = $abmUsuario->buscar($datos);
 
 if (isset($lista)) {
     $idUsuario = $lista[0]->getIdusuario();
-   //include_once '../estructuras/cabecera.php';
+    //include_once '../estructuras/cabecera.php';
 }
 ?>
 
@@ -20,8 +20,9 @@ if (isset($lista)) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Usuario</title>
     <link rel="icon" href="../assets/imagenes/favicon-32x32.png" type="image/png" sizes="32x32">
@@ -30,8 +31,9 @@ if (isset($lista)) {
     <?php include_once("../estructura/bootstrap.php"); ?>
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
+
 <body>
-    <?php include_once("../estructura/cabecera-admin.php"); ?>
+    <?php include_once("../estructura/cabecera.php"); ?>
 
     <div class="contenedor">
         <h1 class="text-center">Modificar Usuario</h1>
@@ -75,7 +77,7 @@ if (isset($lista)) {
                 $abmUsuarioRol = new abmusuariorol();
                 $listaUsuarioRol = $abmUsuarioRol->buscar($datos);
                 $rol = $listaUsuarioRol[0]->getObjRol()->getIdrol();
-                if ($_SESSION['idusuario']!= $idUsuario) {
+                if ($_SESSION['idusuario'] != $idUsuario) {
                 ?>
 
                     <div class="col-md-4">
@@ -111,4 +113,5 @@ if (isset($lista)) {
     </div>
     <?php include_once("../estructura/footer.php"); ?>
 </body>
+
 </html>

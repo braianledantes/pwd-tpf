@@ -19,15 +19,7 @@ $session = new Sesion();
 </head>
 
 <body>
-    <?php
-    if ($session->esAdministrador()) {
-        include_once("./estructura/cabecera-admin.php");
-    } else if ($session->esCliente()) {
-        include_once("./estructura/cabecera-cliente.php");
-    } else {
-        include_once("./estructura/cabecera-publica.php");
-    }
-    ?>
+    <?php include_once("./estructura/cabecera.php"); ?>
     <main>
         <h1>Pagina pública</h1>
         <p>Esta es la página principal de la tienda de anillos</p>

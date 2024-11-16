@@ -26,7 +26,7 @@ if ($sesion->estaActiva()) {
 </head>
 
 <body>
-    <?php include_once("../estructura/cabecera-publica.php"); ?>
+    <?php include_once("../estructura/cabecera-vacia.php"); ?>
 
     <main>
         <?php

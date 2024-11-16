@@ -249,4 +249,14 @@ class Menu
 
         return $arreglo;
     }
+
+    public function toArray() {
+        return [
+            'idmenu' => $this->getIdmenu(),
+            'menombre' => $this->getMenombre(),
+            'medescripcion' => $this->getMedescripcion(),
+            'idpadre' => $this->getObjMenu() != null ? $this->getObjMenu()->getIdmenu() : null,
+            'medeshabilitado' => $this->getMedeshabilitado()
+        ];
+    }
 }
