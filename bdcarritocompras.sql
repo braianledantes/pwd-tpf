@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2024 a las 00:44:42
+-- Tiempo de generación: 17-11-2024 a las 00:56:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -96,6 +96,16 @@ CREATE TABLE `menu` (
   `medeshabilitado` timestamp NULL DEFAULT current_timestamp() COMMENT 'Fecha en la que el menu fue deshabilitado por ultima vez'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Volcado de datos para la tabla `menu`
+--
+
+INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
+(82, 'AMB de Menus', '/menus', NULL, NULL),
+(83, 'ABM de Roles', '/roles', NULL, NULL),
+(84, 'ABM de Productos', '/productos', NULL, NULL),
+(85, 'ABM de Usuarios', '/usuarios', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +116,16 @@ CREATE TABLE `menurol` (
   `idmenu` bigint(20) NOT NULL,
   `idrol` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `menurol`
+--
+
+INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
+(82, 1),
+(83, 1),
+(84, 1),
+(85, 1);
 
 -- --------------------------------------------------------
 
@@ -118,8 +138,18 @@ CREATE TABLE `producto` (
   `pronombre` varchar(100) NOT NULL,
   `prodetalle` varchar(512) NOT NULL,
   `procantstock` int(11) NOT NULL,
-  `proprecio` int(20) NOT NULL
+  `proprecio` int(20) NOT NULL,
+  `prourlimagen` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `procantstock`, `proprecio`, `prourlimagen`) VALUES
+(41, 'Producto sin imagen', 'un producto cualquiera que no tiene imagen', 20, 200, 'http://localhost/pwd-tpf/imagenes/productos/673917025c756.png'),
+(42, 'Anillo', 'Un anillo de extremada calidad', 10, 10000, 'http://localhost/pwd-tpf/imagenes/productos/67390df1c1c18.png'),
+(50, 'Anillo 2', 'Un anillo de extremada calidad', 10, 10000, 'http://localhost/pwd-tpf/imagenes/productos/673910343543e.jpg');
 
 -- --------------------------------------------------------
 
@@ -163,6 +193,7 @@ INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabili
 (1, 'braian1686', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'braian.ledantes@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
 (2, 'clara4938', '$2y$10$Fiqc9ebHmi0Ql4NXA/bJjea4fwpzY8SCDk7IcRVTFWujYm3cl8dBW', 'clara.pelozo@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
 (3, 'luci3075', '$2y$10$xqy5KXxA7qQh0qIlKzO//.uXn.Re9iVbgcAEnLFln/nM237ejflZq', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -289,19 +320,19 @@ ALTER TABLE `compraitem`
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
