@@ -87,6 +87,9 @@ $roles = $abmrol->buscar(null);
                         } else {
                             alert(result.data);
                         }
+                    },
+                    error: function(result) {
+                        console.error(result);
                     }
                 });
             });

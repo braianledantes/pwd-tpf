@@ -12,6 +12,9 @@ function data_submitted()
     foreach ($_POST as $key => $value) {
         $datos[$key] = $value;
     }
+    foreach ($_FILES as $key => $value) {
+        $datos[$key] = $value;
+    }
     foreach ($datos as $key => $value) {
         if ($value == '' || $value == null) {
             unset($datos[$key]);

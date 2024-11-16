@@ -1,18 +1,33 @@
-<?php include_once("../../configuracion.php");
+<?php
+include_once("../../configuracion.php");
+
+// verifica que el usuario esté logueado y sea administrador
 $session = new Sesion();
+if (!$session->estaActiva()) {
+    header("Location: ../index.php");
+}
+
+if (!$session->esAdministrador()) {
+    header('Location: ../');
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todos los productos</title>
+    <title>Productos</title>
     <link rel="icon" href="../assets/imagenes/favicon-32x32.png" type="image/png" sizes="32x32">
 
-    <!-- estilos -->
+    <!-- bootstrap -->
     <?php include_once("../estructura/bootstrap.php"); ?>
+    <!-- JQuery -->
+    <?php include_once("../estructura/jquery.php"); ?>
+
     <link rel="stylesheet" href="../css/estilos.css">
     <!---- fontawesome ---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -20,29 +35,66 @@ $session = new Sesion();
 
 <body>
     <?php include_once("../estructura/cabecera.php"); ?>
+    <main>
+        <h1>Pagina de ABM de Productos</h1>
+        <a href="./alta.php" class="btn btn-primary">Crear producto</a>
+        <section id="lista">
 
-    <h2>Productos</h2>
-
-    <table border>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Stock</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Nombre1</td>
-                <td>Descripcion1</td>
-                <td>Stock1</td>
-            </tr>
-        </tbody>
-    </table>
-
+        </section>
+    </main>
     <?php include_once("../estructura/footer.php"); ?>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: "./accionListar.php",
+                success: function(result) {
+                    const data = result.data;
+                    let contenido = `
+                    <table border>
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Detalle</th>
+                                <th>Stock</th>
+                                <th>Precio</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                    if (data.length === 0) {
+                        contenido = '<h2>No hay menús cargados</h2>';
+                    } else {
+                        data.forEach(producto => {
+                            const acciones = `
+                            <a href="./modificar.php?idproducto=${producto.idproducto}" class="btn btn-warning">Modificar</a>
+                            <a href="./accionBaja.php?idproducto=${producto.idproducto}" class="btn btn-danger">Eliminar</a>
+                            `;
+                            contenido += `
+                            <tr>
+                                <td><img src="${producto.prourlimagen}" width="100"></td>
+                                <td>${producto.idproducto}</td>
+                                <td>${producto.pronombre}</td>
+                                <td>${producto.prodetalle}</td>
+                                <td>${producto.proprecio}</td>
+                                <td>${producto.procantstock}</td>
+                                <td>${acciones}</td>
+                            </tr>`;
+                        });
+                    }
+                    contenido += `
+                        </tbody>
+                    </table>`;
+                    $("#lista").html(contenido);
+                },
+                error: function(result) {
+                    console.error(result);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
