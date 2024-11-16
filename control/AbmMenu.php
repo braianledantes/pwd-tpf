@@ -68,6 +68,14 @@ class AbmMenu
      */
     public function alta($param)
     {
+        if (isset($param['idpadre'])) {
+            $menuPadre = $this->buscar(['idmenu' => $param['idpadre']]);
+            if (empty($menuPadre)) {
+                throw new Exception('El menu padre no existe');
+            }
+        } else {
+            $param['idpadre'] = null;
+        }
         $resp = false;
         $param['idmenu'] = null;
         $param['medeshabilitado'] = null;
@@ -104,7 +112,14 @@ class AbmMenu
      */
     public function modificacion($param)
     {
-
+        if (isset($param['idpadre'])) {
+            $menuPadre = $this->buscar(['idmenu' => $param['idpadre']]);
+            if (empty($menuPadre)) {
+                throw new Exception('El menu padre no existe');
+            }
+        } else {
+            $param['idpadre'] = null;
+        }
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $elObjtMenu = $this->cargarObjeto($param);
@@ -122,12 +137,12 @@ class AbmMenu
     public function buscar($param)
     {
         $where = " true ";
-        /*if ($param<>NULL){
-            if  (isset($param['id']))
-                $where.=" and id =".$param['id'];
-            if  (isset($param['descrip']))
-                 $where.=" and descrip ='".$param['descrip']."'";
-        }*/
+        if ($param <> NULL) {
+            if (isset($param['idmenu']))
+                $where .= " and idmenu =" . $param['idmenu'];
+            if (isset($param['medescripcion']))
+                $where .= " and medescripcion ='" . $param['medescripcion'] . "'";
+        }
         $arreglo = Menu::listar($where);
         return $arreglo;
     }

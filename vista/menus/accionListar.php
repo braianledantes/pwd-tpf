@@ -1,26 +1,24 @@
 <?php
 include_once("../../configuracion.php");
+header('Content-Type: application/json');
 
 // verifica que el usuario esté logueado y sea administrador
 $session = new Sesion();
-if (!$session->estaActiva()) {
-    header("Location: ../index.php");
-}
-
-if (!$session->esAdministrador()) {
-    header('Location: ../');
+if (!$session->estaActiva() || !$session->esAdministrador()) {
+    echo json_encode([
+        'status' => 'error',
+        'data' => 'No tiene permisos para realizar esta acción'
+    ]);
     exit;
 }
 
-header('Content-Type: application/json');
-
 try {
-    $abmMenu = new AbmMenu();
-    $lista = $abmMenu->buscar(null);
+    $abmMenuRol = new AbmMenuRol();
+    $lista = $abmMenuRol->buscar(null);
 
     $listaJson = [];
-    foreach ($lista as $menu) {
-        $listaJson[] = $menu->toArray();
+    foreach ($lista as $menurol) {
+        $listaJson[] = $menurol->toArray();
     }
 
     echo json_encode([

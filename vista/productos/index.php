@@ -19,7 +19,7 @@ $session = new Sesion();
 </head>
 
 <body>
-    <?php include_once("./estructura/cabecera.php"); ?>
+    <?php include_once("../estructura/cabecera.php"); ?>
 
     <h2>Productos</h2>
 

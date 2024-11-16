@@ -147,4 +147,11 @@ class Rol
         }
         return $arreglo;
     }
+
+    public function toArray() {
+        return array(
+            'idrol' => $this->getidrol(),
+            'rodescripcion' => $this->getrodescripcion()
+        );
+    }
 }

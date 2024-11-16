@@ -23,15 +23,14 @@ try {
         throw new Exception("El rol no existe");
     }
 
-    $exito = $abmMenu->modificacion($data);
+    $exito = $abmMenu->alta($data);
+
 
     if ($exito) {
-        $menu = $abmMenu->buscar($data);
+        // crea la relacion entre el rol y el menu
+        $menuNuevo = $abmMenu->buscar($data);
         $abmMenuRol = new AbmMenuRol();
-        // borra la relacion anterior
-        $abmMenuRol->baja(['idrol' => $data['idrol'], 'idmenu' => $menu[0]->getIdmenu()]);
-        // crea la nueva relacion
-        $abmMenuRol->alta(['idrol' => $data['idrol'], 'idmenu' => $menu[0]->getIdmenu()]);
+        $abmMenuRol->alta(['idrol' => $data['idrol'], 'idmenu' => $menuNuevo[0]->getIdmenu()]);
 
         $ubicacion = $data['medescripcion'];
         // crea la carpeta con un archivo index.php en base a plantilla.php, dentro de la carpeta "vista"
@@ -42,20 +41,17 @@ try {
             file_put_contents($carpeta . "/index.php", $plantilla);
         }
 
-        header('Content-Type: application/json');
         echo json_encode([
             'status' => 'success',
-            'data' => 'Menu modificado con exito'
+            'data' => 'Menu creado con exito'
         ]);
     } else {
-        header('Content-Type: application/json');
         echo json_encode([
             'status' => 'error',
-            'data' => 'No se pudo modificar el menu'
+            'data' => 'No se pudo crear el menu'
         ]);
     }
 } catch (Exception $e) {
-    header('Content-Type: application/json');
     echo json_encode([
         'status' => 'error',
         'data' => $e->getMessage()
