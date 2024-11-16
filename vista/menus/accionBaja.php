@@ -15,15 +15,6 @@ if (!$session->estaActiva() || !$session->esAdministrador()) {
 $data = data_submitted();
 
 try {
-    // borra los roles asociados al menu
-    $abmMenuRol = new AbmMenuRol();
-    $listaMenuRoles = $abmMenuRol->buscar(['idmenu' => $data['idmenu']]);
-    foreach ($listaMenuRoles as $menuRol) {
-        $abmMenuRol->baja([
-            'idrol' => $menuRol->getobjRol()->getIdrol(),
-            'idmenu' => $data['idmenu']
-        ]);
-    }
     // borra el menu
     $abmMenu = new AbmMenu();
     $exito = $abmMenu->baja($data);

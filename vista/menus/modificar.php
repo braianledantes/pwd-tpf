@@ -69,7 +69,7 @@ try {
                 <h1>Modificar Menú <?= $menu->getIdmenu() ?></h1>
             </div>
             <div class="row">
-                <form id="formModificarMenu">
+                <form id="formModificarMenu" action="./accionModificar.php" method="POST">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombre" name="menombre" value="<?= $menu->getMenombre(); ?>" required>

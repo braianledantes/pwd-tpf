@@ -15,23 +15,10 @@ if (!$session->estaActiva() || !$session->esAdministrador()) {
 try {
     $data = data_submitted();
     $abmMenu = new AbmMenu();
-    
-    // verifica que el rol exista
-    $abmRol = new AbmRol();
-    $rol = $abmRol->buscar(['idrol' => $data['idrol']]);
-    if (empty($rol)) {
-        throw new Exception("El rol no existe");
-    }
-
     $exito = $abmMenu->alta($data);
 
-
     if ($exito) {
-        // crea la relacion entre el rol y el menu
-        $menuNuevo = $abmMenu->buscar($data);
-        $abmMenuRol = new AbmMenuRol();
-        $abmMenuRol->alta(['idrol' => $data['idrol'], 'idmenu' => $menuNuevo[0]->getIdmenu()]);
-
+        
         $ubicacion = $data['medescripcion'];
         // crea la carpeta con un archivo index.php en base a plantilla.php, dentro de la carpeta "vista"
         $carpeta = "../../vista/" . $ubicacion;
