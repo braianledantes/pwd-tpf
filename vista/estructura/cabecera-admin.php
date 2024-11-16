@@ -24,20 +24,20 @@ if (!$session->esAdministrador()) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pwd-tpf/Vista/index.php">Inicio</a>
+                    <li class="icono">
+                        <a href="/pwd-tpf/Vista/home"><i class="fa-solid fa-house"></i>Inicio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pwd-tpf/Vista/productos">Productos</a>
+                    <li class="icono">
+                        <a href="/pwd-tpf/Vista/productos"><i class="fa-solid fa-tag"></i>Productos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pwd-tpf/Vista/admin/listaUsuarios.php">Ver lista Usuarios</a>
+                    <li class="icono">
+                        <a href="/pwd-tpf/Vista/admin/listaUsuarios.php"><i class="fa-solid fa-bars"></i>Ver lista Usuarios</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pwd-tpf/Vista/admin/cargarUsuario.php">Agregar Usuario</a>
+                    <li class="icono">
+                        <a href="/pwd-tpf/Vista/admin/cargarUsuario.php"><i class="fa-solid fa-user-plus"></i>Agregar Usuario</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cerrar Seaion" href="/pwd-tpf/Vista/login/accionLogout.php">Cerrar Sesión</a>
+                    <li class="icono">
+                    <a href="/pwd-tpf/Vista/login/accionLogout.php"><i class="fa-solid fa-right-to-bracket"></i>Cerrar Sesión</a>
                     </li>
                 </ul>
             </div>
