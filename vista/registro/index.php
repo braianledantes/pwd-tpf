@@ -54,10 +54,10 @@ if ($sesion->estaActiva()) {
         </div>
         <div class="container mt-3">
             <div class="d-flex justify-content-center">
-                <div class="col d-flex justify-content-center" style="max-width: 800px;">
+                <div class="col d-flex justify-content-center" style="max-width: 500px;padding-top: 40px;padding-bottom:80px;">
                     <form action="./accionRegistro.php" method="post" class="container bg-white border rounded shadow p-4" id="datosUsuario" name="usuarioNuevo">
-                        <h2 class="text-center">Registrarse</h1>
-                        <div class="col-md-12">
+                        <h2 id="subtitulo" class="text-center">Bienvenido!</h1>
+                        <div class="col-md-12" style="z-index:-1">
                             <div class="mt-3">
                                 <div class="form-floating">
                                     <input class="form-control" id="usnombre" name="usnombre" type="text" placeholder="Nombre de usuario" required>

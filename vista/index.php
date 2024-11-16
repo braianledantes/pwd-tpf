@@ -15,9 +15,7 @@ $session = new Sesion();
     <!-- bootstrap -->
     <?php include_once("./estructura/bootstrap.php"); ?>
     <link rel="stylesheet" href="./css/estilos.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
     <!---- fontawesome ---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
@@ -25,10 +23,10 @@ $session = new Sesion();
 <body>
     <?php include_once("./estructura/cabecera.php"); ?>
     <!-- Carrusel -->
-     <section style=" margin-top:-30px;">
+     <section style=" margin-top:-17px;">
      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" style="border-radius: 3rem;padding:20px; margin:570px 100px;width:600px; background-color:lightgrey;border:1px solid black;color: #001220"><a href="./productos/index.php">Mira nuestros productos!</a></button>
+                <button id="tienda"type="button"><a href="./productos/index.php">Ver productos!</a></button>
             </div>
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">

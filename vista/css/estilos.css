@@ -1,16 +1,21 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 * {
   /*font-family: 'Lora', serif;*/
-  font-family: "Montserrat", serif;
+  /*font-family: "Montserrat", serif;*/
   font-optical-sizing: auto;
   font-weight: weight;
   font-style: normal;
 }
-.titulo{
+#titulo, #datosUsuario,#tienda{
     font-family: 'Lora', serif;
 }
+#subtitulo, button[type='submit']{
+    font-family: "Montserrat", serif;
+}
+#link{color:#03111b;}
+#link:hover{font-weight: bold;}
 :root {
     color-scheme: light dark;
 }
@@ -37,6 +42,7 @@ h3 {
 }
 
 /*FORMULARIO DE SESION*/
+
 .login-form-container {
     display: flex;
     align-items: center;
@@ -173,15 +179,18 @@ img {
     width: "50px";
     height: "50px";  
 }
-
+#tienda{letter-spacing:1px ;border-radius: 3rem;padding:10px; margin:590px 100px;width:600px; background-color:rgba(211, 211, 211, 0.479);border:none;color: #001220}
+#tienda:hover{background-color: #0012206e;color: #ffffff;font-weight: bold;}
 /*FOOTER*/
 
 .footer {
+    font-family: "Montserrat", serif;
     background-color: #03111b;/**#000f1a*/
     color: #fbffcd;
     text-align: center;
     bottom: 0;
     width: 100%;
+    padding-bottom: 20px;
 }
 
 .footer .copy {
