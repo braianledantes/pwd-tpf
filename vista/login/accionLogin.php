@@ -14,9 +14,9 @@ if ($session->estaActiva()) {
 $data = data_submitted();
 
 try {
-    $sesion->iniciarSesion($data);
+    $session->iniciarSesion($data);
 
-    if ($sesion->estaActiva()) {
+    if ($session->estaActiva()) {
         echo json_encode([
             'status' => 'ok',
             'message' => 'Sesión iniciada correctamente'
