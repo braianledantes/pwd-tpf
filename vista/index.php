@@ -50,6 +50,7 @@ $session = new Sesion();
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+    <div id="info"><p>¡Despachamos todos los días hábiles para que reciba el producto cuanto antes!</p></div>
      </section>
 <?php include_once("./estructura/footer.php"); ?>
 </body>
