@@ -50,11 +50,13 @@ if ($sesion->estaActiva()) {
         }
         ?>
 
+
+        </div>
         <div class="container mt-3">
             <div class="d-flex justify-content-center">
                 <div class="col d-flex justify-content-center" style="max-width: 800px;">
-                    <form action="./accionRegistro.php" method="post" class="col-md-6 mt-3 " id="datosUsuario" name="usuarioNuevo">
-                        <h1 class="h3 text-center">Registrarse</h1>
+                    <form action="./accionRegistro.php" method="post" class="container bg-white border rounded shadow p-4" id="datosUsuario" name="usuarioNuevo">
+                        <h2 class="text-center">Registrarse</h1>
                         <div class="col-md-12">
                             <div class="mt-3">
                                 <div class="form-floating">
@@ -89,7 +91,7 @@ if ($sesion->estaActiva()) {
                         </div>
                         <div class=" mt-4">
                             <div class="d-grid">
-                                <button class="btn" type="submit">Registrarme</button>
+                                <button class="btn btn-dark" type="submit">Registrarme</button>
                             </div>
                         </div>
                     </form>

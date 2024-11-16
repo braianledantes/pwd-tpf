@@ -76,7 +76,7 @@ if ($sesion->estaActiva()) {
                             <button class="btn btn-dark" type="submit">Iniciar Sesion</button>
                         </div>
                         <div class="text-center">
-                            <p class="mb-0 text-muted">¿No tenés una cuenta? <a href="../registro">Click Aqui!</a></p>
+                            <p class="mb-0 text-muted">¿No tenés una cuenta? <a href="../registro">Registrate!</a></p>
                         </div>
                     </form>
                 </div>
