@@ -21,7 +21,9 @@ $session = new Sesion();
                         <?php if ($session->estaActiva()) { ?>
                             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cerrar Seaion" href="/pwd-tpf/Vista/login/accionLogout.php">Cerrar Sesión</a>
                         <?php } else { ?>
-                            <a class="nav-link" href="/pwd-tpf/Vista/login">Iniciar Sesión </a>
+                            <div class="sesion">
+                                <a href="/pwd-tpf/Vista/login"><i class="fas fa-user"></i></a>
+                            </div>
                         <?php } ?>
                     </li>
                 </ul>

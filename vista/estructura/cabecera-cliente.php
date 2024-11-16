@@ -24,17 +24,17 @@ if (!$session->esAdministrador() && !$session->esCliente()) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pwd-tpf/Vista/home">Inicio</a>
+                    <li class="icono">
+                        <a href="/pwd-tpf/Vista/home"><i class="fa-solid fa-house"></i>Inicio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pwd-tpf/Vista/productos">Productos</a>
+                    <li class="icono">
+                        <a href="/pwd-tpf/Vista/productos"><i class="fa-solid fa-tag"></i>Productos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pwd-tpf/Vista/carrito">Carrito</a>
+                    <li class="icono">
+                        <a href="/pwd-tpf/Vista/carrito"><i class="fa-solid fa-cart-shopping"></i>Carrito </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pwd-tpf/Vista/login/accionLogout.php">Cerrar Sesión</a>
+                    <li class="icono">
+                        <a href="/pwd-tpf/Vista/login/accionLogout.php"><i class="fa-solid fa-right-to-bracket"></i>Cerrar sesión </a>
                     </li>
 
                 </ul>

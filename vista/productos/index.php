@@ -11,10 +11,11 @@ $session = new Sesion();
     <title>Todos los productos</title>
     <link rel="icon" href="../assets/imagenes/favicon-32x32.png" type="image/png" sizes="32x32">
 
-    <!-- bootstrap -->
+    <!-- estilos -->
     <?php include_once("../estructura/bootstrap.php"); ?>
-
     <link rel="stylesheet" href="../css/estilos.css">
+    <!---- fontawesome ---->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
 <body>

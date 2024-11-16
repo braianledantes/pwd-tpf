@@ -1,3 +1,13 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+* {
+  font-family: 'Lora', serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
 :root {
     color-scheme: light dark;
 }
@@ -6,6 +16,7 @@ body {
     display: grid;
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
+    text-align: center; 
 }
 
 .contenedor{
@@ -18,6 +29,9 @@ nav {
     color: rgb(195, 204, 195);
 }
 
+h3 {
+    text-align: center;
+}
 
 /*FORMULARIO DE SESION*/
 .login-form-container {
@@ -148,4 +162,78 @@ table tbody {
     background-color: #d0e9fc;
     border: 1px solid #fff;
 
+}
+
+/*IMAGEN INICIO*/
+
+img {
+    width: "50px";
+    height: "50px";  
+}
+
+/*FOOTER*/
+
+.footer {
+    background-color: #001f36;
+    color: #fbffcd;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer .copy {
+    text-align: center;
+    font-size: 0.5cm;
+    white-space: nowrap;
+    line-height: 0cm;
+}
+
+.footer .contacto {
+    text-align: center;
+}
+
+.footer .contacto a {
+    text-decoration: none;
+    line-height: 5rem;
+    font-size: 0.5cm;
+    color: #fbffcd;
+    margin: 0 .5rem;
+    letter-spacing: normal;
+}
+
+.footer .contacto a:hover {
+    color: #79ae92;
+}
+
+.footer .share a:hover {
+    background: var(--black);
+}
+
+/*HEADER*/
+
+.sesion a {
+    text-decoration: none;
+    line-height: 5rem;
+    font-size: 0.7cm;
+    color: #fbffcd;
+    margin: 0.5rem;
+    letter-spacing: normal;
+}
+
+.sesion a:hover {
+    color: #79ae92;
+}
+
+/*ICONOS*/
+.icono a {
+    text-decoration: none;
+    line-height: 5rem;
+    font-size: 0.7cm;
+    color: #fbffcd;
+    margin: 0.5rem;
+    letter-spacing: normal;
+}
+
+.sesion a:hover {
+    color: #79ae92;
 }

@@ -163,7 +163,6 @@ INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabili
 (1, 'braian1686', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'braian.ledantes@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
 (2, 'clara4938', '$2y$10$Fiqc9ebHmi0Ql4NXA/bJjea4fwpzY8SCDk7IcRVTFWujYm3cl8dBW', 'clara.pelozo@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
 (3, 'luci3075', '$2y$10$xqy5KXxA7qQh0qIlKzO//.uXn.Re9iVbgcAEnLFln/nM237ejflZq', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00');
-
 -- --------------------------------------------------------
 
 --
