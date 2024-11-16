@@ -1,8 +1,7 @@
 <?php
 $session = new Sesion();
 ?>
-
-<header class="position-sticky top-0 shadow mb-3">
+<header class="position-auto top-0 shadow mb-3">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000; padding: 30px 160px;">
         <div class="container-fluid">
             <a class="nav-link" href="/pwd-tpf/index.php">
