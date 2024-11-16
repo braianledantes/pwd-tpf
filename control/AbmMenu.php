@@ -77,9 +77,8 @@ class AbmMenu
             throw new Exception("El rol no existe");
         }
         // Si no existe el menu padre lo setea en null
-        $idPadre = $param['idpadre'];
-        if (isset($idPadre)) {
-            $menuPadre = $this->buscar(['idmenu' => $idPadre]);
+        if (isset($param['idpadre'])) {
+            $menuPadre = $this->buscar(['idmenu' => $param['idpadre']]);
             if (empty($menuPadre)) {
                 throw new Exception('El menu padre no existe');
             }
