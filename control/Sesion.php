@@ -101,6 +101,36 @@ class Sesion
     }
 
     /**
+     * Obtiene todos los menus del usuario logeado segun los roles que tenga.
+     * Hay que tener en cuenta que un usuario puede tener varios roles y un rol puede tener varios menus.
+     */
+    public function obtenerMenusDelUsuario()
+    {
+        $menus = array();
+        if (isset($_SESSION['idusuario'])) {
+            $idusuario = $_SESSION['idusuario'];
+            // obtiene el los roles del usuario
+            $abmUsuarioRol = new ABMUsuarioRol();
+            $rolesUsuario = $abmUsuarioRol->buscar(['idusuario' => $idusuario]);
+
+            foreach ($rolesUsuario as $rolUsuario) {
+                $rol = $rolUsuario->getobjrol();
+
+                $abmMenuRol = new ABMMenuRol();
+                $menusRol = $abmMenuRol->buscar(['idrol' => $rol->getidrol()]);
+                // obtiene los menus del rol
+                foreach ($menusRol as $menuRol) {
+                    $menu = $menuRol->getobjMenu();
+                    $idMenu = $menu->getidmenu();
+                    $menus[$idMenu] = $menu;
+                }
+            }
+        }
+
+        return $menus;
+    }
+
+    /**
      * Verifica que el usuario tenga el rol de administrador.
      */
     public function esAdministrador()
