@@ -12,6 +12,9 @@
 ## Bibliotecas utilizadas
 <!-- TODO: agregar las bibliotecas -->
 
+## Paleta de colores utilizada
+https://paletadecolores.com.mx/paleta/000000/001f36/1c5560/79ae92/fbffcd/
+
 ## Pruebas
 1. Instalar XAMP.
 2. Copiar el repositorio en la carpeta donde esta instalado XAMP. Por ejemplo `C:\xampp\htdocs`.
