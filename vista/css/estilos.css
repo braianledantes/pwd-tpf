@@ -2,12 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 * {
-  font-family: 'Lora', serif;
+  /*font-family: 'Lora', serif;*/
+  font-family: "Montserrat", serif;
   font-optical-sizing: auto;
   font-weight: weight;
   font-style: normal;
 }
-
+.titulo{
+    font-family: 'Lora', serif;
+}
 :root {
     color-scheme: light dark;
 }
@@ -174,7 +177,7 @@ img {
 /*FOOTER*/
 
 .footer {
-    background-color: #001f36;
+    background-color: #03111b;/**#000f1a*/
     color: #fbffcd;
     text-align: center;
     bottom: 0;
@@ -245,21 +248,11 @@ img {
     height: auto;
     object-fit: cover; 
 }
-
-.carousel-indicators button {
-    background-color: #000;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color:#1c5560; 
+.carousel-control-prev, .carousel-control-next{
+    background-color:#1c5560;
     border-radius: 50%; 
-    padding: 10px; 
-}
-
-.carousel-control-prev-icon:hover,
-.carousel-control-next-icon:hover {
-    background-color: #001f36 
+    margin:310px 60px;
+    width: 60px;
 }
 
 header {
