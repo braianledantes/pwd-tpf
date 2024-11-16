@@ -134,7 +134,14 @@ class ABMProducto
      */
     public function modificacion($param)
     {
-        //echo "Estoy en modificacion";
+        // si la imagen fue cargada, la sube al servidor
+        if (array_key_exists('proimagen', $param) && $param['proimagen']['error'] == UPLOAD_ERR_OK) {
+            $param['prourlimagen'] = $this->subirImagen($param['proimagen'], uniqid());
+        } else {
+            // si no se cargo una imagen, se setea a null
+            $param['prourlimagen'] = null;
+        }
+        // modifica el objeto en la base de datos
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $elObjtTabla = $this->cargarObjeto($param);
