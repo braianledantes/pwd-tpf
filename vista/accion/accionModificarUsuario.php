@@ -1,6 +1,12 @@
 <?php
 include_once ('../../configuracion.php');
 
+// verifica que el usuario esté logueado y tenga permisos
+$session = new Sesion();
+if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
+    header("Location: ../login");
+}
+
 $datos = data_submitted();
 
 $datosBusqueda['idusuario'] = $datos['idusuario'];

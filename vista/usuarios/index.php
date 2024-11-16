@@ -1,11 +1,10 @@
 <?php
 include_once '../../configuracion.php';
 $datos = data_submitted();
-$sesion = new Sesion();
-
-if (!$sesion->esAdministrador()) {
-    header('Location: ../index.php?messageErr=' . urlencode("No tiene los permisos para acceder"));
-    exit;
+// verifica que el usuario esté logueado y tenga permisos
+$session = new Sesion();
+if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
+    header("Location: ../login");
 }
 ?>
 

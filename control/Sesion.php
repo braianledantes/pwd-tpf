@@ -41,6 +41,40 @@ class Sesion
     }
 
     /**
+     * Verifica si el usuario tiene acceso al menú actual.
+     */
+    public function tieneAccesoAMenuActual(): bool
+    {
+        $tieneAcceso = false;
+        $idusuario = $_SESSION['idusuario'];
+        // obtiene el menu actual
+        $INICIO = strtolower($GLOBALS['INICIO']);
+        $uri = strtolower($_SERVER['REQUEST_URI']);
+        $menuActual = str_replace($INICIO, '', $uri);
+
+        // obtiene el los roles del usuario
+        $abmUsuarioRol = new ABMUsuarioRol();
+        $rolesUsuario = $abmUsuarioRol->buscar(['idusuario' => $idusuario]);
+
+        foreach ($rolesUsuario as $rolUsuario) {
+            $rol = $rolUsuario->getobjrol();
+
+            $abmMenuRol = new ABMMenuRol();
+            $menus = $abmMenuRol->buscar(['idrol' => $rol->getidrol()]);
+            // verifica si existe algun menu que empiece con $menuActual
+            foreach ($menus as $menu) {
+                $menuDescription = strtolower($menu->getobjMenu()->getMedescripcion());
+                if (strpos($menuActual, $menuDescription) === 0) {
+                    $tieneAcceso = true;
+                    break;
+                }
+            }
+        }
+
+        return $tieneAcceso;
+    }
+
+    /**
      * Obtiene los roles del usuario logeado.
      */
     private function tieneRol($descripcion)

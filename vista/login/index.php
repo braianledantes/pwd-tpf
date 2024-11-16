@@ -1,12 +1,11 @@
 <?php include_once("../../configuracion.php");
 $datos = data_submitted();
 
-$sesion = new Sesion();
-$homeUrl = "$PROJECT_PATH/index.php";
-
-if ($sesion->estaActiva()) {
-    header("Location: $homeUrl");
-    exit();
+// verifica que el usuario no esté logueado
+$session = new Sesion();
+if ($session->estaActiva()) {
+    header("Location: ../");
+    exit;
 }
 ?>
 

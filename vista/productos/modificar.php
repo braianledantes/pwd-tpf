@@ -1,15 +1,10 @@
 <?php
 include_once("../../configuracion.php");
 
-// verifica que el usuario esté logueado y sea administrador
+// verifica que el usuario esté logueado y tenga permisos
 $session = new Sesion();
-if (!$session->estaActiva()) {
-    header("Location: ../index.php");
-}
-
-if (!$session->esAdministrador()) {
-    header('Location: ../');
-    exit;
+if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
+    header("Location: ../login");
 }
 
 $data = data_submitted();

@@ -50,7 +50,7 @@ $roles = $abmrol->buscar(null);
                     </div>
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Ubicación</label>
-                        <input type="text" class="form-control" id="descripcion" name="medescripcion" required>
+                        <input type="text" class="form-control" id="descripcion" name="medescripcion" required value="" placeholder="/ejemplo">
                     </div>
                     <div class="mb-3">
                         <label for="idpadre" class="form-label">ID del menú Padre</label>
@@ -64,6 +64,7 @@ $roles = $abmrol->buscar(null);
                                 <option value="<?= $rol->getIdrol() ?>"><?= $rol->getRodescripcion() ?></option>
                             <?php endforeach; ?>
                         </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </form>
             </div>

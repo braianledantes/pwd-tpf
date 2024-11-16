@@ -1,11 +1,12 @@
 <?php
 include_once '../../configuracion.php';
-$datos = data_submitted();
-$sesion = new Sesion();
-if ($sesion->estaActiva()) {
-    header("Location: $PROJECT_PATH/Vista/home");
-    exit;
+// verifica que el usuario no esté logueado
+$session = new Sesion();
+if ($session->estaActiva()) {
+    header("Location: ../");
 }
+
+$datos = data_submitted();
 ?>
 <!DOCTYPE html>
 <html lang="es">
