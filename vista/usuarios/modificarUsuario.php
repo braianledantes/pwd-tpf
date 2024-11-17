@@ -34,7 +34,7 @@ if (isset($lista)) {
 <body>
     <?php include_once("../estructura/cabecera.php"); ?>
 
-    <div class="contenedor">
+    <div class="mx-auto w-75 mt-3 mb-5" >
         <h1 class="text-center">Modificar Usuario</h1>
         <form id="datosUsuario" class="col-md-11 mt-4" method="post" action="../accion/accionModificarUsuario.php">
             <input type="hidden" name="idusuario" value=<?php echo $idUsuario ?>>

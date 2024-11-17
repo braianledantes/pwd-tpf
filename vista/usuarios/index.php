@@ -35,7 +35,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
         if (count($lista) > 0) {
         ?>
 
-            <h1 class="text-center">Lista de Usuarios Cargados :)</h1>
+            <h1 class="text-center mt-3">Lista de Usuarios Cargados :)</h1>
 
             <table class='table table-light table-striped table-borderless' style="margin-top: 30px;">
                 <thead>

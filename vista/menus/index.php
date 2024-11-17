@@ -40,7 +40,7 @@ if (!$session->esAdministrador()) {
         <h2>Pagina de ABM de menús</h2>
 =======
         <h1>Pagina de ABM de Menús</h1>
-        <a href="./alta.php" class="btn btn-primary">Crear Menú</a>
+        <a href="./alta.php" class="btn btn-dark mt-3">Crear Menú</a>
 >>>>>>> ad006f876cc4a12ff895b13c610df1a1dcafd7a4
         <section id="listaMenus">
 

@@ -31,8 +31,8 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 <body>
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
-        <h1>Pagina de ABM de Roles</h1>
-        <a href="./alta.php" class="btn btn-primary">Crear Rol</a>
+        <h1 class="mt-3">Pagina de ABM de Roles</h1>
+        <a href="./alta.php" class="btn btn-dark mt-3">Crear Rol</a>
         <section id="listaMenus">
 
         </section>
@@ -46,7 +46,8 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                 success: function(result) {
                     const data = result.data;
                     let contenido = `
-                    <table border>
+                    <div class="mx-auto w-50 mb-5">
+                    <table class='table table-light table-striped table-borderless' style="margin-top: 30px;">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -60,8 +61,8 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                     } else {
                         data.forEach(rol => {
                             const acciones = `
-                            <a href="./modificar.php?idrol=${rol.idrol}" class="btn btn-warning">Modificar</a>
-                            <a href="./accionBaja.php?idrol=${rol.idrol}" class="btn btn-danger">Eliminar</a>
+                            <a href="./modificar.php?idrol=${rol.idrol}" class='btn circle-icon rounded-circle'><i class="bi bi-pen "></i></a>
+                            <a href="./accionBaja.php?idrol=${rol.idrol}" class='btn btn-danger btn-sm rounded-circle'><i class='bi bi-trash3-fill'></i></a>
                             `;
                             contenido += `
                             <tr>

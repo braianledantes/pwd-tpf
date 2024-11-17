@@ -49,18 +49,20 @@ try {
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
         <!-- formulario de modificacion de menu -->
-        <div class="container">
-            <div class="row">
-                <h1>Modificación de Rol <?= $rol->getidrol() ?> </h1>
+        <div class="w-50 mx-auto mt-3 mb-5">
+            <div>
+                <h1 class="mt-3">Modificación de Rol <?= $rol->getidrol() ?> </h1>
             </div>
-            <div class="row">
-                <form id="form">
+            <div>
+                <form id="form" class="w-25 mx-auto mt-4">
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion" name="rodescripcion" value="<?= $rol->getrodescripcion() ?>" required>
-                        <input type="hidden" name="idrol" value="<?= $rol->getidrol() ?>">
+                        <div class="form-floating">
+                            <input type="hidden" name="idrol" value="<?= $rol->getidrol() ?>">
+                                <input class="form-control" id="descripcion" name="rodescripcion" type="text" placeholder="Descripcion" value="<?= $rol->getrodescripcion() ?>" required>
+                                <label for="descripcion">Descripcion</label>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Modificar</button>
+                    <button type="submit" class="btn btn-dark mt-3">Modificar</button>
                 </form>
             </div>
         </div>
