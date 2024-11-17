@@ -2,13 +2,21 @@
 include_once '../../configuracion.php';
 header('Content-Type: application/json');
 
-$sesion = new Sesion();
+// verifica que el usuario no esté logueado
+$session = new Sesion();
+if ($session->estaActiva()) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Ya iniciaste sesión'
+    ]);
+    exit;
+}
 $data = data_submitted();
 
 try {
-    $sesion->iniciarSesion($data);
+    $session->iniciarSesion($data);
 
-    if ($sesion->estaActiva()) {
+    if ($session->estaActiva()) {
         echo json_encode([
             'status' => 'ok',
             'message' => 'Sesión iniciada correctamente'

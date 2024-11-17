@@ -12,22 +12,20 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     exit;
 }
 
-$data = data_submitted();
-
 try {
-    // borra el rol
-    $abmRol = new ABMRol();
-    $exito = $abmRol->baja($data);
+    $data = data_submitted();
+    $abmProducto = new ABMProducto();
+    $exito = $abmProducto->alta($data);
 
     if ($exito) {
         echo json_encode([
             'status' => 'success',
-            'data' => 'Rol eliminado con exito'
+            'data' => 'Producto creado con exito'
         ]);
     } else {
         echo json_encode([
             'status' => 'error',
-            'data' => 'No se pudo eliminar el rol'
+            'data' => 'No se pudo crear el producto'
         ]);
     }
 } catch (Exception $e) {

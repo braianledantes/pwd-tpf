@@ -1,21 +1,21 @@
 <?php
 include_once("../../configuracion.php");
+header('Content-Type: application/json');
 
 // verifica que el usuario esté logueado y sea administrador
 $session = new Sesion();
-if (!$session->estaActiva()) {
-    header("Location: ../index.php");
-}
-
-if (!$session->esAdministrador()) {
-    header('Location: ../');
+if (!$session->estaActiva() || !$session->esAdministrador()) {
+    echo json_encode([
+        'status' => 'error',
+        'data' => 'No tiene permisos para realizar esta acción'
+    ]);
     exit;
 }
 
-header('Content-Type: application/json');
 $data = data_submitted();
 
 try {
+    // borra el menu
     $abmMenu = new AbmMenu();
     $exito = $abmMenu->baja($data);
 
@@ -30,7 +30,6 @@ try {
             'data' => 'No se pudo eliminar el menu'
         ]);
     }
-
 } catch (Exception $e) {
     echo json_encode([
         'status' => 'error',

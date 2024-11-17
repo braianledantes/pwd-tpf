@@ -36,7 +36,12 @@ if (!$session->esAdministrador()) {
 <body>
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
+<<<<<<< HEAD
         <h2>Pagina de ABM de menús</h2>
+=======
+        <h1>Pagina de ABM de Menús</h1>
+        <a href="./alta.php" class="btn btn-primary">Crear Menú</a>
+>>>>>>> ad006f876cc4a12ff895b13c610df1a1dcafd7a4
         <section id="listaMenus">
 
         </section>
@@ -49,12 +54,24 @@ if (!$session->esAdministrador()) {
                 url: "./accionListar.php",
                 success: function(result) {
                     const data = result.data;
-                    console.log(data);
-                    let contenido = '';
+                    let contenido = `
+                    <table border>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Ubicación</th>
+                                <th>Id padre</th>
+                                <th>Rol</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
                     if (data.length === 0) {
                         contenido = '<h2>No hay menús cargados</h2>';
                     } else {
                         data.forEach(element => {
+<<<<<<< HEAD
                             // crear un article con cada elemento menu
 
                             
@@ -71,9 +88,30 @@ if (!$session->esAdministrador()) {
                             </a>
                             </div>
                             </article>`;
+=======
+                            const menu = element.objMenu;
+                            const rol = element.objrol;
+>>>>>>> ad006f876cc4a12ff895b13c610df1a1dcafd7a4
 
+                            const acciones = `
+                            <a href="..${menu.medescripcion}" class="btn btn-info">Ver</a>
+                            <a href="./modificar.php?idmenu=${menu.idmenu}" class="btn btn-warning">Modificar</a>
+                            <a href="./accionBaja.php?idmenu=${menu.idmenu}" class="btn btn-danger">Eliminar</a>
+                            `;
+                            contenido += `
+                            <tr>
+                                <td>${menu.idmenu}</td>
+                                <td>${menu.menombre}</td>
+                                <td>${menu.medescripcion}</td>
+                                <td>${menu.idpadre}</td>
+                                <td>${rol.rodescripcion}</td>
+                                <td>${acciones}</td>
+                            </tr>`;
                         });
                     }
+                    contenido += `
+                        </tbody>
+                    </table>`;
                     $("#listaMenus").html(contenido);
                 }
             });
