@@ -40,6 +40,10 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     <?php include_once("../estructura/footer.php"); ?>
     <script>
         $(document).ready(function() {
+            mostrarLista();
+        });
+
+        function mostrarLista() {
             $.ajax({
                 type: "GET",
                 url: "./accionListar.php",
@@ -66,7 +70,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                         data.forEach(producto => {
                             const acciones = `
                             <a href="./modificar.php?idproducto=${producto.idproducto}" class='btn circle-icon rounded-circle'><i class="bi bi-pen "></i></a>
-                            <a href="./accionBaja.php?idproducto=${producto.idproducto}" class='btn btn-danger btn-sm rounded-circle'><i class='bi bi-trash3-fill'></i></a>
+                            <a onclick="eliminar(${producto.idproducto})" class='btnEliminar btn btn-danger btn-sm rounded-circle'><i class='bi bi-trash3-fill'></i></a>
                             `;
                             contenido += `
                             <tr>
@@ -90,7 +94,30 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                     console.error(result);
                 }
             });
-        });
+        }
+
+        function eliminar(idproducto) {
+            if (confirm("¿Está seguro que desea eliminar el producto?")) {
+                $.ajax({
+                    type: "GET",
+                    url: "./accionBaja.php",
+                    data: {
+                        idproducto: idproducto
+                    },
+                    success: function(result) {
+                        if (result.status === 'success') {
+                            alert("Producto eliminado correctamente");
+                            mostrarLista();
+                        } else {
+                            alert("Error al eliminar el producto");
+                        }
+                    },
+                    error: function(result) {
+                        console.error(result);
+                    }
+                });
+            }
+        }
     </script>
 </body>
 
