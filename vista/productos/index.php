@@ -31,7 +31,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 <body>
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
-        <h1 class="mt-3">Pagina de ABM de Productos</h1>
+        <h2 class="mt-3">ABM de Productos</h2>
         <a href="./alta.php" class="btn btn-dark mt-3">Crear producto</a>
         <section id="lista">
 
