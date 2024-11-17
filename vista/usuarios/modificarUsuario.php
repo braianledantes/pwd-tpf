@@ -36,7 +36,7 @@ if (isset($lista)) {
 
     <div class="mx-auto w-75 mt-3 mb-5" >
         <h1 class="text-center">Modificar Usuario</h1>
-        <form id="datosUsuario" class="col-md-11 mt-4" method="post" action="../accion/accionModificarUsuario.php">
+        <form id="datosUsuario" class="col-md-11 mt-4" method="post" action="./accionModificarUsuario.php">
             <input type="hidden" name="idusuario" value=<?php echo $idUsuario ?>>
             <div class="row">
                 <div class="col-md-6">

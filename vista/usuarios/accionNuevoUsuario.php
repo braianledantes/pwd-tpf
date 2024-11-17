@@ -4,7 +4,7 @@ include_once '../../configuracion.php';
 // verifica que el usuario esté logueado y tenga permisos
 $session = new Sesion();
 if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
-    header("Location: ../login");
+    header("Location: ../index.php");
 }
 
 $datos = data_submitted();
@@ -15,19 +15,19 @@ $usuarioExistente = $abmUsuario->buscar(['usnombre' => $datos['usnombre']]);
 
 // Si el nombre de usuario ya existe, redirige con un mensaje de error
 if (count($usuarioExistente) > 0) {
-    header('Location: ../registro/index.php?messageErr=' . urlencode("El nombre de usuario ya existe."));
+    header('Location: ./index.php?messageErr=' . urlencode("El nombre de usuario ya existe."));
     exit;
 }
 
 $exito = $abmUsuario->alta($datos);
 // Si hubo algún error al agregar el usuario, redirige con un mensaje de error
 if (!$exito) {
-    header('Location: ../registro/index.php?messageErr=' . urlencode('Error al registrar el usuario.'));
+    header('Location: ./index.php?messageErr=' . urlencode('Error al registrar el usuario.'));
     exit;
 }
 
 // Obtiene el nuevo usuario recién insertado
-$nuevoUsuario = $abmUsuario->buscar($datos);
+$nuevoUsuario = $abmUsuario->buscar(['usnombre' => $datos['usnombre']]);
 
 // Asigna el rol al nuevo usuario
 $datosUsRol = [
@@ -40,7 +40,7 @@ $abmUsuarioRol = new ABMUsuarioRol();
 $abmUsuarioRol->alta($datosUsRol);
 
 // Si todo fue exitoso, redirige al administrador a la página principal
-header('Location: ../index.php?messageOk=' . urlencode('Usuario registrado y rol asignado correctamente.'));
+header('Location: ./index.php?messageOk=' . urlencode('Usuario registrado y rol asignado correctamente.'));
 exit;
 
 ?>

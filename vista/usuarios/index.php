@@ -36,6 +36,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
         ?>
 
             <h1 class="text-center mt-3">Lista de Usuarios Cargados :)</h1>
+            <a href="./cargarUsuario.php" class="btn btn-dark mt-3">+ Agregar Nuevo Usuario</a>
 
             <table class='table table-light table-striped table-borderless' style="margin-top: 30px;">
                 <thead>
@@ -59,6 +60,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                     $datos['idusuario'] = $id;
                     $listaUsuarioRol = $abmUsuarioRol->buscar($datos);
                     $rol = $listaUsuarioRol[0]->getObjRol()->getRodescripcion();
+
                 ?>
 
                     <tr id="row<?php echo $id ?>">
@@ -91,7 +93,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                                 </button>
                             </td>
                         </form>
-                        <form action="../accion/accionEliminarUsuario.php">
+                        <form action="./accionEliminarUsuario.php">
                             <td class='text-center'>
                                 <input name='idusuario' id='idusuario' type='hidden' value=<?php echo $id ?>><button type="submit" class='btn btn-danger btn-sm rounded-circle'><i class='bi bi-trash3-fill'></i></button>
                             </td>
@@ -125,7 +127,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                 data: {
                     idusuario: idUsuario
                 },
-                url: "../accion/accionDeshabilitarUsuario.php",
+                url: "./accionDeshabilitarUsuario.php",
                 type: "post",
                 success: function(respuesta) {
                     respuesta = JSON.parse(respuesta);

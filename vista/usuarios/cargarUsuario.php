@@ -50,7 +50,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
         <div class="container mt-3">
             <div class="d-flex justify-content-center">
                 <div class="col d-flex justify-content-center" style="max-width: 800px;">
-                    <form action="../accion/accionNuevoUsuario.php" method="post" class="col-md-6 mt-3 " id="datosUsuario" name="usuarioNuevo">
+                    <form action="./accionNuevoUsuario.php" method="post" class="col-md-6 mt-3 mb-5 " id="datosUsuario" name="usuarioNuevo">
                         <h1 class="h3 text-center">Agregar Usuario</h1>
                         <div class="col-md-12">
                             <div class="mt-3">

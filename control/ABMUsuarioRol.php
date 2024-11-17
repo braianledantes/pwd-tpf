@@ -43,8 +43,11 @@ class ABMUsuarioRol
         $objRel = new UsuarioRol();
         $abmUs = new ABMUsuario();
         $arrayUs = $abmUs->buscar(['idusuario' => $param['idusuario']]);
+        echo"ABMUSUARIO/////////////////////////////////////////////////////////////////////////////";
+        var_dump($arrayUs);
         $abmRol = new ABMRol();
-        $objRol = $abmRol->buscar(['idrol' => $param['idrol']]);
+        $objRol = $abmRol->buscar(['idrol' => $param['idrol']]);///
+        var_dump($objRol);
         $objRel->setear($arrayUs[0], $objRol[0]);
 
         if ($objRel->eliminar()) {
