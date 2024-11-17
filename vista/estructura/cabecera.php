@@ -1,5 +1,7 @@
 <?php
 $session = new Sesion();
+
+$menus = $session->obtenerMenusDelUsuario();
 ?>
 <header class="position-auto top-0 shadow mb-3">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000; padding: 30px 160px;">
@@ -7,7 +9,7 @@ $session = new Sesion();
             <a class="nav-link" href="/pwd-tpf/index.php">
                 <div class="d-flex align-items-center">
                     <img class="ms-auto me-3" style="height: 80px; width: auto;" src="/pwd-tpf/vista/assets/imagenes/angelwings.png" alt="logo Angel Wings">
-                    <h3 class="mb-0 text-white">Angel Wings Jewelry</h3>
+                    <h3 id="titulo" class="mb-0 text-white">Angel Wings Jewelry</h3>
                 </div>
             </a>
 
@@ -16,6 +18,11 @@ $session = new Sesion();
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <?php foreach ($menus as $menu) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pwd-tpf/vista<?= $menu->getMedescripcion() ?>"><?= $menu->getMenombre() ?></a>
+                        </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <?php if ($session->estaActiva()) { ?>
                             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cerrar Seaion" href="/pwd-tpf/Vista/login/accionLogout.php">Cerrar Sesión</a>

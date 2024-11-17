@@ -15,7 +15,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
+    <title>Roles</title>
     <link rel="icon" href="../assets/imagenes/favicon-32x32.png" type="image/png" sizes="32x32">
 
     <!-- bootstrap -->
@@ -31,9 +31,9 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 <body>
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
-        <h1>Pagina de ABM de Productos</h1>
-        <a href="./alta.php" class="btn btn-primary">Crear producto</a>
-        <section id="lista">
+        <h1>Pagina de ABM de Roles</h1>
+        <a href="./alta.php" class="btn btn-primary">Crear Rol</a>
+        <section id="listaMenus">
 
         </section>
     </main>
@@ -49,12 +49,8 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                     <table border>
                         <thead>
                             <tr>
-                                <th>Imagen</th>
                                 <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Detalle</th>
-                                <th>Stock</th>
-                                <th>Precio</th>
+                                <th>Descripcion</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
@@ -62,19 +58,15 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                     if (data.length === 0) {
                         contenido = '<h2>No hay menús cargados</h2>';
                     } else {
-                        data.forEach(producto => {
+                        data.forEach(rol => {
                             const acciones = `
-                            <a href="./modificar.php?idproducto=${producto.idproducto}" class="btn btn-warning">Modificar</a>
-                            <a href="./accionBaja.php?idproducto=${producto.idproducto}" class="btn btn-danger">Eliminar</a>
+                            <a href="./modificar.php?idrol=${rol.idrol}" class="btn btn-warning">Modificar</a>
+                            <a href="./accionBaja.php?idrol=${rol.idrol}" class="btn btn-danger">Eliminar</a>
                             `;
                             contenido += `
                             <tr>
-                                <td><img src="${producto.prourlimagen}" width="100"></td>
-                                <td>${producto.idproducto}</td>
-                                <td>${producto.pronombre}</td>
-                                <td>${producto.prodetalle}</td>
-                                <td>${producto.proprecio}</td>
-                                <td>${producto.procantstock}</td>
+                                <td>${rol.idrol}</td>
+                                <td>${rol.rodescripcion}</td>
                                 <td>${acciones}</td>
                             </tr>`;
                         });
@@ -82,7 +74,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                     contenido += `
                         </tbody>
                     </table>`;
-                    $("#lista").html(contenido);
+                    $("#listaMenus").html(contenido);
                 },
                 error: function(result) {
                     console.error(result);

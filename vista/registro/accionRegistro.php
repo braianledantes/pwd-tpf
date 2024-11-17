@@ -2,6 +2,16 @@
 include_once '../../configuracion.php';
 header('Content-Type: application/json');
 
+// verifica que el usuario no esté logueado
+$session = new Sesion();
+if ($session->estaActiva()) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Ya iniciaste sesión'
+    ]);
+    exit;
+}
+
 $datos = data_submitted();
 
 $abmUsuario = new abmusuario();

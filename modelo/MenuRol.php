@@ -144,4 +144,11 @@ class MenuRol
         }
         return $arreglo;
     }
+
+    public function toArray() {
+        return array(
+            'objMenu' => $this->getobjMenu()->toArray(),
+            'objrol' => $this->getobjrol()->toArray()
+        );
+    }
 }

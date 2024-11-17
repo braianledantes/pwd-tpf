@@ -36,7 +36,7 @@ if (!$session->esAdministrador()) {
 <body>
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
-        <h1>Pagina de ABM de menús</h1>
+        <h2>Pagina de ABM de menús</h2>
         <section id="listaMenus">
 
         </section>
@@ -61,6 +61,7 @@ if (!$session->esAdministrador()) {
                             // TODO: tienen que estar en una tabla
 
                             contenido += `<article class="card col-12 col-md-6 col-lg-4">
+                            <div id="listaMenus" class="row">
                             <a href="..${element['medescripcion']}">
                                 <div class="card-body">
                                     <h5 class="card-title">${element['menombre']}</h5>
@@ -68,6 +69,7 @@ if (!$session->esAdministrador()) {
                                     <a href="./accionEliminar.php?idmenu=${element['idmenu']}" class="btn btn-danger">Eliminar</a>
                                 </div>
                             </a>
+                            </div>
                             </article>`;
 
                         });

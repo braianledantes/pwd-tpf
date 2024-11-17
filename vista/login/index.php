@@ -1,12 +1,11 @@
 <?php include_once("../../configuracion.php");
 $datos = data_submitted();
 
-$sesion = new Sesion();
-$homeUrl = "$PROJECT_PATH/index.php";
-
-if ($sesion->estaActiva()) {
-    header("Location: $homeUrl");
-    exit();
+// verifica que el usuario no esté logueado
+$session = new Sesion();
+if ($session->estaActiva()) {
+    header("Location: ../");
+    exit;
 }
 ?>
 
@@ -26,6 +25,7 @@ if ($sesion->estaActiva()) {
     <link rel="stylesheet" href="../css/estilos.css">
     <!---- fontawesome ---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    
 </head>
 
 <body>
@@ -52,12 +52,12 @@ if ($sesion->estaActiva()) {
             }
         }
         ?>
-        <div class="container-fluid d-flex align-items-start justify-content-center" style="min-height: 60vh; padding-top: 40px;">
+        <div class="container-fluid d-flex align-items-start justify-content-center" style="min-height: 60vh; padding-top: 40px;padding-bottom:80px;">
             <div class="row justify-content-center mt-3">
                 <div class="col" style="max-width: 400px;">
-                    <form id="datosUsuario" name="login" class="container bg-white border rounded shadow p-4">
+                    <form id="datosUsuario" name="login" class="container bg-white border rounded shadow p-4" accion="vista\login\accionLogin.php" method="post">
                         <div class="row mb-4">
-                            <h2 class="text-center">¡Hola! :)</h2>
+                            <h2 id="subtitulo" class="text-center">¡Hola! :)</h2>
                         </div>
                         <div class="row">
                             <div class="input-group mb-3">
@@ -76,7 +76,7 @@ if ($sesion->estaActiva()) {
                             <button class="btn btn-dark" type="submit">Iniciar Sesion</button>
                         </div>
                         <div class="text-center">
-                            <p class="mb-0 text-muted">¿No tenés una cuenta? <a href="../registro">Registrate!</a></p>
+                            <p class="mb-0 text-muted">¿No tenés una cuenta? <a id="link" href="../registro">Click Aqui!</a></p>
                         </div>
                     </form>
                 </div>

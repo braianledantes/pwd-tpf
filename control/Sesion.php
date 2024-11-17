@@ -41,6 +41,40 @@ class Sesion
     }
 
     /**
+     * Verifica si el usuario tiene acceso al menú actual.
+     */
+    public function tieneAccesoAMenuActual(): bool
+    {
+        $tieneAcceso = false;
+        $idusuario = $_SESSION['idusuario'];
+        // obtiene el menu actual
+        $INICIO = strtolower($GLOBALS['INICIO']);
+        $uri = strtolower($_SERVER['REQUEST_URI']);
+        $menuActual = str_replace($INICIO, '', $uri);
+
+        // obtiene el los roles del usuario
+        $abmUsuarioRol = new ABMUsuarioRol();
+        $rolesUsuario = $abmUsuarioRol->buscar(['idusuario' => $idusuario]);
+
+        foreach ($rolesUsuario as $rolUsuario) {
+            $rol = $rolUsuario->getobjrol();
+
+            $abmMenuRol = new ABMMenuRol();
+            $menus = $abmMenuRol->buscar(['idrol' => $rol->getidrol()]);
+            // verifica si existe algun menu que empiece con $menuActual
+            foreach ($menus as $menu) {
+                $menuDescription = strtolower($menu->getobjMenu()->getMedescripcion());
+                if (strpos($menuActual, $menuDescription) === 0) {
+                    $tieneAcceso = true;
+                    break;
+                }
+            }
+        }
+
+        return $tieneAcceso;
+    }
+
+    /**
      * Obtiene los roles del usuario logeado.
      */
     private function tieneRol($descripcion)
@@ -64,6 +98,36 @@ class Sesion
             }
         }
         return $tieneElRol;
+    }
+
+    /**
+     * Obtiene todos los menus del usuario logeado segun los roles que tenga.
+     * Hay que tener en cuenta que un usuario puede tener varios roles y un rol puede tener varios menus.
+     */
+    public function obtenerMenusDelUsuario()
+    {
+        $menus = array();
+        if (isset($_SESSION['idusuario'])) {
+            $idusuario = $_SESSION['idusuario'];
+            // obtiene el los roles del usuario
+            $abmUsuarioRol = new ABMUsuarioRol();
+            $rolesUsuario = $abmUsuarioRol->buscar(['idusuario' => $idusuario]);
+
+            foreach ($rolesUsuario as $rolUsuario) {
+                $rol = $rolUsuario->getobjrol();
+
+                $abmMenuRol = new ABMMenuRol();
+                $menusRol = $abmMenuRol->buscar(['idrol' => $rol->getidrol()]);
+                // obtiene los menus del rol
+                foreach ($menusRol as $menuRol) {
+                    $menu = $menuRol->getobjMenu();
+                    $idMenu = $menu->getidmenu();
+                    $menus[$idMenu] = $menu;
+                }
+            }
+        }
+
+        return $menus;
     }
 
     /**

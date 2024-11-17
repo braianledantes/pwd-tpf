@@ -15,6 +15,7 @@ $session = new Sesion();
     <!-- bootstrap -->
     <?php include_once("./estructura/bootstrap.php"); ?>
     <link rel="stylesheet" href="./css/estilos.css">
+
     <!---- fontawesome ---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
@@ -22,23 +23,24 @@ $session = new Sesion();
 <body>
     <?php include_once("./estructura/cabecera.php"); ?>
     <!-- Carrusel -->
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/RV3G/diamond/diamond-Brillant_AAA/alloycolour/red_white.jpg" class="d-block w-100" alt="Imagen 1">
+     <section style=" margin-top:-17px;">
+     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button id="tienda"type="button"><a href="./productos/index.php">Ver productos!</a></button>
+            </div>
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./assets/imagenes/anillo1.png" class=" w-100" alt="Anillo de alas plateado">
+                </div>
+                <div class="carousel-item ">
+                    <img src="./assets/imagenes/anillo2.png" class=" w-100" alt="Anillo de corazon gema">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/imagenes/anillo3.png" class=" w-100" alt="Anillo de ala de angel">
+                </div>
+            </div>
         </div>
-        <div class="carousel-item">
-            <img src="https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/britany-n/diamond/diamond-Brillant_AAA/stone2/diamond-Brillant_AAA/stone3/diamond-Brillant_AAA/alloycolour/yellow.jpg" class="d-block w-100" alt="Imagen 2">
-        </div>
-        <div class="carousel-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7BFAj6Ix2k5XIkJ36vOFSUNdo7NY7twc8PA&s" class="d-block w-100" alt="Imagen 3">
-        </div>
-    </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
@@ -48,6 +50,8 @@ $session = new Sesion();
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+    <div id="info"><p>¡Despachamos todos los días hábiles para que reciba el producto cuanto antes!</p></div>
+     </section>
 <?php include_once("./estructura/footer.php"); ?>
 </body>
 

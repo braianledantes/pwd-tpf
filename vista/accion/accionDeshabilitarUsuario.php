@@ -2,10 +2,10 @@
 include_once '../../configuracion.php';
 $datos = data_submitted();
 
-$sesion = new Sesion();
-if (!$sesion->estaActiva()) {
-    header('Location: ../login/login.php?message=' . urlencode("No ha iniciado sesión"));
-    exit;
+// verifica que el usuario esté logueado y tenga permisos
+$session = new Sesion();
+if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
+    header("Location: ../login");
 }
 
 $idUsuario = $_SESSION['idusuario'];
