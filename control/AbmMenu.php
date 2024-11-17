@@ -100,10 +100,7 @@ class AbmMenu
         // Si no existe lo inserta
         if ($menu != null and $menu->insertar()) {
             // crea las relaciones entre el menu y los roles
-            $abmMenuRol = new AbmMenuRol();
-            foreach ($idRoles as $idRol) {
-                $abmMenuRol->alta(['idrol' => $idRol, 'idmenu' => $menu->getIdmenu()]);
-            }
+            $this->insertarRelaciones($menu->getIdmenu(), $idRoles);
             $resp = true;
         }
         return $resp;
@@ -117,14 +114,7 @@ class AbmMenu
     {
         $resp = false;
         // borra los roles asociados al menu
-        $abmMenuRol = new AbmMenuRol();
-        $listaMenuRoles = $abmMenuRol->buscar(['idmenu' => $param['idmenu']]);
-        foreach ($listaMenuRoles as $menuRol) {
-            $abmMenuRol->baja([
-                'idrol' => $menuRol->getobjRol()->getIdrol(),
-                'idmenu' => $param['idmenu']
-            ]);
-        }
+        $this->borrarRelaciones($param['idmenu']);
         // borra el menu
         if ($this->seteadosCamposClaves($param)) {
             $elObjtTabla = $this->cargarObjetoConClave($param);
@@ -134,6 +124,26 @@ class AbmMenu
         }
 
         return $resp;
+    }
+
+    private function insertarRelaciones($idmenu, $idRoles)
+    {
+        $abmMenuRol = new AbmMenuRol();
+        foreach ($idRoles as $idRol) {
+            $abmMenuRol->alta(['idrol' => $idRol, 'idmenu' => $idmenu]);
+        }
+    }
+
+    private function borrarRelaciones($idmenu)
+    {
+        $abmMenuRol = new AbmMenuRol();
+        $listaMenuRoles = $abmMenuRol->buscar(['idmenu' => $idmenu]);
+        foreach ($listaMenuRoles as $menuRol) {
+            $abmMenuRol->baja([
+                'idrol' => $menuRol->getobjRol()->getIdrol(),
+                'idmenu' => $idmenu
+            ]);
+        }
     }
 
     /**
@@ -175,20 +185,10 @@ class AbmMenu
             if ($menu != null) {
                 // modifica el menu
                 $menu->modificar();
-                // borra las relaciones anteriores del menu con el rol
-                $abmMenuRol = new AbmMenuRol();
-                $listamenusroles = $abmMenuRol->buscar(['idmenu' => $menu->getIdmenu()]);
-                foreach ($listamenusroles as $menurol) {
-                    $abmMenuRol->baja([
-                        'idrol' => $menurol->getobjRol()->getIdrol(),
-                        'idmenu' => $menu->getIdmenu()
-                    ]);
-                }
+                // borra las relaciones anteriores del menu con los roles
+                $this->borrarRelaciones($menu->getIdmenu());
                 // crea las relaciones entre el menu y los roles
-                $abmMenuRol = new AbmMenuRol();
-                foreach ($idRoles as $idRol) {
-                    $abmMenuRol->alta(['idrol' => $idRol, 'idmenu' => $menu->getIdmenu()]);
-                }
+                $this->insertarRelaciones($menu->getIdmenu(), $idRoles);
                 $resp = true;
             }
         }
