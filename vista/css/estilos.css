@@ -36,7 +36,9 @@ body {
 #menuDinamico{background-color:white;font: weight 200px;}
 #menuDinamico ul li a:hover{font-weight: bold;}
 #menuDinamico ul li a:active{font-weight: bold;}
+/***************************************ABM MENU*************************************************/
 
+/************************************************************************************************/
 nav {
     color: rgb(195, 204, 195);
 }

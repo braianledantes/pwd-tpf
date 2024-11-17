@@ -29,21 +29,21 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 <body>
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
-        <div class="container">
-            <!-- formulario de alta de menu -->
-            <div class="row">
-                <h1>Alta de Rol</h1>
+        <div class="w-50 mx-auto mt-3 mb-5">
+            <div>
+                <h1 class="mt-3">Alta de Rol</h1>
             </div>
-            <div class="row">
-                <form id="form" action="./accionAlta.php" method="POST">
+            <div>
+                <form id="form" class="w-25 mx-auto mt-4" action="./accionAlta.php" method="POST">
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion" name="rodescripcion" required>
+                        <div class="form-floating">
+                                <input class="form-control" id="descripcion" name="rodescripcion" type="text" placeholder="Descripcion" required>
+                                <label for="descripcion">Descripcion</label>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button type="submit" class="btn btn-dark mt-3">Crear</button>
                 </form>
             </div>
-
         </div>
 
     </main>

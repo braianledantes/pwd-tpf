@@ -37,7 +37,7 @@ if (!$session->esAdministrador()) {
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
         <h2>ABM de Menús</h2>
-        <a href="./alta.php" class="btn btn-dark mt-3">Crear Menú</a>
+        <a href="./alta.php" class="btn btn-dark mt-3">+ Crear Menú</a>
         <section id="listaMenus">
 
         </section>
@@ -55,7 +55,8 @@ if (!$session->esAdministrador()) {
                 success: function(result) {
                     const data = result.data;
                     let contenido = `
-                    <table border>
+                    <div class="contenedor mb-5">
+                    <table class='table table-light table-striped table-borderless' style="margin-top: 30px;">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -74,7 +75,7 @@ if (!$session->esAdministrador()) {
                             const roles = menu.roles.map(rol => rol.rodescripcion).join(', ');
 
                             const acciones = `
-                            <a href="..${menu.medescripcion}" class="btn btn-info">Ver</a>
+                            <a href="..${menu.medescripcion}" class="btn fs-5" id="icono"><i class="bi bi-eye"></i></a>
                             <a href="./modificar.php?idmenu=${menu.idmenu}" class='btn circle-icon rounded-circle'><i class="bi bi-pen "></i></a>
                             <a onclick="eliminar(${menu.idmenu})" class='btnEliminar btn btn-danger btn-sm rounded-circle'><i class='bi bi-trash3-fill'></i></a>
                             `;

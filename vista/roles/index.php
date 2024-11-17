@@ -32,7 +32,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
         <h2 class="mt-3">ABM de Roles</h2>
-        <a href="./alta.php" class="btn btn-dark mt-3">Crear Rol</a>
+        <a href="./alta.php" class="btn btn-dark mt-3">+ Crear Rol</a>
         <section id="listaMenus">
 
         </section>

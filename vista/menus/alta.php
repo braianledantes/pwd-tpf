@@ -37,30 +37,33 @@ $roles = $abmrol->buscar(null);
 <body>
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
-        <div class="container">
+        <div class="w-25 mx-auto mt-3 mb-5">
             <!-- formulario de alta de menu -->
             <div class="row">
                 <h1>Alta de Menú</h1>
             </div>
             <div class="row">
                 <form id="formCrearMenu" action="./accionAlta.php" method="POST">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="menombre" required>
+                    <div class="form-floating mt-3 mb-3">
+                        <input class="form-control" id="nombre" name="menombre" type="text" placeholder="Nombre" required>
+                        <label for="nombre">Nombre</label>
+                            
                     </div>
-                    <div class="mb-3">
-                        <label for="descripcion" class="form-label">Ubicación</label>
+                    <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="descripcion" name="medescripcion" required value="" placeholder="/ejemplo">
+                        <label for="descripcion" class="form-label">Ubicación</label>
                     </div>
-                    <div class="mb-3">
-                        <label for="idpadre" class="form-label">ID del menú Padre</label>
-                        <input type="number" class="form-control" id="idpadre" name="idpadre">
+                    <div class="form-floating mb-3">
+                    
+                        <input type="number" class="form-control" id="idpadre" name="idpadre" placeholder="ID del menu Padre" required>
+                        <label for="idpadre">ID del menú Padre</label>
                     </div>
-                    <div class="mb-3">
+                    
+                    <div class="form-floating mb-3">
                         <!-- selecciona multiples roles -->
-                        <label for="roles" class="form-label">Roles</label>
+                        <label for="roles" class="form-label">Roles:</label>
                         <?php foreach ($roles as $rol) : ?>
-                            <div class="form-check">
+                            <div class="form-check w-25 mx-auto">
                                 <input class="form-check-input" type="checkbox" name="roles[]" value="<?= $rol->getIdrol() ?>" id="<?= $rol->getIdrol() ?>">
                                 <label class="form-check-label" for="<?= $rol->getIdrol() ?>">
                                     <?= $rol->getRodescripcion() ?>
@@ -68,7 +71,7 @@ $roles = $abmrol->buscar(null);
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button type="submit" class="btn btn-dark">Crear Menu</button>
                 </form>
             </div>
 

@@ -66,30 +66,29 @@ try {
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
         <!-- formulario de modificacion de menu -->
-        <div class="container">
+        <div class="w-25 mx-auto mt-3 mb-5">
             <div class="row">
                 <h1>Modificar Menú <?= $menu->getIdmenu() ?></h1>
             </div>
             <div class="row">
                 <form id="formModificarMenu" action="./accionModificar.php" method="POST">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
+                    <div class="form-floating mt-3 mb-3">
                         <input type="text" class="form-control" id="nombre" name="menombre" value="<?= $menu->getMenombre(); ?>" required>
+                        <label for="nombre" class="form-label">Nombre</label>
                     </div>
-                    <div class="mb-3">
-                        <label for="descripcion" class="form-label">Ubicación</label>
+                    <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="descripcion" name="medescripcion" value="<?= $menu->getMedescripcion(); ?>" required>
+                        <label for="descripcion" class="form-label">Ubicación</label>
                     </div>
-                    <div class="mb-3">
-                        <label for="idpadre" class="form-label">ID del menú Padre</label>
+                    <div class="form-floating mb-3">
                         <input type="number" class="form-control" id="idpadre" name="idpadre" value="<?= $menuPadre ? $menuPadre->getIdmenu() : ''; ?>">
+                        <label for="idpadre" class="form-label">ID del menú Padre</label>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-floating mb-3">
                         <!-- selecciona multiples roles -->
-                        <label for="roles" class="form-label">Roles</label>
+                        <label for="roles" class="form-label">Roles:</label>
                         <?php foreach ($roles as $rol) : ?>
-
-                            <div class="form-check">
+                            <div class="form-check w-25 mx-auto">
                                 <input class="form-check-input" type="checkbox" name="roles[]" value="<?= $rol->getIdrol() ?>" id="<?= $rol->getIdrol() ?>" <?= in_array($rol, $rolesDelMenu) ? 'checked' : '' ?>>
                                 <label class="form-check-label" for="<?= $rol->getIdrol() ?>">
                                     <?= $rol->getRodescripcion() ?>
@@ -100,7 +99,7 @@ try {
                     </div>
 
                     <input type="hidden" name="idmenu" value="<?= $menu->getIdmenu(); ?>">
-                    <button type="submit" class="btn btn-primary">Modificar</button>
+                    <button type="submit" class="btn btn-dark">Modificar</button>
                 </form>
             </div>
         </div>
