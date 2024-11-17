@@ -36,12 +36,8 @@ if (!$session->esAdministrador()) {
 <body>
     <?php include_once("../estructura/cabecera.php"); ?>
     <main>
-<<<<<<< HEAD
-        <h2>Pagina de ABM de menús</h2>
-=======
-        <h1>Pagina de ABM de Menús</h1>
+        <h2>ABM de Menús</h2>
         <a href="./alta.php" class="btn btn-dark mt-3">Crear Menú</a>
->>>>>>> ad006f876cc4a12ff895b13c610df1a1dcafd7a4
         <section id="listaMenus">
 
         </section>
@@ -71,27 +67,8 @@ if (!$session->esAdministrador()) {
                         contenido = '<h2>No hay menús cargados</h2>';
                     } else {
                         data.forEach(element => {
-<<<<<<< HEAD
-                            // crear un article con cada elemento menu
-
-                            
-                            // TODO: tienen que estar en una tabla
-
-                            contenido += `<article class="card col-12 col-md-6 col-lg-4">
-                            <div id="listaMenus" class="row">
-                            <a href="..${element['medescripcion']}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${element['menombre']}</h5>
-                                    <a href="./accionModificar.php?idmenu=${element['idmenu']}" class="btn btn-primary">Modificar</a>
-                                    <a href="./accionEliminar.php?idmenu=${element['idmenu']}" class="btn btn-danger">Eliminar</a>
-                                </div>
-                            </a>
-                            </div>
-                            </article>`;
-=======
                             const menu = element.objMenu;
                             const rol = element.objrol;
->>>>>>> ad006f876cc4a12ff895b13c610df1a1dcafd7a4
 
                             const acciones = `
                             <a href="..${menu.medescripcion}" class="btn btn-info">Ver</a>
