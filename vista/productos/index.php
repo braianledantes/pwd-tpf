@@ -74,8 +74,8 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                                 <td>${producto.idproducto}</td>
                                 <td>${producto.pronombre}</td>
                                 <td>${producto.prodetalle}</td>
-                                <td>${producto.proprecio}</td>
                                 <td>${producto.procantstock}</td>
+                                <td>${producto.proprecio}</td>
                                 <td>${acciones}</td>
                             </tr>`;
                         });

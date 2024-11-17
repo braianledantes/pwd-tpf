@@ -134,20 +134,36 @@ class ABMProducto
      */
     public function modificacion($param)
     {
-        // si la imagen fue cargada, la sube al servidor
-        if (array_key_exists('proimagen', $param) && $param['proimagen']['error'] == UPLOAD_ERR_OK) {
-            $param['prourlimagen'] = $this->subirImagen($param['proimagen'], uniqid());
-        } else {
-            // si no se cargo una imagen, se setea a null
-            $param['prourlimagen'] = null;
-        }
-        // modifica el objeto en la base de datos
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
-            $elObjtTabla = $this->cargarObjeto($param);
-            if ($elObjtTabla != null and $elObjtTabla->modificar()) {
-                $resp = true;
-            }
+            // trae el objeto a modificar
+            $producto = $this->cargarObjetoConClave($param);
+            $producto->cargar();
+
+            if ($producto != null) {
+                // modifica los valores de los atributos
+                if (array_key_exists('pronombre', $param)) {
+                    $producto->setusnombre($param['pronombre']);
+                }
+                if (array_key_exists('prodetalle', $param)) {
+                    $producto->setprodetalle($param['prodetalle']);
+                }
+                if (array_key_exists('procantstock', $param)) {
+                    $producto->setprocantstock($param['procantstock']);
+                }
+                if (array_key_exists('proprecio', $param)) {
+                    $producto->setproprecio($param['proprecio']);
+                }
+                // si la imagen fue cargada, la sube al servidor
+                if (array_key_exists('proimagen', $param) && $param['proimagen']['error'] == UPLOAD_ERR_OK) {
+                    // sube la imagen con un nombre unico
+                    $prourlimagen = $this->subirImagen($param['proimagen'], uniqid());
+                    $producto->setprourlimagen($prourlimagen);
+                } 
+
+                // actualiza el objeto en la base de datos
+                $resp = $producto->modificar();
+            }        
         }
         return $resp;
     }
