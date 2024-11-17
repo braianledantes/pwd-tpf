@@ -40,6 +40,10 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     <?php include_once("../estructura/footer.php"); ?>
     <script>
         $(document).ready(function() {
+            mostrarLista();
+        });
+
+        function mostrarLista() {
             $.ajax({
                 type: "GET",
                 url: "./accionListar.php",
@@ -62,7 +66,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                         data.forEach(rol => {
                             const acciones = `
                             <a href="./modificar.php?idrol=${rol.idrol}" class='btn circle-icon rounded-circle'><i class="bi bi-pen "></i></a>
-                            <a href="./accionBaja.php?idrol=${rol.idrol}" class='btn btn-danger btn-sm rounded-circle'><i class='bi bi-trash3-fill'></i></a>
+                            <a onclick="eliminar(${rol.idrol})" class='btn btn-danger btn-sm rounded-circle'><i class='bi bi-trash3-fill'></i></a>
                             `;
                             contenido += `
                             <tr>
@@ -81,7 +85,30 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                     console.error(result);
                 }
             });
-        });
+        }
+
+        function eliminar(idrol) {
+            if (confirm("¿Está seguro que desea eliminar el rol?")) {
+                $.ajax({
+                    type: "GET",
+                    url: "./accionBaja.php",
+                    data: {
+                        idrol
+                    },
+                    success: function(result) {
+                        if (result.status === 'success') {
+                            alert("Rol eliminado correctamente");
+                            mostrarLista();
+                        } else {
+                            alert("Error al eliminar el rol");
+                        }
+                    },
+                    error: function(result) {
+                        console.error(result);
+                    }
+                });
+            }
+        }
     </script>
 </body>
 
