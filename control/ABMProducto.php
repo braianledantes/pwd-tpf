@@ -187,6 +187,8 @@ class ABMProducto
                 $where .= " and procantstock ='" . $param['procantstock'] . "'";
             if (isset($param['procantstock']))
                 $where .= " and procantstock ='" . $param['procantstock'] . "'";
+            if (isset($param['proprecio']))
+                $where .= " and proprecio ='" . $param['proprecio'] . "'";
         }
         $obj = new Producto();
         $arreglo = $obj->listar($where);
