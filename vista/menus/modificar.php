@@ -20,27 +20,29 @@ $roles = $abmRoles->buscar(null);
 $error = null;
 $menu = null;
 $menuPadre = null;
-$rol = null;
+$rolesDelMenu = [];
 try {
     if (!isset($data['idmenu'])) {
         throw new Exception("Falta el id del menu");
     }
 
-    $abmMenuRol = new AbmMenuRol();
-    $listaMenuRol = $abmMenuRol->buscar(['idmenu' => $data['idmenu']]);
-    if (empty($listaMenuRol)) {
+    $abmMenu = new AbmMenu();
+    $menus = $abmMenu->buscar(['idmenu' => $data['idmenu']]);
+    if (empty($menus)) {
         throw new Exception("El menu no existe");
     }
-    $menurol = $listaMenuRol[0];
-    $menu = $menurol->getobjmenu();
-    $rol = $menurol->getobjRol();
+    $menu = $menus[0];
+    // obtiene los roles del menu
+    $abmMenuRol = new AbmMenuRol();
+    $menuRoles = $abmMenuRol->buscar(['idmenu' => $menu->getIdmenu()]);
+    foreach ($menuRoles as $mr) {
+        $rolesDelMenu[] = $mr->getobjrol();
+    }
 
     $menuPadre = $menu->getobjmenu();
 } catch (Exception $e) {
     $error = $e;
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -83,15 +85,18 @@ try {
                         <input type="number" class="form-control" id="idpadre" name="idpadre" value="<?= $menuPadre ? $menuPadre->getIdmenu() : ''; ?>">
                     </div>
                     <div class="mb-3">
-                        <label for="rol" class="form-label">Rol</label>
-                        <select class="form-select" id="rol" name="idrol" required>
-                            <option value="">Seleccione un rol</option>
-                            <?php foreach ($roles as $r) : ?>
-                                <option value="<?= $r->getIdrol() ?>"
-                                    <?= $rol->getIdrol() == $r->getIdrol() ? 'selected' : ''; ?>><?= $r->getRodescripcion() ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                        <!-- selecciona multiples roles -->
+                        <label for="roles" class="form-label">Roles</label>
+                        <?php foreach ($roles as $rol) : ?>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="roles[]" value="<?= $rol->getIdrol() ?>" id="<?= $rol->getIdrol() ?>" <?= in_array($rol, $rolesDelMenu) ? 'checked' : '' ?>>
+                                <label class="form-check-label" for="<?= $rol->getIdrol() ?>">
+                                    <?= $rol->getRodescripcion() ?>
+                                </label>
+                            </div>
+
+                        <?php endforeach; ?>
                     </div>
 
                     <input type="hidden" name="idmenu" value="<?= $menu->getIdmenu(); ?>">

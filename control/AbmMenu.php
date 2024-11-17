@@ -69,12 +69,20 @@ class AbmMenu
     public function alta($param)
     {
         $resp = false;
-        $idRol = $param['idrol'];
-        // verifica que el rol exista
+
+        $idRoles = []; // arreglo con los id de los roles
         $abmRol = new AbmRol();
-        $rol = $abmRol->buscar(['idrol' => $idRol]);
-        if (empty($rol)) {
-            throw new Exception("El rol no existe");
+
+        // verifica que existan todos los roles
+        if (isset($param['roles']) && is_array($param['roles'])) {
+            $rolesParam = $param['roles'];
+            foreach ($rolesParam as $idRol) {
+                $rol = $abmRol->buscar(['idrol' => $idRol]);
+                if (empty($rol)) {
+                    throw new Exception("El rol no existe");
+                }
+                $idRoles[] = $idRol;
+            }
         }
         // Si no existe el menu padre lo setea en null
         if (isset($param['idpadre'])) {
@@ -88,12 +96,14 @@ class AbmMenu
 
         $param['idmenu'] = null; // no se setea el id ya que es autoincremental
         $param['medeshabilitado'] = null; // no se setea la fecha de deshabilitado ya que es null
-        $elObjtTabla = $this->cargarObjeto($param);
+        $menu = $this->cargarObjeto($param);
         // Si no existe lo inserta
-        if ($elObjtTabla != null and $elObjtTabla->insertar()) {
-            // crea la relacion entre el rol y el menu
+        if ($menu != null and $menu->insertar()) {
+            // crea las relaciones entre el menu y los roles
             $abmMenuRol = new AbmMenuRol();
-            $abmMenuRol->alta(['idrol' => $idRol, 'idmenu' => $elObjtTabla->getIdmenu()]);
+            foreach ($idRoles as $idRol) {
+                $abmMenuRol->alta(['idrol' => $idRol, 'idmenu' => $menu->getIdmenu()]);
+            }
             $resp = true;
         }
         return $resp;
@@ -134,13 +144,22 @@ class AbmMenu
     public function modificacion($param)
     {
         $resp = false;
-        // verifica que el rol exista
+
+        $idRoles = []; // arreglo con los id de los roles
         $abmRol = new AbmRol();
-        $rol = $abmRol->buscar(['idrol' => $param['idrol']]);
-        if (empty($rol)) {
-            throw new Exception("El rol no existe");
+
+        // verifica que existan todos los roles
+        if (isset($param['roles']) && is_array($param['roles'])) {
+            $rolesParam = $param['roles'];
+            foreach ($rolesParam as $idRol) {
+                $rol = $abmRol->buscar(['idrol' => $idRol]);
+                if (empty($rol)) {
+                    throw new Exception("El rol no existe");
+                }
+                $idRoles[] = $idRol;
+            }
         }
-        // verifica que el menu padre exista sino lo setea en null
+        // Si no existe el menu padre lo setea en null
         if (isset($param['idpadre'])) {
             $menuPadre = $this->buscar(['idmenu' => $param['idpadre']]);
             if (empty($menuPadre)) {
@@ -152,21 +171,24 @@ class AbmMenu
 
         // modifica el menu
         if ($this->seteadosCamposClaves($param)) {
-            $elObjtMenu = $this->cargarObjeto($param);
-            if ($elObjtMenu != null) {
+            $menu = $this->cargarObjeto($param);
+            if ($menu != null) {
                 // modifica el menu
-                $elObjtMenu->modificar();
+                $menu->modificar();
                 // borra las relaciones anteriores del menu con el rol
                 $abmMenuRol = new AbmMenuRol();
-                $listamenusroles = $abmMenuRol->buscar(['idmenu' => $elObjtMenu->getIdmenu()]);
+                $listamenusroles = $abmMenuRol->buscar(['idmenu' => $menu->getIdmenu()]);
                 foreach ($listamenusroles as $menurol) {
                     $abmMenuRol->baja([
                         'idrol' => $menurol->getobjRol()->getIdrol(),
-                        'idmenu' => $elObjtMenu->getIdmenu()
+                        'idmenu' => $menu->getIdmenu()
                     ]);
                 }
-                // crea la nueva relacion
-                $abmMenuRol->alta(['idrol' => $param['idrol'], 'idmenu' => $elObjtMenu->getIdmenu()]);
+                // crea las relaciones entre el menu y los roles
+                $abmMenuRol = new AbmMenuRol();
+                foreach ($idRoles as $idRol) {
+                    $abmMenuRol->alta(['idrol' => $idRol, 'idmenu' => $menu->getIdmenu()]);
+                }
                 $resp = true;
             }
         }

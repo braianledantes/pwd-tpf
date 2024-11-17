@@ -42,9 +42,9 @@ $menus = $session->obtenerMenusDelUsuario();
                         <span class="nav-link">¡Explora nuestros productos y encuentra el anillo perfecto para ti! ♡ </span>
                     </li>
                 <?php } else { ?>
-                    <?php foreach ($menus as $menu) { ?>
+                    <?php foreach ($menus as $m) { ?>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="/pwd-tpf/vista<?= $menu->getMedescripcion() ?>"><?= $menu->getMenombre() ?></a>
+                            <a class="nav-link" href="/pwd-tpf/vista<?= $m->getMedescripcion() ?>"><?= $m->getMenombre() ?></a>
                         </li>
                     <?php } ?>
                 <?php } ?>

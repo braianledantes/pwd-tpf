@@ -62,7 +62,7 @@ if (!$session->esAdministrador()) {
                                 <th>Nombre</th>
                                 <th>Ubicación</th>
                                 <th>Id padre</th>
-                                <th>Rol</th>
+                                <th>Roles</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
@@ -70,9 +70,8 @@ if (!$session->esAdministrador()) {
                     if (data.length === 0) {
                         contenido = '<h2>No hay menús cargados</h2>';
                     } else {
-                        data.forEach(element => {
-                            const menu = element.objMenu;
-                            const rol = element.objrol;
+                        data.forEach(menu => {
+                            const roles = menu.roles.map(rol => rol.rodescripcion).join(', ');
 
                             const acciones = `
                             <a href="..${menu.medescripcion}" class="btn btn-info">Ver</a>
@@ -85,7 +84,7 @@ if (!$session->esAdministrador()) {
                                 <td>${menu.menombre}</td>
                                 <td>${menu.medescripcion}</td>
                                 <td>${menu.idpadre}</td>
-                                <td>${rol.rodescripcion}</td>
+                                <td>${roles}</td>
                                 <td>${acciones}</td>
                             </tr>`;
                         });

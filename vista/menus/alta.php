@@ -57,13 +57,16 @@ $roles = $abmrol->buscar(null);
                         <input type="number" class="form-control" id="idpadre" name="idpadre">
                     </div>
                     <div class="mb-3">
-                        <label for="rol" class="form-label">Rol</label>
-                        <select class="form-select" id="rol" name="idrol" required>
-                            <option value="">Seleccione un rol</option>
-                            <?php foreach ($roles as $rol) : ?>
-                                <option value="<?= $rol->getIdrol() ?>"><?= $rol->getRodescripcion() ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <!-- selecciona multiples roles -->
+                        <label for="roles" class="form-label">Roles</label>
+                        <?php foreach ($roles as $rol) : ?>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="roles[]" value="<?= $rol->getIdrol() ?>" id="<?= $rol->getIdrol() ?>">
+                                <label class="form-check-label" for="<?= $rol->getIdrol() ?>">
+                                    <?= $rol->getRodescripcion() ?>
+                                </label>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </form>

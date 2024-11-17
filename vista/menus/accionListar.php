@@ -13,12 +13,28 @@ if (!$session->estaActiva() || !$session->esAdministrador()) {
 }
 
 try {
+    // trae todos los menus
+    $abmMenu = new AbmMenu();
+    $lista = $abmMenu->buscar(null);
+
+    // por cada menu obtiene los roles asociados
     $abmMenuRol = new AbmMenuRol();
-    $lista = $abmMenuRol->buscar(null);
+    $listaMenuRol = $abmMenuRol->buscar(null);
 
     $listaJson = [];
-    foreach ($lista as $menurol) {
-        $listaJson[] = $menurol->toArray();
+
+    // arma un array con los roles asociados a cada menu
+    foreach ($lista as $menu) {
+        $menuArray = $menu->toArray();
+        $roles = [];
+        foreach ($listaMenuRol as $menuRol) {
+            if ($menuRol->getobjMenu()->getIdmenu() == $menu->getIdmenu()) {
+                $roles[] = $menuRol->getobjrol()->toArray();
+            }
+        }
+        $menuArray['roles'] = $roles;
+
+        $listaJson[] = $menuArray;
     }
 
     echo json_encode([
