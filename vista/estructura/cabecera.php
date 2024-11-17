@@ -18,11 +18,6 @@ $menus = $session->obtenerMenusDelUsuario();
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <?php foreach ($menus as $menu) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/pwd-tpf/vista<?= $menu->getMedescripcion() ?>"><?= $menu->getMenombre() ?></a>
-                        </li>
-                    <?php } ?>
                     <li class="nav-item">
                         <?php if ($session->estaActiva()) { ?>
                             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cerrar Seaion" href="/pwd-tpf/Vista/login/accionLogout.php">Cerrar Sesión</a>
@@ -32,6 +27,27 @@ $menus = $session->obtenerMenusDelUsuario();
                             </div>
                         <?php } ?>
                     </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--Menu que se carga dinamicamente de acuerdo al tipo de usario-->
+    <nav id="menuDinamico"class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mx-auto mb-2 mb-lg-0">
+                <?php if (empty($menus)) { ?>
+                    <li class="nav-item">
+                        <span class="nav-link">¡Explora nuestros productos y encuentra el anillo perfecto para ti! ♡ </span>
+                    </li>
+                <?php } else { ?>
+                    <?php foreach ($menus as $menu) { ?>
+                        <li class="nav-item mx-5">
+                            <a class="nav-link" href="/pwd-tpf/vista<?= $menu->getMedescripcion() ?>"><?= $menu->getMenombre() ?></a>
+                        </li>
+                    <?php } ?>
+                <?php } ?>
                 </ul>
             </div>
         </div>
