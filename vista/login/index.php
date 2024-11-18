@@ -29,7 +29,7 @@ if ($session->estaActiva()) {
 </head>
 
 <body>
-<?php include_once("../estructura/cabecera-vacia.php"); ?>
+<?php include_once("../estructura/cabecera.php"); ?>
 
     <main>
 

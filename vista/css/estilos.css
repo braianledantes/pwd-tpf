@@ -53,7 +53,7 @@ h3 {
     text-align: center;
 }
 
-/* TABLA */
+/******************************************TABLA*************************************************/
 td , th {
     padding: 10px;
 }
@@ -87,7 +87,7 @@ table tbody {
 
 }
 
-/*IMAGEN INICIO*/
+/*******************************************INICIO********************************************/
 img {
     width: "50px";
     height: "50px";  
@@ -117,7 +117,7 @@ img {
 }
 
 
-/*FOOTER*/
+/********************************************FOOTER********************************************/
 .footer {
     font-family: "Montserrat", serif;
     background-color: #03111b;/**#000f1a*/
@@ -156,21 +156,23 @@ img {
     background: var(--black);
 }
 
-/*HEADER*/
-
-.sesion a {
+/*****************************************HEADER********************************************/
+.sesion a,#opcionUsuario{
     text-decoration: none;
     line-height: 5rem;
-    font-size: 0.7cm;
-    color: #fbffcd;
-    margin: 0.5rem;
+    font-size: 1.2rem;
+    color: #ffffff;
     letter-spacing: normal;
 }
 
-.sesion a:hover {
-    color: #79ae92;
+.sesion a:hover , #opcionUsuario:hover{
+    color: #abc2dd;
 }
-
+#menuser{margin-top: -30px;}
+.dropdown-item:active {
+    color:#17486eb7; /* Cambia el color del texto */
+    background-color: white;
+}
 /*ICONOS*/
 .icono a {
     text-decoration: none;
@@ -182,7 +184,7 @@ img {
 }
 
 .sesion a:hover {
-    color: #79ae92;
+    color: #badbdd;
 }
 
 

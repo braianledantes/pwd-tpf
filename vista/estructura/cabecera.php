@@ -18,15 +18,29 @@ $menus = $session->obtenerMenusDelUsuario();
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <?php if ($session->estaActiva()) { ?>
-                            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cerrar Seaion" href="/pwd-tpf/Vista/login/accionLogout.php">Cerrar Sesión</a>
-                        <?php } else { ?>
-                            <div class="sesion">
-                                <a href="/pwd-tpf/Vista/login"><i class="fas fa-user"></i></a>
-                            </div>
-                        <?php } ?>
+                    <li class="nav-item sesion">
+                        <a href="/pwd-tpf/Vista/login" class="nav-link"><i class="bi bi-bag"></i></a>
                     </li>
+                        <?php if ($session->estaActiva()) {
+                            $usuarioActivo = $session->getUsuario(); // Obtener el nombre del usuario de la sesión
+                            $nombreUsuario = $usuarioActivo->getUsnombre();
+                        ?>
+                        <!-- Dropdown de usuario -->
+                            <li class="nav-item dropdown">
+                                <a id="opcionUsuario" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?php echo $nombreUsuario; ?>     <i class="fas fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-light shadow" id="menuser">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i><span class="ms-2">Configuración</span></a></li>
+                                    <li><a class="dropdown-item" href="/pwd-tpf/vista/login/accionLogout.php"><i class="bi bi-box-arrow-right"></i><span class="ms-2">Cerrar Sesion</span></a></li>
+                                </ul>
+                            </li>
+
+                        <?php } else { ?>
+                            <li class="nav-item sesion">
+                                <a href="/pwd-tpf/Vista/login" class="nav-link"><i class="fas fa-user"></i></a>
+                            </li>
+                        <?php } ?>
                 </ul>
             </div>
         </div>

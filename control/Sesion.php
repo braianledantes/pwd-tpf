@@ -155,6 +155,22 @@ class Sesion
     }
 
     /**
+     * Consigue a un usuario de la bd
+     * @return $datosUsuario
+     */
+    public function getUsuario(){
+        $abmUsuario = new abmusuario();
+         $where = ['idusuario' => $_SESSION['idusuario']];
+        $listaUsuarios = $abmUsuario->buscar($where);
+
+        if ($listaUsuarios >= 1) {
+             $datosUsuario = $listaUsuarios[0];
+        }
+
+        return $datosUsuario;
+    }
+
+    /**
      * Verifica si hay un usuario con la sesión activa.
      */
     public function estaActiva()
