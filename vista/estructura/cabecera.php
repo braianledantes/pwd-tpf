@@ -20,11 +20,15 @@ $menus = $session->obtenerMenusDelUsuario();
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item sesion">
-                        <a href="/pwd-tpf/Vista/login" class="nav-link"><i class="bi bi-bag"></i></a>
+                        <a href=".\listaProductos\index.php" class="nav-link"><i class="bi bi-bag"></i></a>
                     </li>
                         <?php if ($session->estaActiva()) {
                             $usuarioActivo = $session->getUsuario(); // Obtener el nombre del usuario de la sesión
-                            $nombreUsuario = $usuarioActivo->getUsnombre();
+                            if (is_object($usuarioActivo)) {
+                                $nombreUsuario = $usuarioActivo->getUsnombre();
+                            } else {
+                                $nombreUsuario = 'Invitado';
+                            }
                         ?>
                         <!-- Dropdown de usuario --> 
                             <li class="nav-item dropdown">

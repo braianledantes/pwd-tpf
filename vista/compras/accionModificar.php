@@ -23,7 +23,7 @@ try {
     }
 
     $abmCompra = new ABMCompraEstado();
-    $abmCompra->modificacion([
+    $abmCompra->alta([
         'idCompra' => $idCompra,
         'idcompraestadotipo' => $idcompraestadotipo
     ]);

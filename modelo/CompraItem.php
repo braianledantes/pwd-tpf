@@ -185,6 +185,7 @@ class CompraItem
 
                         $objProducto = new Producto();
                         $objProducto->setidproducto($row['idproducto']);
+                        $objProducto->cargar();
                         $objCompra = new Compra();
                         $objCompra->setIdcompra($row['idcompra']);
 

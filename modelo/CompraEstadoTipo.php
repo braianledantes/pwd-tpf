@@ -130,7 +130,7 @@ class CompraEstadoTipo
         return $resp;
     }
 
-    public function listar($parametro = "")
+    public static function listar($parametro = "")
     {
         $arreglo = array();
         $db = new BaseDatos();
@@ -148,8 +148,6 @@ class CompraEstadoTipo
                         array_push($arreglo, $obj);
                     }
                 }
-            } else {
-                $this->setmensajeoperacion("compraestadotipo->listar: " . $db->getError());
             }
         }
         return $arreglo;
