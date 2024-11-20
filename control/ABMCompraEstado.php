@@ -93,8 +93,8 @@ class ABMCompraEstado
         $param['idcompraestado'] = null;
         $param['cefechaini'] = null;
         $param['cefechafin'] = null;
-        $elObjtTabla = $this->cargarObjeto($param);
-        if ($elObjtTabla != null and $elObjtTabla->insertar()) {
+        $compraEstado = $this->cargarObjeto($param);
+        if ($compraEstado != null and $compraEstado->insertar()) {
             $resp = true;
         }
         return $resp;
