@@ -21,20 +21,10 @@ try {
         throw new Exception('Faltan datos');
     }
 
-    if ($idcompraestadotipo < 0 || $idcompraestadotipo > 4) {
-        throw new Exception('El estado de la compra no es válido');
-    }
-
-    $fechaFin = null;
-    if ($idcompraestadotipo == 3 || $idcompraestadotipo == 4) {
-        $fechaFin = date('Y-m-d H:i:s');
-    }
-
     $abmCompra = new ABMCompraEstado();
     $abmCompra->modificacion([
         'idCompra' => $idCompra,
-        'idcompraestadotipo' => $idcompraestadotipo,
-        'cofechafin' => $fechaFin
+        'idcompraestadotipo' => $idcompraestadotipo
     ]);
 
     echo json_encode([

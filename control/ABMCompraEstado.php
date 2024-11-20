@@ -126,7 +126,19 @@ class ABMCompraEstado
     public function modificacion($param)
     {
         $resp = false;
-        $param['cefechaini'] = null;
+        $idcompraestadotipo = $param['idcompraestadotipo'];
+        // comprueba q el estado de la compra sea válido
+        if ($idcompraestadotipo < 0 || $idcompraestadotipo > 4) {
+            throw new Exception('El estado de la compra no es válido');
+        }
+    
+        $fechaFin = null;
+        // si el estado es 3 o 4, se setea la fecha de fin
+        if ($idcompraestadotipo == 3 || $idcompraestadotipo == 4) {
+            $fechaFin = date('Y-m-d H:i:s');
+        }
+
+        $param['cefechafin'] = $fechaFin;
         if ($this->seteadosCamposClaves($param)) {
             $elObjtTabla = $this->cargarObjeto($param);
             if ($elObjtTabla != null and $elObjtTabla->modificar()) {

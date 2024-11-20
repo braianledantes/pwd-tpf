@@ -76,15 +76,63 @@ class ABMCompra
 
     public function alta($param)
     {
-        $resp = -1;
+        $carrito = $param['carrito'];
+
+        // si el carrito esta vacio lanza un error
+        if (empty($carrito)) {
+            throw new Exception('El carrito esta vacio');
+        }
+
         $param['idcompra'] = null;
         $param['cofecha'] = null;
-        $elObjtTabla = $this->cargarObjeto($param);
-        //        verEstructura($elObjtTabla);
-        if ($elObjtTabla != null and $elObjtTabla->insertar()) {
-            $resp = $elObjtTabla->getIdcompra();
+        $compra = $this->cargarObjeto($param);
+        if ($compra == null || !$compra->insertar()) {
+            throw new Exception('Error al insertar la compra');
         }
-        return $resp;
+
+        $idCompra = $compra->getIdcompra();
+
+        
+        // verifica que los productos del carrito existan y tengan stock suficiente
+        $abmProducto = new AbmProducto();
+        foreach ($carrito as $idproducto => $cantidad) {
+            $producto = $abmProducto->buscar(['idproducto' => $idproducto]);
+            if (empty($producto)) {
+                $this->baja(['idcompra' => $idCompra]);
+                throw new Exception('Producto no encontrado');
+            }
+            $producto = $producto[0];
+            if ($producto->getprocantstock() < $cantidad) {
+                $this->baja(['idcompra' => $idCompra]);
+                throw new Exception('Stock insuficiente para el producto ' . $producto->getusnombre());
+            }
+        }
+        
+        // crea los items de la compra y actualiza el stock de los productos
+        $abmCompraItem = new AbmCompraItem();
+        foreach ($carrito as $idproducto => $cantidad) {
+            $abmCompraItem->alta([
+                'idcompra' => $idCompra,
+                'idproducto' => $idproducto,
+                'cicantidad' => $cantidad
+            ]);
+
+            $producto = $abmProducto->buscar(['idproducto' => $idproducto])[0];
+            $producto->setprocantstock($producto->getprocantstock() - $cantidad);
+            $producto->modificar();
+        }
+
+        // crea un estado para la compra (Iniciada)
+        $abmCompraEstado = new AbmCompraEstado();
+        $dioEstado = $abmCompraEstado->alta([
+            'idcompra' => $idCompra,
+            'idcompraestadotipo' => 1 // Iniciada
+        ]);
+
+        if (!$dioEstado) {
+            $this->baja(['idcompra' => $idCompra]);
+            throw new Exception('Error al iniciar la compra');
+        }
     }
 
     /**

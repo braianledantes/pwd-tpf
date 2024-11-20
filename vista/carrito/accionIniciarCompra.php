@@ -13,14 +13,6 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 }
 
 try {
-    // obtiene el carrito
-    $carrito = $session->obtenerCarrito();
-
-    // si el carrito esta vacio lanza un error
-    if (empty($carrito)) {
-        throw new Exception('El carrito esta vacio');
-    }
-
     // obtiene el id del usuario
     $usuario = $session->getUsuario();
     if (!$usuario) {
@@ -31,33 +23,9 @@ try {
     // crea una nueva compra
     $abmCompra = new AbmCompra();
     $idCompra = $abmCompra->alta([
-        'idusuario' => $idusuario
+        'idusuario' => $idusuario,
+        'carrito' => $session->obtenerCarrito()
     ]);
-    if ($idCompra <= 0) {
-        throw new Exception('Error al iniciar la compra');
-    }
-
-    // crea los items de la compra
-    $abmCompraItem = new AbmCompraItem();
-    foreach ($carrito as $idproducto => $cantidad) {
-        $abmCompraItem->alta([
-            'idcompra' => $idCompra,
-            'idproducto' => $idproducto,
-            'cicantidad' => $cantidad
-        ]);
-    }
-
-    // crea un estado para la compra
-    $abmCompraEstado = new AbmCompraEstado();
-    $dioEstado = $abmCompraEstado->alta([
-        'idcompra' => $idCompra,
-        'idcompraestadotipo' => 1 // Iniciada
-    ]);
-
-    if (!$dioEstado) {
-        $abmCompra->baja(['idcompra' => $idCompra]);
-        throw new Exception('Error al iniciar la compra');
-    }
 
     // vacia el carrito del usuario
     $session->vaciarCarrito();
