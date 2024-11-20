@@ -16,7 +16,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angel Wings Jewelry</title>
-    <link rel="icon" href="../vista/assets/imagenes/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="../assets/imagenes/favicon-32x32.png" type="image/png" sizes="32x32">
 
     <!-- bootstrap -->
     <?php include_once("../estructura/bootstrap.php"); ?>

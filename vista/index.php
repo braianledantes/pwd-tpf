@@ -44,7 +44,7 @@ $session = new Sesion();
                 <div class="d-flex flex-column align-items-center justify-content-center" style="height: 500px; background-color: #e9ecef;">
                     <img src="./assets/imagenes/anillo2.png" class=" w-100" alt="Anillo de corazon gema">
                     <p style="font-weight:bolder;font-size:larger;color:#e9ecef;position: absolute; top: 10%; left: 22%; transform: translate(-50%, -50%); z-index:10">Descubre nuestras nuevas joyas!</p>
-                    <button class="btn btn-outline-dark" style="position: absolute; top: 20%; left: 16%; transform: translate(-50%, -50%);">Ver productos</button>
+                    <button class="btn btn-outline-dark rounded-pill px-4" style="position: absolute; top: 20%; left: 16%; transform: translate(-50%, -50%);"> <a class="text-decoration-none" href="./listaProductos/index.php" style="color:white;font-weight:bold;">Ver productos</a></button>
                 </div>
             </div>
             <div class="carousel-item">

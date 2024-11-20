@@ -4,7 +4,7 @@ include_once("../../configuracion.php");
 // Verifica que el usuario esté logueado y tenga permisos
 $session = new Sesion();
 if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
-    header("Location: ../login");
+    header('Location: ../login?messageErr=' . urlencode('Debe Inciar Sesion para poder ver los Productos.'));
 }
 ?>
 
@@ -60,7 +60,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 
                             if (producto.procantstock > 0) {
                                 accionComprar = `
-                                <a onclick="agregarACarrito(${producto.idproducto})" class='comprar btn btn-outline-dark btn-sm btn-block  px-5 rounded-pill'>
+                                <a onclick="agregarACarrito(${producto.idproducto}, this)" class='comprar btn btn-outline-dark btn-sm btn-block  px-5 rounded-pill'>
                                     Comprar
                                 </a>
                                 `;
@@ -101,26 +101,29 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
             });
         }
 
-        function agregarACarrito(idproducto) {
-            $.ajax({
-                type: "POST",
-                url: "./accionAgregarACarrito.php",
-                data: {
-                    idproducto: idproducto
-                },
-                success: function(result) {
-                    console.log("Respuesta del servidor:", result);
-                    if (result.status === "success") {
-                        alert("Producto agregado al carrito");
-                    } else {
-                        alert("Error al agregar el producto al carrito");
-                    }
-                },
-                error: function(result) {
-                    console.error(result);
+        function agregarACarrito(idproducto, buttonElement) {
+        $.ajax({
+            type: "POST",
+            url: "./accionAgregarACarrito.php",
+            data: { idproducto: idproducto },
+            success: function(result) {
+                console.log("Respuesta del servidor:", result);
+                if (result.status === "success") {
+                    $(buttonElement).text("Producto Agregado")
+                                .attr("disabled", true) 
+                                .removeClass('btn-outline-dark')
+                                .addClass('btn-secondary') 
+                                .off('click'); 
+                    $(buttonElement).removeAttr("onclick"); 
+                } else {
+                    console.log("Error al agregar el producto al carrito");
                 }
-            });
+        },
+        error: function(result) {
+            console.error(result);
         }
+    });
+}
     </script>
 </body>
 
