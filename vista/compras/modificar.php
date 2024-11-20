@@ -9,15 +9,15 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 
 $data = data_submitted();
 
-$producto = null;
+$compra = null;
 try {
-    $idproducto = $data['idcompra'];
+    $idcompra = $data['idcompra'];
     if (!isset($idproducto)) {
         throw new Exception("Falta el id de compra");
     }
 
     $abmCompra = new ABMCompra();
-    $listaCompras = $abmCompra->buscar(['idcompra' => $idproducto]);
+    $listaCompras = $abmCompra->buscar(['idcompra' => $idcompra]);
     if (empty($listaCompras)) {
         throw new Exception("El id de compra no es válido");
     }
