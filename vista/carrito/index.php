@@ -46,7 +46,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Subtotal</th>
-                                    <th>Acciones</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,10 +55,10 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                             <tfoot>
                                 <tr>
                                     <td colspan="4">
-                                        <button class="btn btn-danger" onclick="vaciarCarrito()">Vaciar carrito</button>
+                                        <button class="btn btn-danger px-4 rounded-pill" onclick="vaciarCarrito()">Vaciar carrito</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-success" onclick="iniciarCompra()">Iniciar compra</button>
+                                        <button class="btn btn-dark px-4 rounded-pill" onclick="iniciarCompra()">Iniciar compra</button>
                                     </td>
                                 
                                 </tr>
@@ -92,19 +92,19 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 
                             // Acción de aumentar cantidad
                             const accionAumentarCantidad = `
-                            <button class='btn btn-primary btn-sm' onclick='aumentarCantidad(${item.producto.idproducto})'>
-                                <i class="fas fa-plus"></i>
+                            <button class='btn btn-dark btn-sm rounded-circle small-btn' onclick='aumentarCantidad(${item.producto.idproducto})'>
+                                <i class="fas fa-plus small-icon"></i>
                             </button>
                             `;
                             // Acción de disminuir cantidad
                             const accionDisminuirCantidad = `
-                            <button class='btn btn-danger btn-sm' onclick='disminuirCantidad(${item.producto.idproducto})'>
-                                <i class="fas fa-minus"></i>
+                            <button class='btn btn-dark btn-sm rounded-circle small-btn' onclick='disminuirCantidad(${item.producto.idproducto})'>
+                                <i class="fas fa-minus small-icon"></i>
                             </button>
                             `;
                             // Acción de eliminar producto
                             const accionEliminarProducto = `
-                            <button class='btn btn-danger btn-sm' onclick='eliminarProducto(${item.producto.idproducto})'>
+                            <button class='btn btn-danger btn-sm rounded-circle' onclick='eliminarProducto(${item.producto.idproducto})'>
                                 <i class="fas fa-trash"></i>
                             </button>
                             `;
@@ -115,11 +115,11 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                                     ${item.producto.pronombre}
                                 </td>
                                 <td>$${item.producto.proprecio}</td>
-                                <td>${item.cantidad}</td>
+                                <td>${accionAumentarCantidad} ${item.cantidad} ${accionDisminuirCantidad}</td>
                                 <td>$${item.subtotal}</td>
                                 <td>
-                                    ${accionAumentarCantidad}
-                                    ${accionDisminuirCantidad}
+                                    <!--${accionAumentarCantidad}
+                                    ${accionDisminuirCantidad}-->
                                     ${accionEliminarProducto}
                                 </td>
                             </tr>
@@ -133,7 +133,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                     // Total
                     const total = `<tr>
                         <td colspan="4" class="text-right"><strong>Total:</strong></td>
-                        <td>$${data.total}</td>
+                        <td class="total">$${data.total}</td>
                         <td></td>
                     </tr>`;
                     $("tbody").append(total);
