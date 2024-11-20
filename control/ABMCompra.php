@@ -76,13 +76,13 @@ class ABMCompra
 
     public function alta($param)
     {
-        $resp = false;
+        $resp = -1;
         $param['idcompra'] = null;
         $param['cofecha'] = null;
         $elObjtTabla = $this->cargarObjeto($param);
         //        verEstructura($elObjtTabla);
         if ($elObjtTabla != null and $elObjtTabla->insertar()) {
-            $resp = true;
+            $resp = $elObjtTabla->getIdcompra();
         }
         return $resp;
     }

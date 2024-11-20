@@ -82,7 +82,7 @@ class Sesion
         $tieneElRol = false;
         $roles = array();
         // obtiene todos los roles del usuario
-        if (isset($_SESSION['idusuario'])) {
+        if ($this->estaActiva()) {
             $abmUsuarioRol = new ABMUsuarioRol();
             $rolesUsuario = $abmUsuarioRol->buscar(['idusuario' => $_SESSION['idusuario']]);
             $roles = array_map(function ($rol) {
@@ -107,7 +107,7 @@ class Sesion
     public function obtenerMenusDelUsuario()
     {
         $menus = array();
-        if (isset($_SESSION['idusuario'])) {
+        if ($this->estaActiva()) {
             $idusuario = $_SESSION['idusuario'];
             // obtiene el los roles del usuario
             $abmUsuarioRol = new ABMUsuarioRol();
@@ -158,17 +158,113 @@ class Sesion
      * Consigue a un usuario de la bd
      * @return $datosUsuario
      */
-    public function getUsuario(){
+    public function getUsuario(): Usuario | null
+    {
         $abmUsuario = new abmusuario();
-         $where = ['idusuario' => $_SESSION['idusuario']];
+        $where = ['idusuario' => $_SESSION['idusuario']];
         $listaUsuarios = $abmUsuario->buscar($where);
 
         if ($listaUsuarios >= 1) {
-             $datosUsuario = $listaUsuarios[0];
+            $datosUsuario = $listaUsuarios[0];
         }
 
         return $datosUsuario;
     }
+
+    /**
+     * Agrega un producto al carrito. Si no existe el carrito, lo crea.
+     * Si no esta el producto, lo agrega y si ya esta, aumenta la cantidad.
+     */
+    public function agregarProductoAlCarrito($idproducto, $cantidad = 1)
+    {
+        if (!$this->estaActiva()) {
+            throw new Exception('No hay un usuario logueado');
+        }
+
+        if (!isset($_SESSION['carrito'])) {
+            $_SESSION['carrito'] = [];
+        }
+
+        if (!isset($_SESSION['carrito'][$idproducto])) {
+            $_SESSION['carrito'][$idproducto] = $cantidad;
+        } else {
+            $_SESSION['carrito'][$idproducto] += $cantidad;
+        }
+
+        return $_SESSION['carrito'];
+    }
+
+    /**
+     * Disminuye la cantidad de un producto en el carrito.
+     */
+    public function disminuirCantidadDelProducto($idproducto)
+    {
+        if (!$this->estaActiva()) {
+            throw new Exception('No hay un usuario logueado');
+        }
+
+        if (!isset($_SESSION['carrito'])) {
+            $_SESSION['carrito'] = [];
+        }
+
+        if (isset($_SESSION['carrito'][$idproducto])) {
+            $_SESSION['carrito'][$idproducto] -= 1;
+            if ($_SESSION['carrito'][$idproducto] <= 0) {
+                unset($_SESSION['carrito'][$idproducto]);
+            }
+        }
+
+        return $_SESSION['carrito'];
+    }
+
+    /**
+     * Elimina un producto del carrito.
+     */
+    public function eliminarProductoDelCarrito($idproducto)
+    {
+        if (!$this->estaActiva()) {
+            throw new Exception('No hay un usuario logueado');
+        }
+
+        if (!isset($_SESSION['carrito'])) {
+            $_SESSION['carrito'] = [];
+        }
+
+        if (isset($_SESSION['carrito'][$idproducto])) {
+            unset($_SESSION['carrito'][$idproducto]);
+        }
+
+        return $_SESSION['carrito'];
+    }
+
+    /**
+     * Devuelve el carrito del usuario actual.
+     */
+    public function obtenerCarrito()
+    {
+        if (!$this->estaActiva()) {
+            throw new Exception('No hay un usuario logueado');
+        }
+
+        if (!isset($_SESSION['carrito'])) {
+            $_SESSION['carrito'] = [];
+        }
+
+        return $_SESSION['carrito'];
+    }
+
+    /**
+     * Vacia el carrito del usuario actual.
+     */
+    public function vaciarCarrito()
+    {
+        if (!$this->estaActiva()) {
+            throw new Exception('No hay un usuario logueado');
+        }
+
+        $_SESSION['carrito'] = [];
+    }
+
 
     /**
      * Verifica si hay un usuario con la sesión activa.

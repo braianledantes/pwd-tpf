@@ -3,7 +3,7 @@ include_once("../../configuracion.php");
 
 // Verifica que el usuario esté logueado y tenga permisos
 $session = new Sesion();
-if (!$session->estaActiva() /*|| !$session->tieneAccesoAMenuActual()*/) {
+if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     header("Location: ../login");
 }
 ?>
@@ -55,9 +55,9 @@ if (!$session->estaActiva() /*|| !$session->tieneAccesoAMenuActual()*/) {
                     } else {
                         data.forEach(producto => {
                             // Acción de compra
-                            const accionComprar = `
-                            <a href="./comprar.php?idproducto=${producto.idproducto}" class='btn btn-success btn-sm btn-block'>
-                                Comprar
+                            const accionAgregarACarrito = `
+                            <a href="./accionAgregarACarrito.php?idproducto=${producto.idproducto}" class='btn btn-success btn-sm btn-block'>
+                                Agregar al carrito
                             </a>
                             `;
                             contenido += `
@@ -69,8 +69,8 @@ if (!$session->estaActiva() /*|| !$session->tieneAccesoAMenuActual()*/) {
                                         <p class="card-text">${producto.prodetalle}</p>
                                         <p class="card-text"><strong>Stock:</strong> ${producto.procantstock}</p>
                                         <p class="card-text"><strong>Precio:</strong> $${producto.proprecio}</p>
-                                        <div class="d-flex justify-content-between">
-                                            ${accionComprar}
+                                        <div class="d-flex justify-content-center">
+                                            ${accionAgregarACarrito}
                                         </div>
                                     </div>
                                 </div>

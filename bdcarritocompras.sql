@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2024 a las 00:56:06
+-- Tiempo de generación: 20-11-2024 a las 03:37:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -104,7 +104,10 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (82, 'AMB de Menus', '/menus', NULL, NULL),
 (83, 'ABM de Roles', '/roles', NULL, NULL),
 (84, 'ABM de Productos', '/productos', NULL, NULL),
-(85, 'ABM de Usuarios', '/usuarios', NULL, NULL);
+(85, 'ABM de Usuarios', '/usuarios', NULL, NULL),
+(86, 'Compras', '/compras', NULL, NULL),
+(87, 'Lista Productos', '/listaproductos', NULL, NULL),
+(88, 'Mi Carrito', '/carrito', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -125,7 +128,15 @@ INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (82, 1),
 (83, 1),
 (84, 1),
-(85, 1);
+(85, 1),
+(86, 1),
+(86, 3),
+(87, 1),
+(87, 2),
+(87, 3),
+(88, 1),
+(88, 2),
+(88, 3);
 
 -- --------------------------------------------------------
 
@@ -320,7 +331,7 @@ ALTER TABLE `compraitem`
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`

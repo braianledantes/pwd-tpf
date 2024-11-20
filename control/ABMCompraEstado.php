@@ -31,7 +31,6 @@ class ABMCompraEstado
     private function cargarObjeto($param)
     {
         $objCompraEstatado = null;
-
         if (
             array_key_exists('idcompraestado', $param)
             and array_key_exists('idcompra', $param)
@@ -92,8 +91,9 @@ class ABMCompraEstado
     {
         $resp = false;
         $param['idcompraestado'] = null;
+        $param['cefechaini'] = null;
+        $param['cefechafin'] = null;
         $elObjtTabla = $this->cargarObjeto($param);
-        //        verEstructura($elObjtTabla);
         if ($elObjtTabla != null and $elObjtTabla->insertar()) {
             $resp = true;
         }
