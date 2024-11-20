@@ -23,7 +23,7 @@ https://paletadecolores.com.mx/paleta/000000/001f36/1c5560/79ae92/fbffcd/
 2. Copiar el repositorio en la carpeta donde esta instalado XAMP. Por ejemplo `C:\xampp\htdocs`.
 3. Iniciar el servidor de Apache.
 4. Iniciar el servidor MySql
-5. Crear la base de datos *dbcarritocompras*
+5. Crear la base de datos *bdcarritocompras*
 6. Importar el contenido de la base de datos del archivo *bdcarritocompras.sql*
 7. Instalar Composer para instalar bibliotecas externas.
 8. Ejecutar el comando `$composer install` para instalar las bibliotecas.
