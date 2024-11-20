@@ -13,8 +13,9 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 }
 
 try {
+    $datos = data_submitted();
     // obtiene el id del producto
-    $idproducto = $_GET['idproducto'];
+    $idproducto = $datos['idproducto'];
 
     $session->eliminarProductoDelCarrito($idproducto);
 

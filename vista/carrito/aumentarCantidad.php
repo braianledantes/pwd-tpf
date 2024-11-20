@@ -13,8 +13,9 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 }
 
 try {
+    $datos = data_submitted();
     // obtiene el id del producto
-    $idproducto = $_GET['idproducto'];
+    $idproducto = $datos['idproducto'];
 
     // aumenta la cantidad de un producto en el carrito en 1
     $session->agregarProductoAlCarrito($idproducto, 1);
