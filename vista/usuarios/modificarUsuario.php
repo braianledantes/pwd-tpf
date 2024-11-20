@@ -76,7 +76,7 @@ if (isset($lista)) {
                         </div>
                     </div>
                 </div>
-                <!--<input type="hidden" id="usdeshabilitado" name="usdeshabilitado" value=<?//php echo $usuarioDeshabilitado ?> />-->
+                <input type="hidden" id="usdeshabilitado" name="usdeshabilitado" value="<?= $usuarioDeshabilitado ?>" />
             </div>
             <div class="row">
 
@@ -141,9 +141,10 @@ if (isset($lista)) {
                             alert(response.data);
                         }
                     },
-                    error: function() {
-                    //    alert('Error al modificar al Usuario');
-                    window.location.href = './index.php';
+                    error: function(error) {
+                        console.log("Error al modificar al Usuario:", error);
+                        alert('Error al modificar al Usuario');
+                    
                     },
                     cache: false,
                     contentType: false,

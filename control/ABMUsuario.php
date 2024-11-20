@@ -148,10 +148,8 @@ class ABMUsuario
      */
     public function modificacion($param)
     {
-        var_dump($param);
         $resp = false;
         $objUs = new usuario();
-        var_dump($param['usdeshabilitado']);
         $objUs->setear($param['idusuario'], $param['usnombre'], $param['uspass'], $param['usmail'], $param['usdeshabilitado']);
         if ($objUs->modificar()) {
             $resp = true;
