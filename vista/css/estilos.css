@@ -54,7 +54,24 @@ body {
 .card .card-body{background-color: #e6eaec80;}
 .card .card-body .detalle{font-weight: lighter;}
 .card .card-body .precio {letter-spacing: 2px;}
+/*****************************************CARRITO************************************************/
+.small-btn {
+    padding: 0px; /* Ajusta el padding del botón */
+    width: 24px; /* Ajusta el ancho */
+    height: 24px; /* Ajusta la altura */
+    font-size: 14px; /* Tamaño de texto del botón */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2px;
+    margin-left: 2px;
+  }
 
+.small-icon {
+    font-size: 0.7rem; /* Tamaño del icono */
+}
+
+.total{letter-spacing: 2px; font-weight: bold;};
 
 /************************************************************************************************/
 nav {
