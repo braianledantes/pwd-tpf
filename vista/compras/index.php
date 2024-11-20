@@ -41,13 +41,12 @@ $lista = $abmCompra->buscar(null);
                     <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Id Usuario</th>
                             <th>Fecha</th>
-                            <th>Usuario</th>
-                            <th>Nombre Usuario</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         
                     </tbody>
                 </table>
@@ -59,7 +58,7 @@ $lista = $abmCompra->buscar(null);
     <?php include_once("../estructura/footer.php"); ?>
     <script>
         $(document).ready(function() {
-            $('#lista').DataTable();
+            mostrarLista();
         });
 
         function mostrarLista() {
@@ -69,22 +68,20 @@ $lista = $abmCompra->buscar(null);
                 success: function(response) {
                     if (response.status == 'success') {
                         let lista = response.data;
-                        let tbody = document.querySelector('tbody');
-                        tbody.innerHTML = '';
+                        $('#tbody').empty();
                         lista.forEach(compra => {
                             let tr = document.createElement('tr');
                             tr.innerHTML = `
                                 <td>${compra.idcompra}</td>
-                                <td>${compra.cofecha}</td>
                                 <td>${compra.objusuario.idusuario}</td>
-                                <td>${compra.objusuario.usnombre}</td>
+                                <td>${compra.cofecha}</td>
                                 <td>
-                                    <a href="./modificar.php?id=${compra.idcompra}" class="btn btn-primary">Modificar</a>
-                                    <button onclick="eliminar(${compra.idcompra})" class="btn btn-danger">Eliminar</button>
+                                    <a href="./modificar.php?idcompra=${compra.idcompra}" class="btn btn-primary">Modificar</a>
                                 </td>
                             `;
-                            tbody.appendChild(tr);
+                            $('#tbody').append(tr);
                         });
+
                     } else {
                         alert(response.data);
                     }

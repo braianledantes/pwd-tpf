@@ -160,16 +160,15 @@ class ABMCompraEstado
             if (isset($param['idcompraestado']))
                 $where .= " and idcompraestado =" . $param['idcompraestado'];
             if (isset($param['idcompra']))
-                $where .= " and idcompraestadotipo =" . $param['idcompraestadotipo'];
+                $where .= " and idcompra =" . $param['idcompra'];
             if (isset($param['idcompraestadotipo']))
-                $where .= " and cefechaini =" . $param['cefechaini'];
+                $where .= " and idcompraestadotipo =" . $param['idcompraestadotipo'];
             if (isset($param['cefechaini']))
-                $where .= " and cefechafin =" . $param['cefechafin'];
+                $where .= " and cefechaini =" . $param['cefechaini'];
             if (isset($param['cefechafin']))
                 $where .= " and cefechafin =" . $param['cefechafin'];
         }
-        $objCompraEstatado = new CompraEstado();
-        $arreglo = $objCompraEstatado->listar($where);
+        $arreglo = CompraEstado::listar($where);
         //echo "Van ".count($arreglo);
         return $arreglo;
     }

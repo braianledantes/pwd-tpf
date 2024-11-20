@@ -182,7 +182,7 @@ class CompraEstado
         return $resp;
     }
 
-    public function listar($parametro = "")
+    public static function listar($parametro = "")
     {
         $arreglo = array();
         $db = new BaseDatos();
@@ -197,6 +197,7 @@ class CompraEstado
                     while ($row = $db->Registro()) {
                         $objEstadoTipo = new CompraEstadoTipo();
                         $objEstadoTipo->setidcompraestadotipo($row['idcompraestadotipo']);
+                        $objEstadoTipo->cargar();
                         $objCompra = new Compra();
                         $objCompra->setIdcompra($row['idcompra']);
 
@@ -206,8 +207,6 @@ class CompraEstado
                         array_push($arreglo, $obj);
                     }
                 }
-            } else {
-                $this->setmensajeoperacion("compraestado->listar: " . $db->getError());
             }
         }
         return $arreglo;

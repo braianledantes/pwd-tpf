@@ -23,8 +23,7 @@ try {
     foreach ($lista as $compra) {
         $comprajson = $compra->toArray();
         // obtiene el ultimo estado de la compra
-        $estadosCompra = $abmCompraEstado->buscar('idcompra = ' . $compra->getIdcompra() .' order by idcompraestado decs');
-        $comprajson['estado'] = $estadosCompra[0]->toArray();
+        $estadosCompra = $abmCompraEstado->buscar('idcompra = ' . $compra->getIdcompra());
 
         $listaJson[] = $comprajson;
     }
