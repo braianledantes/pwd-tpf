@@ -13,9 +13,10 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 }
 
 try {
+    $datos = data_submitted();
     // obtiene el idcompraestadotipo
-    $idcompraestadotipo = $_GET['idcompraestadotipo'];
-    $idCompra = $_GET['idCompra'];
+    $idcompraestadotipo = $datos['idcompraestadotipo'];
+    $idCompra = $datos['idCompra'];
 
     if (!isset($idcompraestadotipo) || !isset($idCompra)) {
         throw new Exception('Faltan datos');
