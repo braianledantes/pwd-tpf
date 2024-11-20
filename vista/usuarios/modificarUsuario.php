@@ -8,7 +8,12 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 }
 $abmUsuario = new abmusuario();
 $lista = $abmUsuario->buscar($datos);
+//var_dump($lista);
+$usuarioActivo = $session->getUsuario();
+$idUsuarioActivo = $usuarioActivo->getidusuario();
 
+$usuarioDeshabilitado = $lista[0]->getusdeshabilitado();
+//var_dump($usuarioDeshabilitado);
 if (isset($lista)) {
     $idUsuario = $lista[0]->getIdusuario();
     //include_once '../estructuras/cabecera.php';
@@ -28,6 +33,8 @@ if (isset($lista)) {
 
     <!-- bootstrap -->
     <?php include_once("../estructura/bootstrap.php"); ?>
+    <!--JQuery-->
+    <?php include_once("../estructura/jquery.php"); ?>
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
 
@@ -69,6 +76,7 @@ if (isset($lista)) {
                         </div>
                     </div>
                 </div>
+                <!--<input type="hidden" id="usdeshabilitado" name="usdeshabilitado" value=<?//php echo $usuarioDeshabilitado ?> />-->
             </div>
             <div class="row">
 
@@ -76,7 +84,7 @@ if (isset($lista)) {
                 $abmUsuarioRol = new abmusuariorol();
                 $listaUsuarioRol = $abmUsuarioRol->buscar($datos);
                 $rol = $listaUsuarioRol[0]->getObjRol()->getIdrol();
-                if ($_SESSION['idusuario'] != $idUsuario) {
+                if ($idUsuarioActivo != $idUsuario) {
                 ?>
 
                     <div class="col-md-4">
@@ -111,6 +119,40 @@ if (isset($lista)) {
         </form>
     </div>
     <?php include_once("../estructura/footer.php"); ?>
+
+    <script>
+        $(document).ready(function() {
+            $('#datosUsuario').submit(function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                formData.forEach(function(value, key) {
+                console.log(key + ": " + value);
+                });
+
+                $.ajax({
+                    url: './accionModificarUsuario.php',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        console.log("Respuesta del servidor:", response); 
+                        if (response.status === 'success') {
+                            window.location.href = './index.php';
+                        } else {
+                            alert(response.data);
+                        }
+                    },
+                    error: function() {
+                    //    alert('Error al modificar al Usuario');
+                    window.location.href = './index.php';
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+                
+            });
+        });
+    </script>
 </body>
 
 </html>

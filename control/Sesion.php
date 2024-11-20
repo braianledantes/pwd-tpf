@@ -156,7 +156,6 @@ class Sesion
 
     /**
      * Consigue a un usuario de la bd
-     * @return $datosUsuario
      */
     public function getUsuario(): Usuario | null
     {
