@@ -16,17 +16,21 @@ try {
     $datos = data_submitted();
     // obtiene el idcompraestadotipo
     $idcompraestadotipo = $datos['idcompraestadotipo'];
-    $idCompra = $datos['idCompra'];
+    $idCompra = $datos['idcompra'];
 
     if (!isset($idcompraestadotipo) || !isset($idCompra)) {
         throw new Exception('Faltan datos');
     }
 
     $abmCompra = new ABMCompraEstado();
-    $abmCompra->alta([
-        'idCompra' => $idCompra,
+    $exito = $abmCompra->alta([
+        'idcompra' => $idCompra,
         'idcompraestadotipo' => $idcompraestadotipo
     ]);
+
+    if (!$exito) {
+        throw new Exception('Error al modificar la compra');
+    }
 
     echo json_encode([
         'status' => 'success',

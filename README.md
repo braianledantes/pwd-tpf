@@ -10,19 +10,24 @@
 - **Luciana Romano** - Legajo FAI-3075 - mail: luciana.romano@est.fi.uncoma.edu.ar - Github: Lucianaromano
 
 ## Bibliotecas utilizadas
-<!-- TODO: agregar las bibliotecas -->
+- **bootstrap**: Framwork de estilos css.
+- **JQuery**
+- **phpmailer**: Para el envio de mails.
+- **phpdotenv**: Para cargar las variables de entorno.
 
 ## Paleta de colores utilizada
 https://paletadecolores.com.mx/paleta/000000/001f36/1c5560/79ae92/fbffcd/
 
-## Pruebas
+## Instalación
 1. Instalar XAMP.
 2. Copiar el repositorio en la carpeta donde esta instalado XAMP. Por ejemplo `C:\xampp\htdocs`.
 3. Iniciar el servidor de Apache.
 4. Iniciar el servidor MySql
-5. Crear la base de datos *dbcarritocompras*
+5. Crear la base de datos *bdcarritocompras*
 6. Importar el contenido de la base de datos del archivo *bdcarritocompras.sql*
-7. Ingresar en el navegador la URL: http://localhost/pwd-tpf/.
+7. Instalar Composer para instalar bibliotecas externas.
+8. Ejecutar el comando `$composer install` para instalar las bibliotecas.
+9. Ingresar en el navegador la URL: http://localhost/pwd-tpf/.
 
 # Enunciado
 ## Objetivo

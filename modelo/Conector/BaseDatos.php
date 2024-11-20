@@ -16,17 +16,25 @@ class BaseDatos extends PDO
 
     public function __construct()
     {
-        $this->engine = 'mysql';
-        $this->host = 'localhost';
-        $this->database = 'bdcarritocompras';
-        $this->user = 'root';
-        $this->pass = '';
-        $this->debug = false;
+        $dbengine = $_ENV['DB_ENGINE'];
+        $dbhost = $_ENV['DB_HOST'];
+        $dbport = $_ENV['DB_PORT'];
+        $dbname = $_ENV['DB_NAME'];
+        $dbuser = $_ENV['DB_USER'];
+        $dbpass = $_ENV['DB_PASS'];
+        $dbdebug = $_ENV['DB_DEBUG'];
+
+        $this->engine = $dbengine;
+        $this->host = $dbhost;
+        $this->database = $dbname;
+        $this->user = $dbuser;
+        $this->pass = $dbpass;
+        $this->debug = $dbdebug;
         $this->error = "";
         $this->sql = "";
         $this->indice = 0;
 
-        $dns = $this->engine . ':dbname=' . $this->database . ";host=" . $this->host . ";port=3306";
+        $dns = $this->engine . ':dbname=' . $this->database . ";host=" . $this->host . ";port=" . $dbport;
         try {
             parent::__construct($dns, $this->user, $this->pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
             $this->conec = true;
