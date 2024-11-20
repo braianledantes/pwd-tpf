@@ -10,7 +10,12 @@
 - **Luciana Romano** - Legajo FAI-3075 - mail: luciana.romano@est.fi.uncoma.edu.ar - Github: Lucianaromano
 
 ## Bibliotecas utilizadas
-<!-- TODO: agregar las bibliotecas -->
+- **bootstrap**: Framwork de estilos css.
+- **JQuery**
+- **phpmailer**: Para el envio de mails.
+- **phpdotenv**: Para cargar las variables de entorno.
+
+Para instalar las bibliotecas de phpmailer y phpdotenv ejecutar el comando `$composer install`. Previamente se tiene que tener instalado **Composer**
 
 ## Paleta de colores utilizada
 https://paletadecolores.com.mx/paleta/000000/001f36/1c5560/79ae92/fbffcd/
