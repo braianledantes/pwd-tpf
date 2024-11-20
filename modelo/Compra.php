@@ -184,4 +184,13 @@ class Compra
 
         return $arreglo;
     }
+
+    public function toArray() {
+        $usuario = $this->getObjusuario();
+        return array(
+            'idcompra' => $this->getIdcompra(),
+            'cofecha' => $this->getCofecha(),
+            'objusuario' => $usuario === null ? null : $usuario->toArray()
+        );
+    }
 }

@@ -212,4 +212,16 @@ class CompraEstado
         }
         return $arreglo;
     }
+
+    public function toArray() {
+        $objCompra = $this->getObjCompra();
+        $objEstadoTipo = $this->getobjEstadoTipo();
+        return array(
+            "idcompraestado" => $this->getidcompraestado(),
+            "cefechaini" => $this->getcefechaini(),
+            "cefechafin" => $this->getcefechafin(),
+            "idcompra" => $objCompra->getIdcompra(),
+            "idcompraestadotipo" => $objEstadoTipo->getidcompraestadotipo()
+        );
+    }
 }

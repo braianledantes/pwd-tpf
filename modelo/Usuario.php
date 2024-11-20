@@ -193,4 +193,15 @@ class Usuario
         }
         return $resp;
     }
+
+    public function toArray()
+    {
+        return array(
+            'idusuario' => $this->getidusuario(),
+            'usnombre' => $this->getusnombre(),
+            'uspass' => $this->getuspass(),
+            'usmail' => $this->getusmail(),
+            'usdeshabilitado' => $this->getusdeshabilitado()
+        );
+    }
 }

@@ -125,8 +125,8 @@ class ABMCompraEstado
      */
     public function modificacion($param)
     {
-        echo "Estoy en modificacion";
         $resp = false;
+        $param['cefechaini'] = null;
         if ($this->seteadosCamposClaves($param)) {
             $elObjtTabla = $this->cargarObjeto($param);
             if ($elObjtTabla != null and $elObjtTabla->modificar()) {

@@ -1,7 +1,7 @@
 <?php include_once("../../configuracion.php") ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -9,8 +9,11 @@
     <title>Angel Wings Jewelry</title>
     <link rel="icon" href="../vista/assets/imagenes/favicon-32x32.png" type="image/png" sizes="32x32">
 
-    <!-- estilos -->
+    <!-- bootstrap -->
     <?php include_once("../estructura/bootstrap.php"); ?>
+    <!-- JQuery -->
+    <?php include_once("../estructura/jquery.php"); ?>
+
     <link rel="stylesheet" href="../css/estilos.css">
     <!---- fontawesome ---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
