@@ -32,7 +32,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     <main>
         <h2 class="mt-3">Nuestros Anillos</h2>
         <hr style="width: 500px;margin: 0 auto;">
-        <section id="lista" class="mt-5 mb-5"></section>
+        <section id="lista" class="container mt-5 mb-5"></section>
     </main>
     <?php include_once("../estructura/footer.php"); ?>
 
@@ -54,27 +54,40 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                         contenido = '<h2>No hay productos cargados</h2>';
                     } else {
                         data.forEach(producto => {
-                            // Acción de compra
-                            const accionAgregarACarrito = `
-                            <a href="./accionAgregarACarrito.php?idproducto=${producto.idproducto}" class='btn btn-success btn-sm btn-block'>
-                                Agregar al carrito
-                            </a>
-                            `;
+                             // Lógica para mostrar "Comprar" o "Sin stock"
+                            let accionComprar = '';
+                            let mensajeSinStock = '';
+
+                            if (producto.procantstock > 0) {
+                                accionComprar = `
+                                <a href="./accionAgregarACarrito.php?idproducto=${producto.idproducto}" class='comprar btn btn-outline-dark btn-sm btn-block  px-5 rounded-pill'>
+                                    Comprar
+                                </a>
+                                `;
+                            } else {
+                                mensajeSinStock = `
+                                <div class="overlay">
+                                    <p class="stock text-center">Sin stock!</p>
+                                </div>
+                                `;
+                            }
+
                             contenido += `
-                            <div class="col-md-4 col-lg-3 mb-4">
-                                <div class="card">
+                            <div class="col">
+                                <div class="card h-80">
                                     <img src="${producto.prourlimagen}" class="card-img-top" alt="${producto.pronombre}" style="height: 200px; object-fit: cover;">
                                     <div class="card-body">
-                                        <h5 class="card-title">${producto.pronombre}</h5>
-                                        <p class="card-text">${producto.prodetalle}</p>
-                                        <p class="card-text"><strong>Stock:</strong> ${producto.procantstock}</p>
-                                        <p class="card-text"><strong>Precio:</strong> $${producto.proprecio}</p>
-                                        <div class="d-flex justify-content-center">
-                                            ${accionAgregarACarrito}
+                                        <h5 class="nombre card-title">${producto.pronombre}</h5>
+                                        <p class="detalle card-text">${producto.prodetalle}</p>
+                                        <p class="precio card-text"><strong>$${producto.proprecio}</strong></p>
+                                        <div class="mt-auto"> <!-- mt-auto asegura que el botón de comprar esté al fondo -->
+                                            ${accionComprar}
+                                            ${mensajeSinStock}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             `;
                         });
                     }
