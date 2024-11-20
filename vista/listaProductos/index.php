@@ -60,7 +60,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 
                             if (producto.procantstock > 0) {
                                 accionComprar = `
-                                <a href="./accionAgregarACarrito.php?idproducto=${producto.idproducto}" class='comprar btn btn-outline-dark btn-sm btn-block  px-5 rounded-pill'>
+                                <a onclick="agregarACarrito(${producto.idproducto})" class='comprar btn btn-outline-dark btn-sm btn-block  px-5 rounded-pill'>
                                     Comprar
                                 </a>
                                 `;
@@ -94,6 +94,27 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 
                     contenido += `</div>`;
                     $("#lista").html(contenido);
+                },
+                error: function(result) {
+                    console.error(result);
+                }
+            });
+        }
+
+        function agregarACarrito(idproducto) {
+            $.ajax({
+                type: "POST",
+                url: "./accionAgregarACarrito.php",
+                data: {
+                    idproducto: idproducto
+                },
+                success: function(result) {
+                    console.log("Respuesta del servidor:", result);
+                    if (result.status === "success") {
+                        alert("Producto agregado al carrito");
+                    } else {
+                        alert("Error al agregar el producto al carrito");
+                    }
                 },
                 error: function(result) {
                     console.error(result);
