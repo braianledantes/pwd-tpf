@@ -55,7 +55,7 @@ $roles = $abmrol->buscar(null);
                     </div>
                     <div class="form-floating mb-3">
                     
-                        <input type="number" class="form-control" id="idpadre" name="idpadre" placeholder="ID del menu Padre" required>
+                        <input type="number" class="form-control" id="idpadre" name="idpadre" placeholder="ID del menu Padre">
                         <label for="idpadre">ID del menú Padre</label>
                     </div>
                     
