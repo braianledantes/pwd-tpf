@@ -34,13 +34,13 @@ $session = new Sesion();
 
             <!-- Slides -->
         <div class="carousel-inner ">
-            <div class="carousel-item active">
+            <div class="carousel-item">
                 <div class="d-flex flex-column align-items-center justify-content-center" style="height: 500px; background-color: #f8f9fa;">
                 <img src="./assets/imagenes/anillo1.png" class=" w-100" alt="Anillo de alas plateado">
                      <button class="btn btn-outline-dark" style="position: absolute; top:20%; left: 50%; transform: translate(-50%, -50%);z-index:-1">Ver productos</button>
                 </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item active">
                 <div class="d-flex flex-column align-items-center justify-content-center" style="height: 500px; background-color: #e9ecef;">
                     <img src="./assets/imagenes/anillo2.png" class=" w-100" alt="Anillo de corazon gema">
                     <p style="font-weight:bolder;font-size:larger;color:#e9ecef;position: absolute; top: 10%; left: 22%; transform: translate(-50%, -50%); z-index:10">Descubre nuestras nuevas joyas!</p>

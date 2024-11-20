@@ -2,6 +2,7 @@
 $session = new Sesion();
 
 $menus = $session->obtenerMenusDelUsuario();
+//print_r($menus);
 ?>
 <header class="position-auto top-0 shadow mb-3">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000; padding: 30px 160px;">
@@ -25,7 +26,7 @@ $menus = $session->obtenerMenusDelUsuario();
                             $usuarioActivo = $session->getUsuario(); // Obtener el nombre del usuario de la sesión
                             $nombreUsuario = $usuarioActivo->getUsnombre();
                         ?>
-                        <!-- Dropdown de usuario -->
+                        <!-- Dropdown de usuario --> 
                             <li class="nav-item dropdown">
                                 <a id="opcionUsuario" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <?php echo $nombreUsuario; ?>     <i class="fas fa-user"></i>
@@ -46,7 +47,7 @@ $menus = $session->obtenerMenusDelUsuario();
         </div>
     </nav>
 
-    <!--Menu que se carga dinamicamente de acuerdo al tipo de usario-->
+    <!--Menu que se carga dinamicamente de acuerdo al tipo de usuario-->
     <nav id="menuDinamico"class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
