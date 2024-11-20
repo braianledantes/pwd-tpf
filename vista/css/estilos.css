@@ -8,7 +8,7 @@
   font-weight: weight;
   font-style: normal;
 }
-#titulo, #datosUsuario,#tienda, #info, .overlay .stock, .card .card-body .detalle{
+#titulo, #datosUsuario,#tienda, #info, .overlay .stock, .card .card-body .detalle, .contador-carrito{
     font-family: 'Lora', serif;
 }
 #subtitulo, button[type='submit'],#menuDinamico, .card .card-body .nombre, .comprar{
@@ -72,7 +72,30 @@ body {
 }
 
 .total{letter-spacing: 2px; font-weight: bold;};
+/***********************************CONTADOR CARRITO***********************************************/
+.icono-carrito-container {
+    position: absolute;
+}
 
+.icono-carrito {
+    font-size: 1.5rem;
+}
+
+.contador-carrito {
+    position: relative;
+    top: -15px;
+    right: 2px;
+    background-color: #60a3bc;;
+    color: white;
+    border-radius: 50%;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    z-index: 10;
+}
+
+.contador-carrito:empty {
+    display: none;
+}
 /************************************************************************************************/
 nav {
     color: rgb(195, 204, 195);

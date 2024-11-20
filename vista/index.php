@@ -18,6 +18,13 @@ $session = new Sesion();
 
     <!---- fontawesome ---->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+        // Llamar a la función que actualiza el contador del carrito cuando la página carga
+            actualizarContadorCarrito();
+        });
+    </script>
 </head>
 
 <body>
@@ -44,7 +51,7 @@ $session = new Sesion();
                 <div class="d-flex flex-column align-items-center justify-content-center" style="height: 500px; background-color: #e9ecef;">
                     <img src="./assets/imagenes/anillo2.png" class=" w-100" alt="Anillo de corazon gema">
                     <p style="font-weight:bolder;font-size:larger;color:#e9ecef;position: absolute; top: 10%; left: 22%; transform: translate(-50%, -50%); z-index:10">Descubre nuestras nuevas joyas!</p>
-                    <button class="btn btn-outline-dark rounded-pill px-4" style="position: absolute; top: 20%; left: 16%; transform: translate(-50%, -50%);"> <a class="text-decoration-none" href="./listaProductos/index.php" style="color:white;font-weight:bold;">Ver productos</a></button>
+                    <button class="btn btn-outline-dark rounded-pill px-4" style="position: absolute; top: 20%; left: 16%; transform: translate(-50%, -50%);"> <a class="text-decoration-none" href="./listaProductos/index.php" style="color:white;font-weight:bold;">Comprar Ya!</a></button>
                 </div>
             </div>
             <div class="carousel-item">
@@ -68,7 +75,8 @@ $session = new Sesion();
 
      </section>
      <div id="info"><p>¡Despachamos todos los días hábiles para que reciba el producto cuanto antes!</p></div>
-<?php include_once("./estructura/footer.php"); ?>
+     <script src="./js/app.js"></script>
+    <?php include_once("./estructura/footer.php"); ?>
 </body>
 
 </html>

@@ -20,7 +20,12 @@ $menus = $session->obtenerMenusDelUsuario();
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item sesion">
-                        <a href=".\listaProductos\index.php" class="nav-link"><i class="bi bi-bag"></i></a>
+                    <a href="/pwd-tpf/vista/listaProductos/index.php" class="nav-link">
+                        <div class="icono-carrito-container">
+                            <i class="bi bi-bag icono-carrito"></i>
+                            <span id="contador-carrito" class="contador-carrito"></span>
+                        </div>
+                    </a>
                     </li>
                         <?php if ($session->estaActiva()) {
                             $usuarioActivo = $session->getUsuario(); // Obtener el nombre del usuario de la sesión

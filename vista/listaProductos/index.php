@@ -39,6 +39,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     <script>
         $(document).ready(function() {
             mostrarLista();
+            actualizarContadorCarrito();
         });
 
         function mostrarLista() {
@@ -115,16 +116,20 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                                 .addClass('btn-secondary') 
                                 .off('click'); 
                     $(buttonElement).removeAttr("onclick"); 
+
+                    // Actualizar el contador de productos en la cabecera
+                    actualizarContadorCarrito();
                 } else {
                     console.log("Error al agregar el producto al carrito");
                 }
-        },
-        error: function(result) {
-            console.error(result);
-        }
-    });
-}
+            },
+            error: function(result) {
+                console.error(result);
+            }
+        });
+    }
     </script>
+    <script src="../js/app.js"></script>
 </body>
 
 </html>

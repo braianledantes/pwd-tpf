@@ -16,6 +16,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angel Wings Jewelry</title>
+
     <link rel="icon" href="../assets/imagenes/favicon-32x32.png" type="image/png" sizes="32x32">
 
     <!-- bootstrap -->
@@ -77,6 +78,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     <script>
         $(document).ready(function() {
             mostrarCarrito();
+            actualizarContadorCarrito();
         });
 
         function mostrarCarrito() {
@@ -194,6 +196,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                 success: function(result) {
                     if (result.status === 'success') {
                         mostrarCarrito();
+                        actualizarContadorCarrito();
                     } else {
                         alert(result.data);
                     }
@@ -238,6 +241,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
             });
         }
     </script>
+    <script src="../js/app.js"></script>
 </body>
 
 </html>
