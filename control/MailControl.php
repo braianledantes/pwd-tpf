@@ -1,40 +1,41 @@
 <?php
 include_once('../configuracion.php');
 
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-//Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
+function enviarMail($estadoCompra, $emailUsuario){
+    $mail = new PHPMailer(true);
 
-try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = $_ENV['MAIL_HOST'];                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = $_ENV['MAIL_USERNAME'];                     //SMTP username
-    $mail->Password   = $_ENV['MAIL_SECRET'];                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
-    $mail->Port       = $_ENV['MAIL_PORT'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    //Recipients
-    $mail->setFrom("braianledantes@gmail.com", 'Mailer');
-    $mail->addAddress("braianledantes@gmail.com", 'Braian Ledantes');     //Add a recipient
+    try {
+        //Server settings
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
+        $mail->isSMTP();                                
+        $mail->Host       = $_ENV['MAIL_HOST'];           
+        $mail->SMTPAuth   = true;                            
+        $mail->Username   = $_ENV['MAIL_USERNAME'];    
+        $mail->Password   = $_ENV['MAIL_SECRET'];
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = $_ENV['MAIL_PORT'];
 
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        //Recipients
+        $mail->setFrom("braianledantes@gmail.com", 'Tienda Angel Wings Jewelry');
+        $mail->addAddress($emailUsuario, 'Braian Ledantes');   
 
-    verEstructura($mail);
+        //Content
+        $mail->isHTML(true);
+        $mail->Subject = 'Estado de tu compra';
+        $mail->Body    = "El estado de tu compra es: $estadoCompra";
 
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+
+       //verEstructura($mail);
+
+        $mail->send();
+        echo 'El mensaje ha sido enviado';
+    } catch (Exception $e) {
+        echo "El mensaje no pudo ser enviado. Error de Mailer: {$mail->ErrorInfo}";
+    }
+
 }
