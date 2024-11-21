@@ -37,40 +37,64 @@
     <script>
         $(document).ready(function() {
             cargarEstadoCompra();
-
         });
 
-    function cargarEstadoCompra() {
-        console.log('Página cargada, iniciando pAJAX...');
-        $.ajax({
-            url: './accionEstadoCompra.php',
-            type: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                console.log('Respuesta del servidor:', response);
-                if (response.success) {
-                    let html = '';
-                    response.data.forEach(function(estado) {
-                        html += `
+        function cargarEstadoCompra() {
+            $.ajax({
+                url: './accionListar.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status == 'success') {
+                        let html = '';
+                        response.data.forEach(function(compra) {
+                            const ultimoEstado = compra.ultimoestado.compraestadotipo;
+                            html += `
                             <div class="compraEstado">
-                                <p><strong>Compra ID:</strong> ${estado.idcompra}</p>
-                                <p><strong>Estado:</strong> ${estado.estado}</p>
-                                <p><strong>Fecha de Inicio:</strong> ${estado.cefechaini}</p>
-                                <p><strong>Fecha de Fin:</strong> ${estado.cefechafin || 'N/A'}</p>
-                            </div>
-                            <hr>`;
-                    });
-                    $('#historialCompras').html(html); 
-                } else {
-                    $('#historialCompras').html('<p>No se encontraron estados de compra.</p>');
+                                <p><strong>Compra ID:</strong> ${compra.idcompra}</p>
+                                <p><strong>Fecha de Inicio:</strong> ${compra.cofecha}</p>
+                                <p><strong>Último estado:</strong> ${ultimoEstado.cetdescripcion} - ${compra.ultimoestado.cefechaini}</p>`;
+
+                            if (ultimoEstado.idcompraestadotipo < 3) {
+                                html += `<button class="btn btn-danger" onclick="cancelarCompra(${compra.idcompra})">Cancelar Compra</button>`
+                            }
+
+                            html += `</div>
+                        <hr>`;
+                        });
+                        $('#historialCompras').html(html);
+                    } else {
+                        $('#historialCompras').html('<p>No se encontraron estados de compra.</p>');
+                    }
+                },
+                error: function() {
+                    $('#historialCompras').html('<p>Error al cargar los datos.</p>');
                 }
-            },
-            error: function() {
-                $('#historialCompras').html('<p>Error al cargar los datos.</p>');
-            }
-        });
-    }
-</script>
+            });
+        }
+
+        function cancelarCompra(idcompra) {
+            $.ajax({
+                url: './accionCancelarCompra.php',
+                type: 'POST',
+                data: {
+                    idcompra: idcompra
+                },
+                dataType: 'json',
+                success: function(response) {
+                    console.log('Respuesta del servidor:', response);
+                    if (response.status == 'success') {
+                        cargarEstadoCompra();
+                    } else {
+                        alert('Error al cancelar la compra');
+                    }
+                },
+                error: function() {
+                    alert('Error al cancelar la compra');
+                }
+            });
+        }
+    </script>
 
 </body>
 

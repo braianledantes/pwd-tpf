@@ -168,4 +168,12 @@ class CompraEstadoTipo
         }
         return $arreglo;
     }
+
+    public function toArray() {
+        return [
+            'idcompraestadotipo' => $this->getidcompraestadotipo(),
+            'cetdescripcion' => $this->getCetDescripcion(),
+            'cetdetalle' => $this->getCetDetalle()
+        ];
+    }
 }

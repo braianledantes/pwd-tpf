@@ -238,7 +238,7 @@ class CompraEstado
             "cefechaini" => $this->getcefechaini(),
             "cefechafin" => $this->getcefechafin(),
             "idcompra" => $objCompra->getIdcompra(),
-            "idcompraestadotipo" => $objEstadoTipo->getidcompraestadotipo()
+            "compraestadotipo" => $objEstadoTipo->toArray()
         );
     }
 }
