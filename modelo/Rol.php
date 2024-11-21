@@ -45,6 +45,9 @@ class Rol
         $this->mensajeoperacion = $valor;
     }
 
+    /**
+     * Carga los datos de un rol desde la bd, usando el idrol
+     */
     public function cargar()
     {
         $resp = false;
@@ -64,6 +67,9 @@ class Rol
         return $resp;
     }
 
+    /**
+     * Inserta un nuevo rol en la bd
+     */
     public function insertar()
     {
         $resp = false;
@@ -82,7 +88,9 @@ class Rol
         return $resp;
     }
 
-
+    /**
+     * Modifica un rol existente en la bd
+     */
     public function modificar()
     {
         $resp = false;
@@ -101,8 +109,9 @@ class Rol
         return $resp;
     }
 
-
-
+    /**
+     * Elimina un rol de la bd
+     */
     public function eliminar()
     {
         $resp = false;
@@ -121,6 +130,9 @@ class Rol
         return $resp;
     }
 
+    /**
+     * Lista todos los roles que coinciden con el parametro ingresado
+     */
     public function listar($parametro = "")
     {
         $arreglo = array();
@@ -148,6 +160,9 @@ class Rol
         return $arreglo;
     }
 
+    /**
+     * Convierte el obj rol a un array
+     */
     public function toArray() {
         return array(
             'idrol' => $this->getidrol(),

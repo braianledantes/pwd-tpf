@@ -82,7 +82,7 @@ try {
         <!-- formulario de modificacion de menu -->
         <div class="w-75 mx-auto mt-3 mb-5">
             <div class="row">
-                <h2>Modificación del Compra <?= $compra->getIdcompra() ?> </h2>
+                <h2>Modificación de la Compra <?= $compra->getIdcompra() ?> </h2>
             </div>
             <div class="row">
                 <!-- Muestra Datos de la compra (id, fecha, usuario) -->

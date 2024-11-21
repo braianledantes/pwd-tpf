@@ -79,6 +79,9 @@ class Usuario
         $this->mensajeoperacion = $valor;
     }
 
+    /**
+     * Carga los datos de un usuario desde la bd, usando el idusuario.
+    */    
     public function cargar()
     {
         $resp = false;
@@ -98,6 +101,9 @@ class Usuario
         return $resp;
     }
 
+    /**
+     * Inserta un usuario en la bd.
+     */
     public function insertar()
     {
         $resp = false;
@@ -116,7 +122,9 @@ class Usuario
         return $resp;
     }
 
-
+    /**
+     * Modifica un usuario existente en la bd.
+     */
     public function modificar()
     {
         $resp = false;
@@ -134,6 +142,9 @@ class Usuario
         return $resp;
     }
 
+    /**
+     * Elimina un usuario de la bd.
+     */
     public function eliminar()
     {
         $resp = false;
@@ -151,6 +162,9 @@ class Usuario
         return $resp;
     }
 
+    /**
+     * Lista todos los usuarios que coinciden con el parametro ingresado.
+     */
     public function listar($parametro = "")
     {
         $arreglo = array();
@@ -177,6 +191,9 @@ class Usuario
         return $arreglo;
     }
 
+    /**
+     * Modifica el estado de deshabilitacion de un usuario en la bd, se usa para habilitar o deshabilitar a un usuario
+     */
     public function estado($param = "")
     {
         $resp = false;
@@ -194,6 +211,9 @@ class Usuario
         return $resp;
     }
 
+    /**
+     * Convierte un obj usuario en un array asociativo
+     */
     public function toArray()
     {
         return array(

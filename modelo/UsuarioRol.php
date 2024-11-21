@@ -50,6 +50,10 @@ class UsuarioRol
     {
         $this->mensajeoperacion = $valor;
     }
+
+    /**
+     * Carga los datos de una relacion entre usuario y rol desde la bd ,usando el idusuario y idrol
+     */
     public function cargar()
     {
         $resp = false;
@@ -76,6 +80,9 @@ class UsuarioRol
         return $resp;
     }
 
+    /**
+     * Inserta una nueva relacion entre usuario y rol en la bd.
+     */
     public function insertar()
     {
         $resp = false;
@@ -93,6 +100,9 @@ class UsuarioRol
         return $resp;
     }
 
+    /**
+     * Modifica una relacion entre usuario y rol existente en la bd.
+     */
     public function modificar()
     {
         $resp = false;
@@ -116,8 +126,9 @@ class UsuarioRol
         return $resp;
     }
 
-
-
+    /**
+     * Elimina una relacion entre usuario y rol en la bd.
+     */
     public function eliminar()
     {
         $resp = false;
@@ -135,6 +146,9 @@ class UsuarioRol
         return $resp;
     }
 
+    /**
+     * Lista todos los roles de usuario segun el parametro ingresado.
+     */
     public function listar($parametro = "")
     {
         $arreglo = array();

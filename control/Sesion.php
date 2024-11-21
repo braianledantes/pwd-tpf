@@ -41,7 +41,7 @@ class Sesion
     }
 
     /**
-     * Verifica si el usuario tiene acceso al menú actual.
+     * Verifica si el usuario tiene acceso al menú actual, segun el rol.
      */
     public function tieneAccesoAMenuActual(): bool
     {
@@ -169,6 +169,7 @@ class Sesion
 
         return $datosUsuario;
     }
+    /***************GESTION DEL CARRITO DE COMPRAS***********************************/
 
     /**
      * Agrega un producto al carrito. Si no existe el carrito, lo crea.

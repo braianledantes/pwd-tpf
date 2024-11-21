@@ -49,6 +49,10 @@ class MenuRol
     {
         $this->mensajeoperacion = $valor;
     }
+
+    /**
+     * Carga los datos de una relacion entre menu y rol desde la bd ,usando el idmenurol
+     */
     public function cargar()
     {
         $resp = false;
@@ -75,6 +79,9 @@ class MenuRol
         return $resp;
     }
 
+    /**
+     * Inserta una nueva relacion entre menu y rol en la bd.
+     */
     public function insertar()
     {
         $resp = false;
@@ -92,14 +99,18 @@ class MenuRol
         return $resp;
     }
 
+    /**
+     * Modifica una relacion entre menu y rol existente en la bd
+     */
     public function modificar()
     {
         $resp = false;
         return $resp;
     }
 
-
-
+    /**
+     * Elimina una relacion entre menu y rol de la bd.
+    */
     public function eliminar()
     {
         $resp = false;
@@ -117,6 +128,9 @@ class MenuRol
         return $resp;
     }
 
+    /**
+     * Lista todas las relaciones entre menus y roles que coinciden con el parametro ingresado.
+     */
     public function listar($parametro = "")
     {
         $arreglo = array();
@@ -145,6 +159,9 @@ class MenuRol
         return $arreglo;
     }
 
+    /**
+     * Convierte el obj menuRol a un array
+     */
     public function toArray() {
         return array(
             'objMenu' => $this->getobjMenu()->toArray(),

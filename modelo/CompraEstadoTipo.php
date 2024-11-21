@@ -58,6 +58,9 @@ class CompraEstadoTipo
         $this->mensajeoperacion = $valor;
     }
 
+    /**
+     * Carga los datos de un tipo de estado de la compra en la bd, usando el idcompraestadotipo
+     */
     public function cargar()
     {
         $resp = false;
@@ -77,6 +80,9 @@ class CompraEstadoTipo
         return $resp;
     }
 
+    /**
+     * Inserta un nuevo tipo de estado de compra en la bd.
+     */
     public function insertar()
     {
         $resp = false;
@@ -96,6 +102,9 @@ class CompraEstadoTipo
     }
 
 
+    /**
+     * Modifica un tipo de estado de compra en la bd.
+     */
     public function modificar()
     {
         $resp = false;
@@ -113,6 +122,10 @@ class CompraEstadoTipo
         }
         return $resp;
     }
+
+    /**
+     * Elimina un tipo de estado de compra en la bd.
+     */
     public function eliminar()
     {
         $resp = false;
@@ -130,6 +143,9 @@ class CompraEstadoTipo
         return $resp;
     }
 
+    /**
+     * Lista todos los tipos de estado de compra que coinciden con el parametro ingresado.
+     */
     public static function listar($parametro = "")
     {
         $arreglo = array();
