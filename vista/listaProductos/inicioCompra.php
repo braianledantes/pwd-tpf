@@ -23,9 +23,9 @@
     <?php include_once("../estructura/cabecera.php"); ?>
 
     <main class="contenedor mt-5 mb-5">
-    <div class="base row">
+    <div class="base w-100 row" style="margin:0 auto;">
         <!-- Form de compra -->
-        <div class="pagoForm col-md-7 bg-white border card-shadow-lg" style="padding:60px;">
+        <div class="pagoForm col-md-7 bg-white border card-shadow-lg" style="padding:60px; margin-right:20px;">
             <h2>Detalles de la compra</h2>
             <div class="pago mt-5 mb-3">
                 <h5 class="mb-3">Seleccione Tipo de <span class="text-primary">Tarjeta</span></h5>
@@ -85,8 +85,9 @@
         </div>
         
         <!--Resumen de Compra-->
-        <div class="resumen-compra col-md-5">
-            <p>Aqui va el resumen de compra</p>
+        <div class="resumenCompra col-md-4 bg-white border card-shadow-lg" style="padding:60px;">
+            <h2>Mi Compra</h2>
+            <hr class="w-50" style="margin:0 auto;">
         </div>
     </div>
     </main>
