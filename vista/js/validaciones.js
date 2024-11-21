@@ -208,63 +208,77 @@ $(document).ready(function() {
     });
 });
 
-//DATOS DE LA TARJETA
+//Validacion Tarjeta
 $(document).ready(function() {
-    $('#datosTarjeta').validate({
-        message: 'Este valor no es valido',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
+    $('#pago').validate({
+        // Configuración de reglas
+        rules: {
             nombreapellido: {
-                message: 'Datos no válidos',
-                validators: {
-                    notEmpty: {
-                        message: 'Estos datos son obligatorios'
-                    },
-                    regexp: {
-                        regexp: /^[a-z ,.'-]+$/i,
-                        message: 'Datos no válidos'
-                    }
-                }
+                required: true, // El campo es obligatorio
+                minlength: 3,   // Longitud mínima
+                maxlength: 100, // Longitud máxima
+                pattern: /^[a-zA-Z ,.'-]+$/i // Validación para letras y algunos caracteres
+            },
+            usmail: {
+                required: true, // El correo es obligatorio
+                email: true // Validación para correo electrónico
             },
             numtarjeta: {
-                message: 'Datos no válidos',
-                validators: {
-                    notEmpty: {
-                        message: 'Estos datos son obligatorios'
-                    },
-                    regexp: {
-                        regexp: /[0-9]{16}/,
-                        message: 'Datos no válidos'
-                    }
-                }
+                required: true, // El campo es obligatorio
+                pattern: /^[0-9]{16}$/  // Validación para una tarjeta de 16 dígitos
             },
             vencimiento: {
-                message: 'Datos no válidos',
-                validators: {
-                    notEmpty: {
-                        message: 'Estos datos son obligatorios'
-                    }
-                    // regexp: {
-                    //     regexp:
-                    // }
-                }
+                required: true, // El campo es obligatorio
+                pattern: /^(0[1-9]|1[0-2])\/\d{2}$/  // Ejemplo: 05/23 (Mes/Año)
             },
             codigo: {
-                message: 'Datos no válidos',
-                validators: {
-                    notEmpty: {
-                        message: 'Estos datos son obligatorios'
-                    },
-                    regexp: {
-                        regexp: /^[0-9]{3}/,
-                        message: 'Datos no válidos'
-                    }
-                }
+                required: true, // El campo es obligatorio
+                pattern: /^[0-9]{3}$/  // Validación para un código de 3 dígitos
             }
+        },
+        
+        // Mensajes personalizados de validación
+        messages: {
+            nombreapellido: {
+                required: "Este campo es obligatorio",
+                minlength: "El nombre debe tener al menos 3 caracteres",
+                maxlength: "El nombre no puede tener más de 100 caracteres",
+                pattern: "Solo se permiten letras, espacios, comas, puntos, apóstrofes y guiones"
+            },
+            usmail: {
+                required: "El correo es obligatorio",
+                email: "Por favor, ingrese un correo válido"
+            },
+            numtarjeta: {
+                required: "El número de tarjeta es obligatorio",
+                pattern: "El número de tarjeta debe tener 16 dígitos"
+            },
+            vencimiento: {
+                required: "La fecha de vencimiento es obligatoria",
+                pattern: "Formato incorrecto. Debe ser MM/AA"
+            },
+            codigo: {
+                required: "El código de seguridad es obligatorio",
+                pattern: "El código debe tener 3 dígitos"
+            }
+        },
+
+        // Configuración de errores (mostrar mensajes debajo de los campos)
+        errorElement: "div", // Mostrar errores en un <div>
+        errorPlacement: function(error, element) {
+            error.addClass("invalid-feedback"); // Clase para mostrar el error
+            error.insertAfter(element); // Insertar el error después del campo
+        },
+
+        // Resaltar los campos con errores
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+        },
+
+        // Quitar el resaltado cuando el campo es válido
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass("is-invalid");
         }
     });
 });
+

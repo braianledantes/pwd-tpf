@@ -77,7 +77,7 @@
 
                 <div class="mt-4 mb-3">
                     <div class="d-grid">
-                        <button class="btn btn-dark rounded-pill" type="submit">Pagar</button>
+                        <button type="submit" class="btn btn-dark rounded-pill" onclick="iniciarCompra()">Pagar</button>
                     </div>
                 </div>
                 
@@ -88,7 +88,7 @@
         <div class="resumenCompra col-md-4 bg-white border card-shadow-lg" style="padding:60px;">
             <h2>Mi Compra</h2>
             <hr class="w-50" style="margin:0 auto;">
-            <div class="row">
+            <div class="row mt-4">
             <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -130,8 +130,8 @@
                                     ${item.producto.pronombre}
                                 </td>
                                 <td>$${item.producto.proprecio}</td>
+                                <td>${item.cantidad} </td>
                                 <td>$${item.subtotal}</td>
-
                             </tr>
                             `;
                         });
@@ -142,7 +142,7 @@
 
                     // Total
                     const total = `<tr>
-                        <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                        <td colspan="3" class="text-right"><strong>Total:</strong></td>
                         <td class="total">$${data.total}</td>
                         <td></td>
                     </tr>`;
@@ -153,8 +153,26 @@
                 }
             });
         }
+        
+        function iniciarCompra() {
+            $.ajax({
+                type: "GET",
+                url: "./accionIniciarCompra.php",
+                success: function(result) {
+                    if (result.status === 'success') {
+                        window.location.href = "../listaProductos/inicioCompra.php";
+                    } else {
+                        alert(result.data);
+                   }
+                },
+                error: function(result) {
+                    console.error(result);
+                }
+            });
+        }
     </script>
     <script src="../js/app.js"></script>
+    <script src="../js/validaciones.js"></script>
 </body>
 
 </html>
