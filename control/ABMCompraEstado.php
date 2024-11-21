@@ -87,6 +87,9 @@ class ABMCompraEstado
         return $resp;
     }
 
+    /**
+     * Crea un nuevo estado de la compra y lo inserta en la bd
+     */
     public function alta($param)
     {
         $resp = false;
@@ -101,7 +104,7 @@ class ABMCompraEstado
     }
 
     /**
-     * permite eliminar un objeto 
+     * permite eliminar un estado ed compra de la bd
      * @param array $param
      * @return boolean
      */
@@ -119,7 +122,7 @@ class ABMCompraEstado
     }
 
     /**
-     * permite modificar un objeto
+     * Modifica un estado de compra existente
      * @param array $param
      * @return boolean
      */
@@ -149,7 +152,7 @@ class ABMCompraEstado
     }
 
     /**
-     * permite buscar un objeto
+     * busca estados de compra en la bd
      * @param array $param
      * @return array
      */
