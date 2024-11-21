@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -53,7 +54,7 @@ class MailControl
             throw new Exception("No se encontró el usuario con id: $idUsuarioDestino");
         }
         $usuarioDestino = $colUsuarios[0];
-        
+
         // obtengo el estado de la compra
         $abmEstadoCompra = new AbmCompraEstado();
         $param = ['idcompra' => $compra->getIdcompra()];
@@ -61,8 +62,7 @@ class MailControl
         if (empty($colCompraEstado)) {
             throw new Exception("No se encontró el estado de la compra con id: {$compra->getIdcompra()}");
         }
-        $estadoCompra = $colCompraEstado[0];
-       
+
         // obtengo los items de la compra
         $abmCompraItem = new AbmCompraItem();
         $param = ['idcompra' => $compra->getIdcompra()];
@@ -71,17 +71,22 @@ class MailControl
             throw new Exception("No se encontraron items para la compra con id: {$compra->getIdcompra()}");
         }
 
-        $titulo = "Compra realizada con éxito";
-        $contenido = "<h1>Compra realizada con éxito</h1>";
-        $contenido .= "<p>Estado de la compra: {$estadoCompra->getobjEstadoTipo()->getCetDescripcion()}</p>";
+        $titulo = "Compra en Angel Wings Jewelry";
+        $contenido = "<h1>Compra en Angel Wings Jewelry</h1>";
         $contenido .= "<h2>Items de la compra</h2>";
         $contenido .= "<ul>";
         foreach ($colCompraItem as $compraItem) {
             $contenido .= "<li>{$compraItem->getObjProducto()->getusnombre()} - {$compraItem->getCicantidad()} unidades</li>";
         }
         $contenido .= "</ul>";
+        // muestra todos los estados de la compra
+        $contenido .= "<h2>Estados de la compra</h2>";
+        $contenido .= "<ul>";
+        foreach ($colCompraEstado as $compraEstado) {
+            $contenido .= "<li>{$compraEstado->getObjEstadoTipo()->getCetDescripcion()} - {$compraEstado->getcefechaini()}</li>";
+        }
+        $contenido .= "</ul>";
 
         $this->enviarMail($usuarioDestino, $titulo, $contenido);
     }
-    
 }
