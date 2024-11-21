@@ -31,7 +31,7 @@ try {
     ]);
 
     // vacia el carrito del usuario
-    // $session->vaciarCarrito();
+    $session->vaciarCarrito();
 
     //obtengo el estado de la compra
     $ambCompraEstado = new AbmCompraEstado();

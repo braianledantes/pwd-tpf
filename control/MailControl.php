@@ -79,6 +79,7 @@ class MailControl
         foreach ($colCompraItem as $compraItem) {
             $contenido .= "<li>{$compraItem->getObjProducto()->getusnombre()} - {$compraItem->getCicantidad()} unidades</li>";
         }
+        $contenido .= "</ul>";
 
         $this->enviarMail($usuarioDestino, $titulo, $contenido);
     }
