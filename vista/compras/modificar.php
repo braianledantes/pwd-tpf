@@ -41,17 +41,26 @@ try {
     $abmCompraEstadoTipo = new ABMCompraEstadoTipo();
     $listaEstados = $abmCompraEstadoTipo->buscar(null);
 
-    // carga los estados disponibles. Un estado está disponible si no está en la lista de estados de la compra
-    foreach ($listaEstados as $estado) {
-        $estaEnLista = false;
-        foreach ($listaEstadosCompra as $estadoCompra) {
-            if ($estado->getidcompraestadotipo() == $estadoCompra->getobjEstadoTipo()->getidcompraestadotipo()) {
-                $estaEnLista = true;
-                break;
-            }
-        }
-        if (!$estaEnLista) {
-            $estadosDisponibles[] = $estado;
+    // carga los estados disponibles.
+    // si la compra no tiene estados, se le puede agregar cualquier estado.
+    // si la compra tiene el estado 1, agrega los estados 2, 3 y 4.
+    // si la compra tiene el estado 2, agrega los estados 3 y 4.
+    // si la compra tiene el estado 3, no agrega ningun estado.
+    if (empty($listaEstadosCompra)) {
+        $estadosDisponibles = $listaEstados;
+    } else {
+        // obtiene el ultimo estado de la compra
+        $estadoCompra = $listaEstadosCompra[count($listaEstadosCompra) - 1];
+        $estadoCompraTipo = $estadoCompra->getobjEstadoTipo();
+        $idEstadoCompraTipo = $estadoCompraTipo->getIdcompraestadotipo();
+        if ($idEstadoCompraTipo == 1) {
+            $estadosDisponibles = array_filter($listaEstados, function ($estado) {
+                return $estado->getIdcompraestadotipo() > 1;
+            });
+        } else if ($idEstadoCompraTipo == 2) {
+            $estadosDisponibles = array_filter($listaEstados, function ($estado) {
+                return $estado->getIdcompraestadotipo() > 2;
+            });
         }
     }
 
