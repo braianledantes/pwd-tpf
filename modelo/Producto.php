@@ -88,6 +88,9 @@ class Producto
         $this->mensajeoperacion = $valor;
     }
 
+    /**
+     * Carga los datos de un producto desde la bd ,usando el idproducto
+     */
     public function cargar()
     {
         $resp = false;
@@ -107,6 +110,9 @@ class Producto
         return $resp;
     }
 
+    /**
+     * Inserta un producto en la bd
+     */
     public function insertar()
     {
         $resp = false;
@@ -125,7 +131,9 @@ class Producto
         return $resp;
     }
 
-
+    /**
+     * Modifica los datos de un producto en la bd
+     */
     public function modificar()
     {
         $resp = false;
@@ -143,6 +151,10 @@ class Producto
         }
         return $resp;
     }
+
+    /**
+     * Elimina un producto de la bd
+     */
     public function eliminar()
     {
         $resp = false;
@@ -160,6 +172,9 @@ class Producto
         return $resp;
     }
 
+    /**
+     * Lista todos los productos que coinciden con el parametro indicado
+     */
     public function listar($parametro = "")
     {
         $arreglo = array();
@@ -186,6 +201,9 @@ class Producto
         return $arreglo;
     }
 
+    /**
+     * Convierte el obj producto a un array
+     */
     public function toArray() {
         return [
             'idproducto' => $this->getidproducto(),

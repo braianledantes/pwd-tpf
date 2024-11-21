@@ -62,6 +62,9 @@ class Compra
         $this->setObjusuario($objusuario);
     }
 
+    /**
+     * Carga los datos de una compra de la bd, utilizando el id de la compra.
+     */
     public function cargar()
     {
         $resp = false;
@@ -87,6 +90,7 @@ class Compra
     }
 
     /**
+     * Inserta una nueva compra en la bd.
      * La compra siempre la crea con la fecha actual
      */
     public function insertar()
@@ -116,6 +120,10 @@ class Compra
         return $resp;
     }
 
+
+    /**
+     * Modifica una compra en la bd.
+     */
     public function modificar()
     {
         $usuario = $this->getObjusuario();
@@ -140,6 +148,9 @@ class Compra
         return $resp;
     }
 
+    /**
+     * Elimina una compra de la bd.
+     */
     public function eliminar()
     {
         $resp = false;
@@ -157,6 +168,9 @@ class Compra
         return $resp;
     }
 
+    /**
+     * Lista todas las compras que coinciden con el parametro ingresado
+     */
     public static  function listar($parametro = "")
     {
         $arreglo = array();
@@ -185,6 +199,9 @@ class Compra
         return $arreglo;
     }
 
+    /**
+     * Convierte el objeto compra a un array.
+     */
     public function toArray() {
         $usuario = $this->getObjusuario();
         return array(

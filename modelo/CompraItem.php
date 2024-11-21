@@ -77,6 +77,9 @@ class CompraItem
         $this->setObjCompra($objCompra);
     }
 
+    /**
+     * Carga todos los datos de un item de compra de la bd, utilizando el id del item de compra.
+     */
     public function cargar()
     {
         $resp = false;
@@ -102,6 +105,9 @@ class CompraItem
         return $resp;
     }
 
+    /**
+     * Inserta un nuevo item de compra en la bd.
+     */
     public function insertar()
     {
         $resp = false;
@@ -123,6 +129,9 @@ class CompraItem
         return $resp;
     }
 
+    /**
+     * Modifica un item de compra existente en la bd.
+     */
     public function modificar()
     {
         $resp = false;
@@ -149,8 +158,9 @@ class CompraItem
         return $resp;
     }
 
-
-
+    /**
+     * Elimina un item de compra de la bd.
+     */
     public function eliminar()
     {
         $resp = false;
@@ -168,6 +178,9 @@ class CompraItem
         return $resp;
     }
 
+    /**
+     * Lista todos los items de la compra que coincidan con el parametro ingresado.
+     */
     public function listar($parametro = "")
     {
         $arreglo = array();

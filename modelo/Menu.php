@@ -124,7 +124,9 @@ class Menu
         $this->setMedeshabilitado($medeshabilitado);
     }
 
-
+    /**
+     * Carga los datos de un menu desde la bd, usando el idmenu
+     */
     public function cargar()
     {
         $resp = false;
@@ -150,6 +152,9 @@ class Menu
         return $resp;
     }
 
+    /**
+     * Inserta un nuevo menu en la bd
+     */
     public function insertar()
     {
         $resp = false;
@@ -178,6 +183,9 @@ class Menu
         return $resp;
     }
 
+    /**
+     * modifica un menu existente en la bd.
+     */
     public function modificar()
     {
         $resp = false;
@@ -204,6 +212,9 @@ class Menu
         return $resp;
     }
 
+    /**
+     * elimina un menu de la bd.
+     */
     public function eliminar()
     {
         $resp = false;
@@ -221,6 +232,9 @@ class Menu
         return $resp;
     }
 
+    /**
+     * lista todos los menus qeu coinciden con el parametro ingresado.
+     */
     public static  function listar($parametro = "")
     {
         $arreglo = array();
@@ -250,6 +264,9 @@ class Menu
         return $arreglo;
     }
 
+    /**
+     * Convierte el obj menu a un array
+     */
     public function toArray() {
         return [
             'idmenu' => $this->getIdmenu(),

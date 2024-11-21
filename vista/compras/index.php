@@ -76,7 +76,7 @@ $lista = $abmCompra->buscar(null);
                                 <td>${compra.objusuario.idusuario}</td>
                                 <td>${compra.cofecha}</td>
                                 <td>
-                                    <a href="./modificar.php?idcompra=${compra.idcompra}" class="btn btn-primary">Modificar</a>
+                                    <a href="./modificar.php?idcompra=${compra.idcompra}" class="btn btn-primary">Ver</a>
                                 </td>
                             `;
                             $('#tbody').append(tr);

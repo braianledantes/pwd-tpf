@@ -84,6 +84,9 @@ class CompraEstado
         $this->setObjCompra($objCompra);
     }
 
+    /**
+     * Carga los datos de un estado de compra desde la bd, utilizando el idcompraestado
+     */
     public function cargar()
     {
         $resp = false;
@@ -111,6 +114,9 @@ class CompraEstado
         return $resp;
     }
 
+    /**
+     * Inserta un nuevo estado de compra en la bd.
+     */
     public function insertar()
     {
         $resp = false;
@@ -131,6 +137,9 @@ class CompraEstado
         return $resp;
     }
 
+    /**
+     * Modifica un estado de compra en la bd.
+     */
     public function modificar()
     {
         $resp = false;
@@ -165,6 +174,9 @@ class CompraEstado
         return $resp;
     }
 
+    /**
+     * Elimina un estado de compra de la bd.
+     */
     public function eliminar()
     {
         $resp = false;
@@ -182,6 +194,9 @@ class CompraEstado
         return $resp;
     }
 
+    /**
+     * Lista todos los estados de compra que coinciden con el parametro ingresado.
+     */
     public static function listar($parametro = "")
     {
         $arreglo = array();
@@ -212,6 +227,9 @@ class CompraEstado
         return $arreglo;
     }
 
+    /**
+     * Convierte el objeto compraEstado a un array.
+     */
     public function toArray() {
         $objCompra = $this->getObjCompra();
         $objEstadoTipo = $this->getobjEstadoTipo();
