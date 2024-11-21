@@ -35,10 +35,6 @@ try {
         $listaJson[] = $comprajson;
     }
 
-    // envia el mail al usuario de que se cancelo la compra
-    $mailControl = new MailControl();
-    // $mailControl->enviarMailCompra($idCompra);
-
     echo json_encode([
         'status' => 'success',
         'data' => $listaJson
