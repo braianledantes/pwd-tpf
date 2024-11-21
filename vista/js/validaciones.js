@@ -219,10 +219,6 @@ $(document).ready(function() {
                 maxlength: 100, // Longitud máxima
                 pattern: /^[a-zA-Z ,.'-]+$/i // Validación para letras y algunos caracteres
             },
-            usmail: {
-                required: true, // El correo es obligatorio
-                email: true // Validación para correo electrónico
-            },
             numtarjeta: {
                 required: true, // El campo es obligatorio
                 pattern: /^[0-9]{16}$/  // Validación para una tarjeta de 16 dígitos
@@ -244,10 +240,6 @@ $(document).ready(function() {
                 minlength: "El nombre debe tener al menos 3 caracteres",
                 maxlength: "El nombre no puede tener más de 100 caracteres",
                 pattern: "Solo se permiten letras, espacios, comas, puntos, apóstrofes y guiones"
-            },
-            usmail: {
-                required: "El correo es obligatorio",
-                email: "Por favor, ingrese un correo válido"
             },
             numtarjeta: {
                 required: "El número de tarjeta es obligatorio",

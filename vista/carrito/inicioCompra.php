@@ -46,27 +46,21 @@
                     </div>
                     <div class="col-md-8 mt-3">
                         <div class="form-floating">
-                            <input class="form-control" id="usmail" name="usmail" type="text" placeholder="Mail" required>
-                            <label for="usmail">Mail para notificarte Estado de la Compra </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-100 row">
-                    <div class="col-md-5 mt-3">
-                        <div class="form-floating">
                         <input type="text" name="numtarjeta" id="numtarjeta" class="form-control form-control-lg" siez="17" placeholder="1234 5678 9012 3456" minlength="16" maxlength="16" required />
                         <label class="form-label" for="numtarjeta">Número de tarjeta</label>
                         </div>
                     </div>
 
-                    <div class="col-md-4 mt-3">
+                </div>
+                <div class="w-100 row">
+                    <div class="col-md-8 mt-3">
                         <div class="form-floating">
                         <input type="text" name="vencimiento" id="vencimiento" class="form-control form-control-lg" placeholder="MM/AAAA" size="7" id="exp" minlength="7" maxlength="7" required/>
                         <label class="form-label" for="vencimiento">Vencimiento</label>
                         </div>
                     </div>
 
-                    <div class="col-md-3 mt-3">
+                    <div class="col-md-4 mt-3">
                         <div class="form-floating">
                         <input type="password" name="codigo" id="codigo" class="form-control form-control-lg" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" required />
                         <label class="form-label" for="typeText">Código de seguridad</label>
