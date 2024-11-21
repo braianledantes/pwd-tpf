@@ -22,12 +22,19 @@ try {
     $listaCompra = $abmCompra->buscar($param); 
 
     $abmCompraEstado = new ABMCompraEstado();
+    $lista = $abmCompraEstado->buscar(['idcompra']);
 
     $listaJson = [];
 
-    foreach ($listaCompra as $compra) {
-
-            
+    foreach ($lista as $compra) {
+        $comprajson = $compra->toArray();
+        $idCompraEstado = $compra->getIdcompraestado();
+        $idCompra = $compra->getObjCompra()->getIdcompra();
+        $abmCompra = new abmcompra();
+        $listaCompra = $abmCompra->buscar(['idcompra' => $idCompra]);
+        $abmCET = new abmcompraestadotipo();
+        $idCET = $compra->getObjCompraEstadoTipo()->getIdcompraestadotipo();
+        var_dump($listaCompra);       
 
 
         // Agregar la compra al arreglo de resultados
