@@ -41,20 +41,28 @@ try {
     $abmCompraEstadoTipo = new ABMCompraEstadoTipo();
     $listaEstados = $abmCompraEstadoTipo->buscar(null);
 
-    // carga los estados disponibles. Un estado está disponible si no está en la lista de estados de la compra
-    foreach ($listaEstados as $estado) {
-        $estaEnLista = false;
-        foreach ($listaEstadosCompra as $estadoCompra) {
-            if ($estado->getidcompraestadotipo() == $estadoCompra->getobjEstadoTipo()->getidcompraestadotipo()) {
-                $estaEnLista = true;
-                break;
-            }
-        }
-        if (!$estaEnLista) {
-            $estadosDisponibles[] = $estado;
+    // carga los estados disponibles.
+    // si la compra no tiene estados, se le puede agregar cualquier estado.
+    // si la compra tiene el estado 1, agrega los estados 2, 3 y 4.
+    // si la compra tiene el estado 2, agrega los estados 3 y 4.
+    // si la compra tiene el estado 3, no agrega ningun estado.
+    if (empty($listaEstadosCompra)) {
+        $estadosDisponibles = $listaEstados;
+    } else {
+        // obtiene el ultimo estado de la compra
+        $estadoCompra = $listaEstadosCompra[count($listaEstadosCompra) - 1];
+        $estadoCompraTipo = $estadoCompra->getobjEstadoTipo();
+        $idEstadoCompraTipo = $estadoCompraTipo->getIdcompraestadotipo();
+        if ($idEstadoCompraTipo == 1) {
+            $estadosDisponibles = array_filter($listaEstados, function ($estado) {
+                return $estado->getIdcompraestadotipo() > 1;
+            });
+        } else if ($idEstadoCompraTipo == 2) {
+            $estadosDisponibles = array_filter($listaEstados, function ($estado) {
+                return $estado->getIdcompraestadotipo() > 2;
+            });
         }
     }
-
 } catch (Exception $e) {
 }
 ?>
@@ -104,8 +112,6 @@ try {
                     <?php endforeach; ?>
                 </ul>
 
-                <!-- Muestra Estados de la compra -->
-                <h3>Estados de la compra</h3>
                 <ul>
                     <?php foreach ($listaEstadosCompra as $estadoCompra) : ?>
                         <li>
@@ -115,18 +121,16 @@ try {
                     <?php endforeach; ?>
                 </ul>
 
-                <!-- Opcion de Agregar un estado a la compra -->
-                <form id="formCambiarEstado" action="./accionModificar.php" method="POST">
-                    <input type="hidden" name="idcompra" value="<?= $compra->getIdcompra() ?>">
-                    <div class="form-group">
-                        <select class="form-control" id="idcompraestadotipo" name="idcompraestadotipo">
-                            <?php foreach ($estadosDisponibles as $estado) : ?>
-                                <option value="<?= $estado->getidcompraestadotipo() ?>"><?= $estado->getCetDescripcion() ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Cambiar Estado</button>
-                </form>
+                <!-- Opcion de Agregar un estado a la compra si hay estados disponibles -->
+                <?php if (!empty($estadosDisponibles)) : ?>
+                    <?php foreach ($estadosDisponibles as $estado) : ?>
+                        <form class="mt-2 formCambiarEstado">
+                            <input type="hidden" name="idcompra" value="<?= $compra->getIdcompra() ?>">
+                            <input type="hidden" name="idcompraestadotipo" value="<?= $estado->getIdcompraestadotipo() ?>">
+                            <button type="submit" class="btn btn-primary">Cambiar a <?= $estado->getCetDescripcion() ?></button>
+                        </form>
+                    <?php endforeach; ?>
+                <?php endif; ?>
 
             </div>
         </div>
@@ -134,13 +138,14 @@ try {
     <?php include_once("../estructura/footer.php"); ?>
     <script>
         $(document).ready(function() {
-            $('#formCambiarEstado').submit(function(e) {
+            // envia el formulario para cambiar el estado de la compra
+            $(".formCambiarEstado").submit(function(e) {
                 e.preventDefault();
                 var formData = new FormData(this);
-
+                console.log(formData);
                 $.ajax({
-                    url: $(this).attr('action'),
-                    type: $(this).attr('method'),
+                    url: "./accionModificar.php",
+                    type: "POST",
                     data: formData,
                     success: function(response) {
                         if (response.status === 'success') {
@@ -157,7 +162,6 @@ try {
                     contentType: false,
                     processData: false
                 });
-
             });
         });
     </script>

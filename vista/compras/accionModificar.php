@@ -32,6 +32,9 @@ try {
         throw new Exception('Error al modificar la compra');
     }
 
+    $mailControl = new MailControl();
+    $mailControl->enviarMailCompra($idCompra);
+
     echo json_encode([
         'status' => 'success',
         'data' => 'Compra actualizada'
