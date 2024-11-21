@@ -230,7 +230,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                 url: "./accionIniciarCompra.php",
                 success: function(result) {
                     if (result.status === 'success') {
-                        window.location.href = "../";
+                        window.location.href = "../listaProductos/inicioCompra.php";
                     } else {
                         alert(result.data);
                     }
