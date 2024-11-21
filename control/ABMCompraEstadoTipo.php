@@ -3,7 +3,7 @@
 class ABMCompraEstadoTipo
 {
     /**
-     * permite buscar un objeto
+     * permite buscar un objeto en la bd segun los parametros ingresados
      * @param array $param
      * @return array
      */
