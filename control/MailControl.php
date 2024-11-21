@@ -3,13 +3,14 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-class MailControl
-{
-    private function enviarMail($usuarioDestino, $titulo, $contenido)
-    {
+class MailControl {
+    /**
+     * Envia un mail al usuario destino, utilizando PHPMailer
+     */
+    private function enviarMail($usuarioDestino, $titulo, $contenido){
         try {
             $mail = new PHPMailer(true);
-            //Server settings
+            //Configuracion del servidor, utilizando variables de entorno
             $mail->isSMTP();
             $mail->Host       = $_ENV['MAIL_HOST'];
             $mail->SMTPAuth   = true;
@@ -34,9 +35,12 @@ class MailControl
         }
     }
 
+    /**
+     * Envia un mail al usuario destino, relacionado a una compra especifica  
+     */
     public function enviarMailCompra($idcompra)
     {
-        // obtengo la compra
+        // Obtiene la compra
         $abmCompra = new AbmCompra();
         $param = ['idcompra' => $idcompra];
         $colCompras = $abmCompra->buscar($param);
@@ -45,9 +49,8 @@ class MailControl
         }
         $compra = $colCompras[0];
 
-        // obtengo el usuario destino
+        // Obtiene el usuario destino
         $idUsuarioDestino = $compra->getObjUsuario()->getidusuario();
-
         $abmUsuario = new ABMUsuario();
         $colUsuarios = $abmUsuario->buscar(['idusuario' => $idUsuarioDestino]);
         if (empty($colUsuarios)) {
@@ -55,7 +58,7 @@ class MailControl
         }
         $usuarioDestino = $colUsuarios[0];
 
-        // obtengo el estado de la compra
+        // Obtiene el estado de la compra
         $abmEstadoCompra = new AbmCompraEstado();
         $param = ['idcompra' => $compra->getIdcompra()];
         $colCompraEstado = $abmEstadoCompra->buscar($param);
@@ -63,7 +66,7 @@ class MailControl
             throw new Exception("No se encontró el estado de la compra con id: {$compra->getIdcompra()}");
         }
 
-        // obtengo los items de la compra
+        // Obtiene los ítems de la compra
         $abmCompraItem = new AbmCompraItem();
         $param = ['idcompra' => $compra->getIdcompra()];
         $colCompraItem = $abmCompraItem->buscar($param);
@@ -72,21 +75,55 @@ class MailControl
         }
 
         $titulo = "Compra en Angel Wings Jewelry";
-        $contenido = "<h1>Compra en Angel Wings Jewelry</h1>";
-        $contenido .= "<h2>Items de la compra</h2>";
-        $contenido .= "<ul>";
+        $contenido = "
+        <html>
+        <head>
+            <style>
+                body { font-family: Arial, sans-serif; }
+                h1 { color: #fff; background-color: #7890a8; padding: 10px; text-align: center; }
+                h2 { color: #304878; }
+                table { width: 100%; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 8px; }
+                th { background-color: #f2f2f2; }
+                .item { font-weight: bold; }
+                .cantidad { color: #888; }
+                .estado { color: #555; }
+                .fecha { color: #888; }
+            </style>
+        </head>
+        <body>
+            <h1>Gracias por comprar en Angel Wings Jewelry</h1>
+            <h2>Pedido: N° # {$compra->getIdcompra()}</h2>
+            <h2>Detalle de la compra</h2>
+            <table>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                </tr>";
         foreach ($colCompraItem as $compraItem) {
-            $contenido .= "<li>{$compraItem->getObjProducto()->getusnombre()} - {$compraItem->getCicantidad()} unidades</li>";
+            $contenido .= "<tr>
+                <td class='item'>{$compraItem->getObjProducto()->getusnombre()}</td>
+                <td class='cantidad'>{$compraItem->getCicantidad()} unidades</td>
+            </tr>";
         }
-        $contenido .= "</ul>";
-        // muestra todos los estados de la compra
-        $contenido .= "<h2>Estados de la compra</h2>";
-        $contenido .= "<ul>";
-        foreach ($colCompraEstado as $compraEstado) {
-            $contenido .= "<li>{$compraEstado->getObjEstadoTipo()->getCetDescripcion()} - {$compraEstado->getcefechaini()}</li>";
-        }
-        $contenido .= "</ul>";
-
-        $this->enviarMail($usuarioDestino, $titulo, $contenido);
+        $contenido .= "</table>
+        <h2>Estados de la compra</h2>
+        <table>
+            <tr>
+                <th>Estado</th>
+                <th>Fecha</th>
+            </tr>";
+    foreach ($colCompraEstado as $compraEstado) {
+        $contenido .= "<tr>
+            <td class='estado'>{$compraEstado->getObjEstadoTipo()->getCetDescripcion()}</td>
+            <td class='fecha'>{$compraEstado->getcefechaini()}</td>
+        </tr>";
     }
+    $contenido .= "</table>
+    </body>
+    </html>";
+
+    $this->enviarMail($usuarioDestino, $titulo, $contenido);
 }
+}
+?>
