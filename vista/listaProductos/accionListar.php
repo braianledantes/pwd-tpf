@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 
 // verifica que el usuario esté logueado y tenga permisos
 $session = new Sesion();
-if (!$session->estaActiva() /*|| !$session->tieneAccesoAMenuActual()*/) {
+if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     echo json_encode([
         'status' => 'error',
         'data' => 'No tiene permisos para realizar esta acción'

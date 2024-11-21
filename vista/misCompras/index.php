@@ -1,4 +1,12 @@
-<?php include_once("../../configuracion.php") ?>
+<?php
+include_once("../../configuracion.php");
+
+// Verifica que el usuario esté logueado y tenga permisos
+$session = new Sesion();
+if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
+    header('Location: ../login?messageErr=' . urlencode('Debe Inciar Sesion para acceder a esta página.'));
+}
+?>
 
 <!DOCTYPE html>
 <html lang="es">

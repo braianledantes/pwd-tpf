@@ -3,7 +3,7 @@ include_once '../../configuracion.php';
 $datos = data_submitted();
 // verifica que el usuario esté logueado y tenga permisos
 $session = new Sesion();
-if (!$session->estaActiva() /*|| !$session->tieneAccesoAMenuActual()*/) {
+if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     header("Location: ../login");
 }
 $abmUsuario = new abmusuario();
