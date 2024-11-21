@@ -99,7 +99,7 @@ class ABMProducto
         // crea el nombre de la imagen
         $nombreImagen = $nombreImagen . "." . $extencion;
         $imageubicacion = $folder . $nombreImagen;
-        $prourlimagen = $GLOBALS['HOST'] . "imagenes/productos/" . $nombreImagen;
+        $prourlimagen = $GLOBALS['PROJECT_PATH'] . "/imagenes/productos/" . $nombreImagen;
         // crea la carpeta si no existe
         if (!file_exists($folder)) {
             mkdir($folder, 0777, true);

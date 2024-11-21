@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2024 a las 03:37:51
+-- Tiempo de generación: 21-11-2024 a las 01:23:24
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,6 +33,13 @@ CREATE TABLE `compra` (
   `idusuario` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`idcompra`, `cofecha`, `idusuario`) VALUES
+(53, '2024-11-20 14:10:27', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +53,14 @@ CREATE TABLE `compraestado` (
   `cefechaini` timestamp NOT NULL DEFAULT current_timestamp(),
   `cefechafin` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `compraestado`
+--
+
+INSERT INTO `compraestado` (`idcompraestado`, `idcompra`, `idcompraestadotipo`, `cefechaini`, `cefechafin`) VALUES
+(20, 53, 1, '2024-11-20 14:10:28', NULL),
+(21, 53, 2, '2024-11-20 22:30:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -81,6 +96,14 @@ CREATE TABLE `compraitem` (
   `idcompra` bigint(20) NOT NULL,
   `cicantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `compraitem`
+--
+
+INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`) VALUES
+(20, 50, 53, 1),
+(21, 42, 53, 1);
 
 -- --------------------------------------------------------
 
@@ -158,9 +181,10 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `procantstock`, `proprecio`, `prourlimagen`) VALUES
-(41, 'Producto sin imagen', 'un producto cualquiera que no tiene imagen', 20, 200, 'http://localhost/pwd-tpf/imagenes/productos/673917025c756.png'),
-(42, 'Anillo', 'Un anillo de extremada calidad', 10, 10000, 'http://localhost/pwd-tpf/imagenes/productos/67390df1c1c18.png'),
-(50, 'Anillo 2', 'Un anillo de extremada calidad', 10, 10000, 'http://localhost/pwd-tpf/imagenes/productos/673910343543e.jpg');
+(41, 'Producto sin imagen', 'un producto cualquiera que no tiene imagen', 19, 200, '/pwd-tpf/imagenes/productos/673e75a6cfa1e.jpg'),
+(42, 'Anillo', 'Un anillo de extremada calidad', 8, 10000, '/pwd-tpf/imagenes/productos/67390df1c1c18.png'),
+(50, 'Anillo 2', 'Un anillo de extremada calidad', 7, 10000, '/pwd-tpf/imagenes/productos/673910343543e.jpg'),
+(51, 'Anillo 5', 'Un anillo de extremada calidad', 5, 5000, '/pwd-tpf/imagenes/productos/673e7c0f4474a.jpg');
 
 -- --------------------------------------------------------
 
@@ -203,7 +227,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
 (1, 'braian1686', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'braian.ledantes@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
 (2, 'clara4938', '$2y$10$Fiqc9ebHmi0Ql4NXA/bJjea4fwpzY8SCDk7IcRVTFWujYm3cl8dBW', 'clara.pelozo@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
-(3, 'luci3075', '$2y$10$xqy5KXxA7qQh0qIlKzO//.uXn.Re9iVbgcAEnLFln/nM237ejflZq', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00');
+(3, 'luci3075', 'asd1234', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -223,7 +247,7 @@ CREATE TABLE `usuariorol` (
 INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
 (1, 1),
 (2, 2),
-(3, 2);
+(3, 1);
 
 --
 -- Índices para tablas volcadas
@@ -313,19 +337,19 @@ ALTER TABLE `usuariorol`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `compraestado`
 --
 ALTER TABLE `compraestado`
-  MODIFY `idcompraestado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idcompraestado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `compraitem`
 --
 ALTER TABLE `compraitem`
-  MODIFY `idcompraitem` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idcompraitem` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -337,7 +361,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
