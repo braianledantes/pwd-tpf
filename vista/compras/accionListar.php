@@ -16,6 +16,11 @@ try {
     $abmCompra = new ABMCompra();
     $lista = $abmCompra->buscar(null);
 
+    // cambia el order por id decreciente
+    usort($lista, function ($a, $b) {
+        return $b->getIdcompra() - $a->getIdcompra();
+    });
+
     $abmCompraEstado = new ABMCompraEstado();
 
     $listaJson = [];

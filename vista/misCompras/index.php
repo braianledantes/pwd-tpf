@@ -74,6 +74,11 @@
         }
 
         function cancelarCompra(idcompra) {
+            // desactiva el boton y cambia el texto
+            const boton = $(event.target);
+            boton.prop('disabled', true);
+            boton.text('Cancelando...');
+
             $.ajax({
                 url: './accionCancelarCompra.php',
                 type: 'POST',

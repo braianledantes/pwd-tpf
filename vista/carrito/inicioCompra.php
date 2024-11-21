@@ -149,12 +149,16 @@
         }
         
         function iniciarCompra() {
+            const boton = $(event.target);
+            boton.prop('disabled', true);
+            boton.text('Iniciando Compra...');
+
             $.ajax({
                 type: "GET",
                 url: "./accionIniciarCompra.php",
                 success: function(result) {
                     if (result.status === 'success') {
-                        window.location.href = "./inicioCompra.php";
+                        window.location.href = "../misCompras";
                     } else {
                         alert(result.data);
                    }
