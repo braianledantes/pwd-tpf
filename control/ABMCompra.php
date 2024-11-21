@@ -133,6 +133,8 @@ class ABMCompra
             $this->baja(['idcompra' => $idCompra]);
             throw new Exception('Error al iniciar la compra');
         }
+
+        return $idCompra;
     }
 
     /**

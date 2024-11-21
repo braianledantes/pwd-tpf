@@ -59,7 +59,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                                         <button class="btn btn-danger px-4 rounded-pill" onclick="vaciarCarrito()">Vaciar carrito</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-dark px-4 rounded-pill" onclick="//iniciarCompra()"><a class="text-decoration-none text-white" href="../listaProductos/inicioCompra.php">Realizar Pago</a></button>
+                                        <button class="btn btn-dark px-4 rounded-pill" onclick="//iniciarCompra()"><a class="text-decoration-none text-white" href="./inicioCompra.php">Realizar Pago</a></button>
                                     </td>
                                 
                                 </tr>

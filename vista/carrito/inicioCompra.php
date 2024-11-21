@@ -116,7 +116,7 @@
         function mostrarCarrito() {
             $.ajax({
                 type: "GET",
-                url: "../carrito/accionObtenerCarrito.php",
+                url: "./accionObtenerCarrito.php",
                 success: function(result) {
                     const data = result.data;
                     let contenido = `<div class="row">`;
@@ -160,7 +160,7 @@
                 url: "./accionIniciarCompra.php",
                 success: function(result) {
                     if (result.status === 'success') {
-                        window.location.href = "../listaProductos/inicioCompra.php";
+                        window.location.href = "./inicioCompra.php";
                     } else {
                         alert(result.data);
                    }

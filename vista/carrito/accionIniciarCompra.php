@@ -1,6 +1,5 @@
 <?php
 include_once("../../configuracion.php");
-include_once('MailControl.php');
 header('Content-Type: application/json');
 
 // Verificar que la sesion esta activa y si el usuario tiene acceso al menu actual.
@@ -14,6 +13,8 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 }
 
 try {
+    $mailControl = new MailControl();
+
     // obtiene datos del usuario y verifica que exista.
     $usuario = $session->getUsuario();
     if (!$usuario) {
@@ -30,7 +31,7 @@ try {
     ]);
 
     // vacia el carrito del usuario
-    $session->vaciarCarrito();
+    // $session->vaciarCarrito();
 
     //obtengo el estado de la compra
     $ambCompraEstado = new AbmCompraEstado();
@@ -38,8 +39,9 @@ try {
     $compraEstado=$ambCompraEstado->buscar($param);
 
     if (!empty($compraEstado)) {
-        $estadoCompra = $compraEstado[0]->getEstado();
-        enviarMail($estadoCompra, $emailUsuario);
+        $estadoCompraTipo = $compraEstado[0]->getobjEstadoTipo();
+        $descripcionEstadoTipo = $estadoCompraTipo->getCetDescripcion();
+        $mailControl->enviarMailCompra($idCompra);
     } else {
         throw new Exception("No se encontro el estado de la compra.");
     }
