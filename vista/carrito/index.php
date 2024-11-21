@@ -59,7 +59,7 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                                         <button class="btn btn-danger px-4 rounded-pill" onclick="vaciarCarrito()">Vaciar carrito</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-dark px-4 rounded-pill" onclick="iniciarCompra()">Iniciar compra</button>
+                                        <button class="btn btn-dark px-4 rounded-pill" onclick="//iniciarCompra()"><a class="text-decoration-none text-white" href="../listaProductos/inicioCompra.php">Realizar Pago</a></button>
                                     </td>
                                 
                                 </tr>
@@ -224,22 +224,22 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
             });
         }
 
-        function iniciarCompra() {
-            $.ajax({
-                type: "GET",
-                url: "./accionIniciarCompra.php",
-                success: function(result) {
-                    if (result.status === 'success') {
-                        window.location.href = "../listaProductos/inicioCompra.php";
-                    } else {
-                        alert(result.data);
-                    }
-                },
-                error: function(result) {
-                    console.error(result);
-                }
-            });
-        }
+        //function iniciarCompra() {
+        //    $.ajax({
+        //        type: "GET",
+        //        url: "./accionIniciarCompra.php",
+        //        success: function(result) {
+        //            if (result.status === 'success') {
+        //                window.location.href = "../listaProductos/inicioCompra.php";
+        //            } else {
+        //                alert(result.data);
+        //           }
+        //        },
+        //        error: function(result) {
+        //            console.error(result);
+        //        }
+        //    });
+        //}
     </script>
     <script src="../js/app.js"></script>
 </body>

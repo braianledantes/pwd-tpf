@@ -88,6 +88,21 @@
         <div class="resumenCompra col-md-4 bg-white border card-shadow-lg" style="padding:60px;">
             <h2>Mi Compra</h2>
             <hr class="w-50" style="margin:0 auto;">
+            <div class="row">
+            <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+            </table>
+            <div>
         </div>
     </div>
     </main>
@@ -98,6 +113,46 @@
             mostrarCarrito();
             actualizarContadorCarrito();
         });
+        function mostrarCarrito() {
+            $.ajax({
+                type: "GET",
+                url: "../carrito/accionObtenerCarrito.php",
+                success: function(result) {
+                    const data = result.data;
+                    let contenido = `<div class="row">`;
+
+                    if (data.items.length !== 0) {
+                        data.items.forEach(item => {
+                            contenido += `
+                            <tr>
+                                <td>
+                                    <img src="${item.producto.prourlimagen}" alt="${item.producto.pronombre}" style="height: 50px; object-fit: cover;">
+                                    ${item.producto.pronombre}
+                                </td>
+                                <td>$${item.producto.proprecio}</td>
+                                <td>$${item.subtotal}</td>
+
+                            </tr>
+                            `;
+                        });
+                    }
+
+                    contenido += `</div>`;
+                    $("tbody").html(contenido);
+
+                    // Total
+                    const total = `<tr>
+                        <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                        <td class="total">$${data.total}</td>
+                        <td></td>
+                    </tr>`;
+                    $("tbody").append(total);
+                },
+                error: function(result) {
+                    console.error(result);
+                }
+            });
+        }
     </script>
     <script src="../js/app.js"></script>
 </body>
