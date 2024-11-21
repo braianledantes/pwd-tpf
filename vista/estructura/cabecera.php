@@ -41,7 +41,7 @@ $menus = $session->obtenerMenusDelUsuario();
                                 <?php echo $nombreUsuario; ?>     <i class="fas fa-user"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-light shadow" id="menuser">
-                                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i><span class="ms-2">Configuración</span></a></li>
+                                    <li><a class="dropdown-item" href="/pwd-tpf/vista/usuarios/configuracion.php"><i class="bi bi-gear"></i><span class="ms-2">Configuración</span></a></li>
                                     <li><a class="dropdown-item" href="/pwd-tpf/vista/login/accionLogout.php"><i class="bi bi-box-arrow-right"></i><span class="ms-2">Cerrar Sesion</span></a></li>
                                 </ul>
                             </li>

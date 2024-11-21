@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\map;
-
 include_once("../../configuracion.php");
 header('Content-Type: application/json');
 
@@ -16,18 +14,18 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 }
 
 try {
-    $idusuario = $session->getUsuario()->getIdusuario();
+    $idUsuario = $session->getUsuario()->getIdusuario();
 
-    $abmCompra = new ABMCompra();
-    $lista = $abmCompra->buscar(['idusuario' => $idusuario]);
-
-    $abmCompraEstado = new ABMCompraEstado();
+    $abmCompras = new ABMCompra();
+    $lista = $abmCompras->buscar(['idusuario' => $idUsuario]);
 
     $listaJson = [];
 
     foreach ($lista as $compra) {
         $comprajson = $compra->toArray();
+
         // obtiene el ultimo estado de la compra
+        $abmCompraEstado = new ABMCompraEstado();
         $estadosCompra = $abmCompraEstado->buscar(['idcompra' => $compra->getIdcompra()]);
         
         // obtiene el ultimo estado de la compra
@@ -36,6 +34,10 @@ try {
 
         $listaJson[] = $comprajson;
     }
+
+    // envia el mail al usuario de que se cancelo la compra
+    $mailControl = new MailControl();
+    // $mailControl->enviarMailCompra($idCompra);
 
     echo json_encode([
         'status' => 'success',
