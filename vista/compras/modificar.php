@@ -63,7 +63,6 @@ try {
             });
         }
     }
-
 } catch (Exception $e) {
 }
 ?>
@@ -113,8 +112,6 @@ try {
                     <?php endforeach; ?>
                 </ul>
 
-                <!-- Muestra Estados de la compra -->
-                <h3>Estados de la compra</h3>
                 <ul>
                     <?php foreach ($listaEstadosCompra as $estadoCompra) : ?>
                         <li>
@@ -124,18 +121,16 @@ try {
                     <?php endforeach; ?>
                 </ul>
 
-                <!-- Opcion de Agregar un estado a la compra -->
-                <form id="formCambiarEstado" action="./accionModificar.php" method="POST">
-                    <input type="hidden" name="idcompra" value="<?= $compra->getIdcompra() ?>">
-                    <div class="form-group">
-                        <select class="form-control" id="idcompraestadotipo" name="idcompraestadotipo">
-                            <?php foreach ($estadosDisponibles as $estado) : ?>
-                                <option value="<?= $estado->getidcompraestadotipo() ?>"><?= $estado->getCetDescripcion() ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Cambiar Estado</button>
-                </form>
+                <!-- Opcion de Agregar un estado a la compra si hay estados disponibles -->
+                <?php if (!empty($estadosDisponibles)) : ?>
+                    <?php foreach ($estadosDisponibles as $estado) : ?>
+                        <form class="mt-2 formCambiarEstado">
+                            <input type="hidden" name="idcompra" value="<?= $compra->getIdcompra() ?>">
+                            <input type="hidden" name="idcompraestadotipo" value="<?= $estado->getIdcompraestadotipo() ?>">
+                            <button type="submit" class="btn btn-primary">Cambiar a <?= $estado->getCetDescripcion() ?></button>
+                        </form>
+                    <?php endforeach; ?>
+                <?php endif; ?>
 
             </div>
         </div>
@@ -143,13 +138,14 @@ try {
     <?php include_once("../estructura/footer.php"); ?>
     <script>
         $(document).ready(function() {
-            $('#formCambiarEstado').submit(function(e) {
+            // envia el formulario para cambiar el estado de la compra
+            $(".formCambiarEstado").submit(function(e) {
                 e.preventDefault();
                 var formData = new FormData(this);
-
+                console.log(formData);
                 $.ajax({
-                    url: $(this).attr('action'),
-                    type: $(this).attr('method'),
+                    url: "./accionModificar.php",
+                    type: "POST",
                     data: formData,
                     success: function(response) {
                         if (response.status === 'success') {
@@ -166,7 +162,6 @@ try {
                     contentType: false,
                     processData: false
                 });
-
             });
         });
     </script>
