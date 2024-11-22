@@ -169,6 +169,10 @@ try {
             // envia el formulario para cambiar el estado de la compra
             $(".formCambiarEstado").submit(function(e) {
                 e.preventDefault();
+                // desactiva el botón y cambia el texto
+                const boton = $(this).find('button');
+                boton.prop('disabled', true);
+                boton.text('Actualizando...'); 
                 var formData = new FormData(this);
                 console.log(formData);
                 $.ajax({
