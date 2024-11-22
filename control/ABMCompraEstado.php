@@ -93,6 +93,15 @@ class ABMCompraEstado
     public function alta($param)
     {
         $resp = false;
+        // obtengo los estados anteriores de la compra y no tienen fecha fin se les setea una
+        $estadosAnteriores = $this->buscar(['idcompra' => $param['idcompra']]);
+        foreach ($estadosAnteriores as $estado) {
+            if ($estado->getcefechafin() == null) {
+                $estado->setCefechafin(date('Y-m-d H:i:s'));
+                $estado->modificar();
+            }
+        }
+
         $param['idcompraestado'] = null;
         $param['cefechaini'] = null;
         $param['cefechafin'] = null;
