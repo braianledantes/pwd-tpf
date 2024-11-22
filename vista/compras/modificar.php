@@ -117,11 +117,13 @@ try {
                     <thead>
                         <th>Estado</th>
                         <th>Fecha</th>
+                        <th>Fecha Fin</th>
                     </thead>
                     <?php foreach ($listaEstadosCompra as $estadoCompra) : ?>
                         <tbody>
                             <td><?= $estadoCompra->getobjEstadoTipo()->getCetDescripcion() ?></td>
                             <td><?= $estadoCompra->getcefechaini() ?></td>
+                            <td><?= $estadoCompra->getcefechafin() ?></td>
                         </tbody>
                     <?php endforeach; ?>
                 </table>
