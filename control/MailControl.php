@@ -113,17 +113,19 @@ class MailControl {
                 <th>Estado</th>
                 <th>Fecha</th>
             </tr>";
-    foreach ($colCompraEstado as $compraEstado) {
-        $contenido .= "<tr>
-            <td class='estado'>{$compraEstado->getObjEstadoTipo()->getCetDescripcion()}</td>
-            <td class='fecha'>{$compraEstado->getcefechaini()}</td>
-        </tr>";
-    }
-    $contenido .= "</table>
-    </body>
-    </html>";
+        foreach ($colCompraEstado as $compraEstado) {
+            $contenido .= "<tr>
+                <td class='estado'>{$compraEstado->getObjEstadoTipo()->getCetDescripcion()}</td>
+                <td class='fecha'>{$compraEstado->getcefechaini()}</td>
+            </tr>";
+        }
+        $contenido .= "</table>
+        </body>
+        </html>";
 
-    $this->enviarMail($usuarioDestino, $titulo, $contenido);
+        $this->enviarMail($usuarioDestino, $titulo, $contenido);
+    }
+    
 }
-}
+
 ?>

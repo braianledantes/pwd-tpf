@@ -75,9 +75,9 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
 
                             contenido += `
                             <div class="col">
-                                <div class="card h-80">
+                                <div class="card h-100">
                                     <img src="${producto.prourlimagen}" class="card-img-top" alt="${producto.pronombre}" style="height: 200px; object-fit: cover;">
-                                    <div class="card-body">
+                                    <div class="card-body display ">
                                         <h5 class="nombre card-title">${producto.pronombre}</h5>
                                         <p class="detalle card-text">${producto.prodetalle}</p>
                                         <p class="precio card-text"><strong>$${producto.proprecio}</strong></p>
