@@ -70,6 +70,8 @@ class AbmMenu
     {
         $resp = false;
 
+        $ubicacion = $param['medescripcion'];
+
         $idRoles = []; // arreglo con los id de los roles
         $abmRol = new AbmRol();
 
@@ -101,10 +103,26 @@ class AbmMenu
         if ($menu != null and $menu->insertar()) {
             // crea las relaciones entre el menu y los roles
             $this->insertarRelaciones($menu->getIdmenu(), $idRoles);
+
+            $this->crearCarpetaDeMenu($ubicacion);
             $resp = true;
         }
         return $resp;
     }
+
+    /**
+     * Crea la carpeta con un archivo index.php en base a plantilla.php, dentro de la carpeta "vista"
+     */
+    private function crearCarpetaDeMenu($ubicacion)
+    {
+        $carpeta = "../../vista/" . $ubicacion;
+        if (!file_exists($carpeta)) {
+            mkdir($carpeta, 0777, true);
+            $plantilla = file_get_contents("./plantilla.php");
+            file_put_contents($carpeta . "/index.php", $plantilla);
+        }
+    }
+
     /**
      * permite eliminar un objeto 
      * @param array $param
@@ -155,6 +173,8 @@ class AbmMenu
     {
         $resp = false;
 
+        $ubicacion = $param['medescripcion'];
+
         $idRoles = []; // arreglo con los id de los roles
         $abmRol = new AbmRol();
 
@@ -189,6 +209,8 @@ class AbmMenu
                 $this->borrarRelaciones($menu->getIdmenu());
                 // crea las relaciones entre el menu y los roles
                 $this->insertarRelaciones($menu->getIdmenu(), $idRoles);
+
+                $this->crearCarpetaDeMenu($ubicacion);
                 $resp = true;
             }
         }
