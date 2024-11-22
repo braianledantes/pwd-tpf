@@ -148,6 +148,10 @@ class ABMUsuario
      */
     public function modificacion($param)
     {
+        // hasheo de contraseña
+        $passHasheada = hashearContrasenia($param['uspass']);
+        $param['uspass'] = $passHasheada;
+
         $resp = false;
         $objUs = new usuario();
         $objUs->setear($param['idusuario'], $param['usnombre'], $param['uspass'], $param['usmail'], $param['usdeshabilitado']);
