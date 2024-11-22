@@ -92,44 +92,72 @@ try {
             <div class="row">
                 <h2>Modificación de la Compra <?= $compra->getIdcompra() ?> </h2>
             </div>
-            <div class="row">
+            <div class="w-100 row mt-3">
                 <!-- Muestra Datos de la compra (id, fecha, usuario) -->
                 <h3>Datos de la compra</h3>
-                <ul>
-                    <li><strong>Id de compra: </strong><?= $compra->getidcompra() ?></li>
-                    <li><strong>Fecha de compra: </strong><?= $compra->getCofecha() ?></li>
-                    <li><strong>Usuario: </strong><?= $usuario->getusnombre() ?></li>
-                </ul>
+                <table class="compraEstado w-75 table table-light table-striped table-borderless mb-5" style="border-radius:2rem;padding:0px;border-collapse: separate;box-shadow: 0 0 5px grey;overflow: hidden;">
+                    <thead>
+                        <th>Compra ID</th>
+                        <th>Fecha de Compra</th>
+                        <th>Usuario</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?= $compra->getidcompra() ?></td>
+                            <td><?= $compra->getCofecha() ?></td>
+                            <td><?= $usuario->getusnombre() ?></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                <!-- Muestra Items de la compra -->
-                <h3>Items de la compra</h3>
-                <ul>
-                    <?php foreach ($listaItems as $item) : ?>
-                        <li>
-                            <strong>Producto: </strong><?= $item->getObjProducto()->getusnombre() ?>
-                            <strong>Cantidad: </strong><?= $item->getCicantidad() ?>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-
-                <ul>
+                <div class="row mx-auto w-100">
+                <div class="col-md-7" style="margin-left:2rem;">
+                <h3>Estado de la Compra</h3>
+                <table class="compraEstado w-75 table table-light table-striped table-borderless mb-5" style="border-radius: 2rem;padding:0px;box-shadow: 0 0 5px grey;overflow: hidden;border-collapse: separate;">
+                    <thead>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                    </thead>
                     <?php foreach ($listaEstadosCompra as $estadoCompra) : ?>
-                        <li>
-                            <strong>Estado: </strong><?= $estadoCompra->getobjEstadoTipo()->getCetDescripcion() ?>
-                            <strong>Fecha: </strong><?= $estadoCompra->getcefechaini() ?>
-                        </li>
+                        <tbody>
+                            <td><?= $estadoCompra->getobjEstadoTipo()->getCetDescripcion() ?></td>
+                            <td><?= $estadoCompra->getcefechaini() ?></td>
+                        </tbody>
                     <?php endforeach; ?>
-                </ul>
+                </table>
+                </div>
+
+                <div class="col-md-6" style="margin-left:-10rem;">
+                    <!-- Muestra Items de la compra -->
+                <h3>Items de la compra</h3>
+                <table class="compraEstado w-75 table table-light table-striped table-borderless mb-5" style="border-radius: 2rem;padding:0px;border-collapse: separate;box-shadow: 0 0 5px grey;overflow: hidden;">
+                    <thead>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                    </thead>
+                    <?php foreach ($listaItems as $item) : ?>
+                        <tbody>
+                            <td><?= $item->getObjProducto()->getusnombre() ?></td>
+                            <td><?= $item->getCicantidad() ?></td>
+                        </tbody>
+                    <?php endforeach; ?>
+                </table>
+                </div>
+                </div>
 
                 <!-- Opcion de Agregar un estado a la compra si hay estados disponibles -->
                 <?php if (!empty($estadosDisponibles)) : ?>
+                    <table class="w-75 table table-borderless">
                     <?php foreach ($estadosDisponibles as $estado) : ?>
+                        <td>
                         <form class="mt-2 formCambiarEstado">
                             <input type="hidden" name="idcompra" value="<?= $compra->getIdcompra() ?>">
                             <input type="hidden" name="idcompraestadotipo" value="<?= $estado->getIdcompraestadotipo() ?>">
-                            <button type="submit" class="btn btn-primary">Cambiar a <?= $estado->getCetDescripcion() ?></button>
+                            <button type="submit" class="btn btn-dark rounded-pill px-5">Cambiar a <?= $estado->getCetDescripcion() ?></button>
                         </form>
+                        </td>
                     <?php endforeach; ?>
+                    </table>
                 <?php endif; ?>
 
             </div>
