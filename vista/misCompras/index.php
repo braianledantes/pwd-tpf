@@ -31,13 +31,13 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
     <?php include_once("../estructura/cabecera.php"); ?>
 
     <main>
-        <div class="container">
+        <div class="container w-75">
 
             <h2 class="mt-3">Estado de Compras</h2>
             <hr style="width: 500px;margin: 0 auto;">
-            <section id="historialCompras">
+            <section id="historialCompras" class="mt-5">
 
-            </section>
+            </section> 
         </div>
     </main>
 
@@ -58,17 +58,29 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                         response.data.forEach(function(compra) {
                             const ultimoEstado = compra.ultimoestado.compraestadotipo;
                             html += `
-                            <div class="compraEstado">
-                                <p><strong>Compra ID:</strong> ${compra.idcompra}</p>
-                                <p><strong>Fecha de Inicio:</strong> ${compra.cofecha}</p>
-                                <p><strong>Último estado:</strong> ${ultimoEstado.cetdescripcion} - ${compra.ultimoestado.cefechaini}</p>`;
-
-                            if (ultimoEstado.idcompraestadotipo < 3) {
-                                html += `<button class="btn btn-danger" onclick="cancelarCompra(${compra.idcompra})">Cancelar Compra</button>`
+                            <table class="compraEstado w-75 table table-light table-striped table-borderless mb-5" style="border-radius: 2rem;border-collapse: separate;box-shadow: 0 0 5px grey;overflow: hidden;">
+                                <thead>
+                                    <tr>
+                                        <th>Compra ID</th>
+                                        <th>Fecha de Inicio</th>
+                                        <th>Ultimo Estado</th>
+                                        <th>Fecha Fin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>${compra.idcompra}</p></td>
+                                        <td>${compra.cofecha}</p></td>
+                                        <td>${ultimoEstado.cetdescripcion}</td>
+                                        <td>${compra.ultimoestado.cefechaini}</td>
+                                    </tr>
+                                </tbody>`;
+                    
+                            if (ultimoEstado.idcompraestadotipo == 1) {
+                                html += `<tr><td colspan="4"><button class="btn btn-danger rounded-pill px-5" onclick="cancelarCompra(${compra.idcompra})">Cancelar Compra</button></td></tr>`
                             }
 
-                            html += `</div>
-                        <hr>`;
+                            html += `</table>`;
                         });
                         $('#historialCompras').html(html);
                     } else {
