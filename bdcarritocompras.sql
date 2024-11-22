@@ -237,7 +237,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
 (1, 'braian1686', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'braian.ledantes@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
 (2, 'clara4938', '$2y$10$Fiqc9ebHmi0Ql4NXA/bJjea4fwpzY8SCDk7IcRVTFWujYm3cl8dBW', 'clara.pelozo@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
-(3, 'luci3075', 'asd1234', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
+(3, 'luci3075', 'asdf1234', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
 (46, 'chutebnl', '$2y$10$Ldd9s8oC6REbpEbYb6Ihlu.0NI9xulPKgEB0S/jj3PxxgTd48wtTG', 'esponja2116@gmail.com', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -435,4 +435,4 @@ COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET COLLATION_CON
