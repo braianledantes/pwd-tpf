@@ -112,7 +112,7 @@ try {
 
                 <div class="row mx-auto w-100">
                 <div class="col-md-7" style="margin-left:2rem;">
-                <h3>Estado de la Compra</h3>
+                <h3>Estados de la Compra</h3>
                 <table class="compraEstado w-75 table table-light table-striped table-borderless mb-5" style="border-radius: 2rem;padding:0px;box-shadow: 0 0 5px grey;overflow: hidden;border-collapse: separate;">
                     <thead>
                         <th>Estado</th>
