@@ -92,7 +92,7 @@ class ABMCompra
 
         $idCompra = $compra->getIdcompra();
 
-        
+
         // verifica que los productos del carrito existan y tengan stock suficiente
         $abmProducto = new AbmProducto();
         foreach ($carrito as $idproducto => $cantidad) {
@@ -107,7 +107,7 @@ class ABMCompra
                 throw new Exception('Stock insuficiente para el producto ' . $producto->getusnombre());
             }
         }
-        
+
         // crea los items de la compra y actualiza el stock de los productos
         $abmCompraItem = new AbmCompraItem();
         foreach ($carrito as $idproducto => $cantidad) {
