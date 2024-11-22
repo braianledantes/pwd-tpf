@@ -63,7 +63,7 @@ if (isset($lista)) {
                 <div class="col-md-6">
                     <div class="mt-4">
                         <div class="form-floating">
-                            <input class="form-control" id="uspass" name="uspass" type="password" placeholder="Contraseña" value="<?php echo $lista[0]->getUspass() ?>">
+                            <input class="form-control" id="uspass" name="uspass" type="password">
                             <label for="uspass">Contraseña</label>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ if (isset($lista)) {
                 <div class="col-md-6">
                     <div class="mt-4">
                         <div class="form-floating">
-                            <input class="form-control" id="uspass2" name="uspass2" type="password" placeholder="Confirmar contraseña" value="<?php echo $lista[0]->getUspass() ?>">
+                            <input class="form-control" id="uspass2" name="uspass2" type="password">
                             <label for="uspass2">Confirmar contraseña</label>
                         </div>
                     </div>
