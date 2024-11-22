@@ -15,17 +15,7 @@ if (!$session->estaActiva() || !$session->esAdministrador()) {
 try {
     $data = data_submitted();
     $abmMenu = new AbmMenu();
-
-    $exito = $abmMenu->modificacion($data);    
-
-    $ubicacion = $data['medescripcion'];
-    // crea la carpeta con un archivo index.php en base a plantilla.php, dentro de la carpeta "vista"
-    $carpeta = "../../vista/" . $ubicacion;
-    if (!file_exists($carpeta)) {
-        mkdir($carpeta, 0777, true);
-        $plantilla = file_get_contents("./plantilla.php");
-        file_put_contents($carpeta . "/index.php", $plantilla);
-    }
+    $exito = $abmMenu->modificacion($data);
 
     echo json_encode([
         'status' => 'success',
