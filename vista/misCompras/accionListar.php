@@ -32,8 +32,6 @@ try {
         // obtiene el ultimo estado de la compra
         $abmCompraEstado = new ABMCompraEstado();
         $estadosCompra = $abmCompraEstado->buscar(['idcompra' => $compra->getIdcompra()]);
-        
-        // obtiene el ultimo estado de la compra
         $ultimoEstado = $estadosCompra[count($estadosCompra) - 1];
         $comprajson['ultimoestado'] = $ultimoEstado->toArray();
 
