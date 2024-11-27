@@ -147,6 +147,26 @@ class UsuarioRol
     }
 
     /**
+     * Elimina todas las relaciones de usuario.
+     */
+    public function eliminarRolesDeUsuario($idusuario)
+    {
+        $resp = false;
+        $db = new BaseDatos();
+        $sql = "DELETE FROM usuariorol WHERE idusuario= $idusuario";
+        if ($db->Iniciar()) {
+            if ($db->Ejecutar($sql)) {
+                return true;
+            } else {
+                $this->setmensajeoperacion("usuariorol->eliminar: " . $db->getError());
+            }
+        } else {
+            $this->setmensajeoperacion("usuariorol->eliminar: " . $db->getError());
+        }
+        return $resp;
+    }
+
+    /**
      * Lista todos los roles de usuario segun el parametro ingresado.
      */
     public function listar($parametro = "")

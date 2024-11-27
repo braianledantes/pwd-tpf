@@ -187,6 +187,18 @@ class ABMUsuario
         $objUs = new usuario();
         $objUs->setear($param['idusuario'], $param['usnombre'], $param['uspass'], $param['usmail'], $param['usdeshabilitado']);
         if ($objUs->modificar()) {
+            $suarioRol = new UsuarioRol();
+            $suarioRol->eliminarRolesDeUsuario($param['idusuario']);
+
+            // asigna los nuevos roles
+            $nuevosRoles = $param['roles'];
+            $abmUsuarioRol = new ABMUsuarioRol();
+            foreach ($nuevosRoles as $rol) {
+                $abmUsuarioRol->alta([
+                    'idusuario' => $param['idusuario'],
+                    'idrol' => $rol
+                ]);
+            }
             $resp = true;
         }
         return $resp;

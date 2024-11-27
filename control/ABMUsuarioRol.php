@@ -40,20 +40,16 @@ class ABMUsuarioRol
     public function baja($param)
     {
         $resp = false;
-        $objRel = new UsuarioRol();
-        $abmUs = new ABMUsuario();
-        $arrayUs = $abmUs->buscar(['idusuario' => $param['idusuario']]);
-        echo"ABMUSUARIO/////////////////////////////////////////////////////////////////////////////";
-        var_dump($arrayUs);
+        $objUsRol = new UsuarioRol();
         $abmRol = new ABMRol();
-        $objRol = $abmRol->buscar(['idrol' => $param['idrol']]);///
-        var_dump($objRol);
-        $objRel->setear($arrayUs[0], $objRol[0]);
-
-        if ($objRel->eliminar()) {
+        $listaRol = $abmRol->buscar(['idrol' => $param['idrol']]);
+        $abmUsuario = new ABMUsuario();
+        $listaUsuario = $abmUsuario->buscar(['idusuario' => $param['idusuario']]);
+        $objUsRol->setear($listaUsuario[0], $listaRol[0]);
+        if ($objUsRol->eliminar()) {
             $resp = true;
         }
-
+        var_dump($resp);
         return $resp;
     }
 
