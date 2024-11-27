@@ -215,18 +215,36 @@ class ABMUsuario
         return $resp;
     }
 
+    public function modificarNombreYMail($param)
+    {
+        if (!isset($param['idusuario']) || !isset($param['usmail']) || !isset($param['usnombre'])) {
+            throw new Exception('Faltan datos obligatorios');
+        }
+        $usuarios = $this->buscar(['idusuario' => $param['idusuario']]);
+        if (count($usuarios) <= 0) {
+            throw new Exception('El usuario no existe');
+        }
+
+        $usuario = $usuarios[0];
+        $usuario->setUsmail($param['usmail']);
+        $usuario->setUsnombre($param['usnombre']);
+        $usuario->modificar();
+    }
+
     public function modificarContrasenia($param)
     {
-        $resp = false;
-        $usuarios = $this->buscar(['idusuario' => $param['idusuario']]);
-        if (count($usuarios) > 0) {
-            $usuario = $usuarios[0];
-            $usuario->setUspass(hashearContrasenia($param['uspass']));
-            if ($usuario->modificar()) {
-                $resp = true;
-            }
+        if (!isset($param['idusuario']) || !isset($param['uspass'])) {
+            throw new Exception('Faltan datos obligatorios');
         }
-        return $resp;
+
+        $usuarios = $this->buscar(['idusuario' => $param['idusuario']]);
+        if (count($usuarios) <= 0) {
+            throw new Exception('El usuario no existe');
+        }
+
+        $usuario = $usuarios[0];
+        $usuario->setUspass(hashearContrasenia($param['uspass']));
+        $usuario->modificar();
     }
 
     public function darRoles($param)
