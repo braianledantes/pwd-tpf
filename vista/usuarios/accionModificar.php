@@ -11,7 +11,7 @@ try {
 
     $data = data_submitted();
     $abmUsuarios = new ABMUsuario();
-    $abmUsuarios->modificacion($data);
+    $abmUsuarios->modificacionSinContrasenia($data);
 
     echo json_encode([
         'status' => 'success',

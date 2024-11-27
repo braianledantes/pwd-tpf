@@ -204,6 +204,31 @@ class ABMUsuario
         return $resp;
     }
 
+    public function modificacionSinContrasenia($param)
+    {
+        $resp = false;
+        $usuarios = $this->buscar(['idusuario' => $param['idusuario']]);
+        if (count($usuarios) > 0) {
+            $param['uspass'] = $usuarios[0]->getUspass();
+            $resp = $this->modificacion($param);
+        }
+        return $resp;
+    }
+
+    public function modificarContrasenia($param)
+    {
+        $resp = false;
+        $usuarios = $this->buscar(['idusuario' => $param['idusuario']]);
+        if (count($usuarios) > 0) {
+            $usuario = $usuarios[0];
+            $usuario->setUspass(hashearContrasenia($param['uspass']));
+            if ($usuario->modificar()) {
+                $resp = true;
+            }
+        }
+        return $resp;
+    }
+
     public function darRoles($param)
     {
         $where = " true ";

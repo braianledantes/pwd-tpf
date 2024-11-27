@@ -81,10 +81,6 @@ try {
                     <label for="usmail">Correo Electrónico</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="password" name="uspass" value="" placeholder="Contraseña" required>
-                    <label for="password" class="form-label">Contraseña</label>
-                </div>
-                <div class="form-floating mb-3">
                     <!-- selecciona multiples roles -->
                     <label for="roles" class="form-label">Roles:</label>
                     <?php foreach ($roles as $rol) : ?>
