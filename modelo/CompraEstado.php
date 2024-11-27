@@ -119,11 +119,20 @@ class CompraEstado
      */
     public function insertar()
     {
+        $idcompra = $this->getObjCompra()->getIdcompra();
+        $idcompraestadotipo = $this->getobjEstadoTipo()->getidcompraestadotipo();
+        $cefechafin = $this->getcefechafin();
+
         $resp = false;
         $db = new BaseDatos();
-        $sql = "INSERT INTO compraestado(idcompra,idcompraestadotipo) VALUES("
-            . $this->getObjCompra()->getidcompra() . ","
-            . $this->getobjEstadoTipo()->getidcompraestadotipo() . ");";
+
+        if ($cefechafin != null) {
+            $cefechafin = "'$cefechafin'";
+        } else {
+            $cefechafin = "null";
+        }
+
+        $sql = "INSERT INTO compraestado(idcompra, cefechafin, idcompraestadotipo) VALUES($idcompra, $cefechafin, $idcompraestadotipo)";
 
         if ($db->Iniciar()) {
             if ($db->Ejecutar($sql)) {

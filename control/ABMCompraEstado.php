@@ -94,17 +94,23 @@ class ABMCompraEstado
     {
         $resp = false;
         // obtengo los estados anteriores de la compra y no tienen fecha fin se les setea una
-        $estadosAnteriores = $this->buscar(['idcompra' => $param['idcompra']]);
+        $estadosAnteriores = $this->buscar([
+            'idcompra' => $param['idcompra'],
+            'fechaFin' => null
+        ]);
         foreach ($estadosAnteriores as $estado) {
-            if ($estado->getcefechafin() == null) {
-                $estado->setCefechafin(date('Y-m-d H:i:s'));
-                $estado->modificar();
-            }
+            $estado->setCefechafin(date('Y-m-d H:i:s'));
+            $estado->modificar();
         }
 
         $param['idcompraestado'] = null;
         $param['cefechaini'] = null;
         $param['cefechafin'] = null;
+
+        if ($param['idcompraestadotipo'] >= 3) {
+            $param['cefechafin'] = date('Y-m-d H:i:s');
+        }
+
         $compraEstado = $this->cargarObjeto($param);
         if ($compraEstado != null and $compraEstado->insertar()) {
             $resp = true;
@@ -143,7 +149,7 @@ class ABMCompraEstado
         if ($idcompraestadotipo < 0 || $idcompraestadotipo > 4) {
             throw new Exception('El estado de la compra no es válido');
         }
-    
+
         $fechaFin = null;
         // si el estado es 3 o 4, se setea la fecha de fin
         if ($idcompraestadotipo == 3 || $idcompraestadotipo == 4) {
