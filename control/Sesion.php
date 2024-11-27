@@ -267,11 +267,18 @@ class Sesion
 
 
     /**
-     * Verifica si hay un usuario con la sesión activa.
+     * Verifica si hay un usuario con la sesión activa y esta habilitado.
      */
     public function estaActiva()
     {
-        return isset($_SESSION['idusuario']);
+        $habilitado = false;
+        if (isset($_SESSION['idusuario'])) {
+            $idusuario = $_SESSION['idusuario'];
+            $abmUsuario = new ABMUsuario();
+            $usuario = $abmUsuario->buscar(['idusuario' => $idusuario])[0];
+            $habilitado = $usuario->getusdeshabilitado() == '0000-00-00 00:00:00';
+        }
+        return $habilitado;
     }
 
     /**
