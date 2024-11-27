@@ -2,72 +2,30 @@
 include_once '../../configuracion.php';
 header('Content-Type: application/json');
 
-// verifica que el usuario no esté logueado
-$session = new Sesion();
-if ($session->estaActiva()) {
+try {
+    // verifica que el usuario no esté logueado
+    $session = new Sesion();
+    if ($session->estaActiva()) {
+        throw new Exception('Ya inició sesión');
+    }
+
+    $datos = data_submitted();
+
+    $abmUsuario = new ABMUsuario();
+    $abmUsuario->alta($datos);
+
+    $sesion = new Sesion();
+    if (!$sesion->iniciarSesion($datos)) {
+        throw new Exception('Error al iniciar sesión');
+    }
+
+    echo json_encode([
+        'status' => 'ok',
+        'message' => 'Usuario registrado con éxito'
+    ]);
+} catch (Exception $e) {
     echo json_encode([
         'status' => 'error',
-        'message' => 'Ya iniciaste sesión'
+        'message' => $e->getMessage()
     ]);
-    exit;
 }
-
-$datos = data_submitted();
-
-$abmUsuario = new abmusuario();
-$usuarioExistente = $abmUsuario->buscar([
-    'usnombre' => $datos['usnombre']
-]);
-
-if (count($usuarioExistente) > 0) {
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'El usuario ya existe'
-    ]);
-    exit;
-}
-
-$exito = $abmUsuario->alta($datos);
-if (!$exito) {
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'Error al registrar el usuario'
-    ]);
-    exit;
-}
-
-$nuevoUsuario = $abmUsuario->buscar(['usnombre' => $datos['usnombre']]);
-
-$datosUsRol = [
-    'idusuario' => $nuevoUsuario[0]->getidusuario(),
-    'idrol' => 2, // el id 2 es el rol de cliente
-];
-$abmUsuarioRol = new ABMUsuarioRol();
-$resalta = $abmUsuarioRol->alta($datosUsRol);
-
-if (!$resalta) {
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'Error al registrar el usuario'
-    ]);
-    exit;
-}
-
-$sesion = new Sesion();
-$sesion->iniciarSesion($datos);
-$inicioSesion = $sesion->estaActiva();
-
-if (!$inicioSesion) {
-    $sesion->cerrar();
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'Error al iniciar sesión'
-    ]);
-    exit;
-}
-
-echo json_encode([
-    'status' => 'ok',
-    'message' => 'Usuario registrado con éxito'
-]);
-exit;
