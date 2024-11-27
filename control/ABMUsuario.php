@@ -84,9 +84,33 @@ class ABMUsuario
         return $resp;
     }
 
+    /**
+     * @throws Exception si no se pudo insertar el usuario
+     * @throws Exception si faltan datos obligatorios
+     * @throws Exception si el usuario ya existe
+     * @param array $param con los datos del usuario (usnombre, usmail, uspass, roles)
+     */
     public function alta($param)
     {
-        $resp = false;
+        if (!isset($param['usnombre']) || !isset($param['usmail']) || !isset($param['uspass'])) {
+            throw new Exception('Faltan datos obligatorios');
+        }
+
+        // si no se seleccionaron roles, se asigna el rol de cliente por defecto (2)
+        if (!isset($param['roles']) || !is_array($param['roles']) || count($param['roles']) == 0) {
+            $param['roles'] = [2];
+        }
+
+        // verifica que el usuario no exista por nombre
+        $listaUsuarios = $this->buscar(['usnombre' => $param['usnombre']]);
+        if (count($listaUsuarios) > 0) {
+            throw new Exception('El usuario ya existe');
+        }
+        // verifica que el usuario no exista por mail
+        $listaUsuarios = $this->buscar(['usmail' => $param['usmail']]);
+        if (count($listaUsuarios) > 0) {
+            throw new Exception('El usuario ya existe');
+        }
         
         // hasheo de contraseña
         $passHasheada = hashearContrasenia($param['uspass']);
@@ -94,10 +118,14 @@ class ABMUsuario
 
         $objUsuario = $this->cargarObjeto($param);
 
-        if ($objUsuario->insertar()) {
-            $resp = true;
+        if (!$objUsuario->insertar()) {
+            throw new Exception('Error al insertar el usuario');
         }
-        return $resp;
+
+        // asigna los roles al usuario
+        foreach ($param['roles'] as $rol) {
+            $this->alta_rol(['idusuario' => $objUsuario->getIdusuario(), 'idrol' => $rol]);
+        }
     }
 
     public function borrar_rol($param)
@@ -112,16 +140,19 @@ class ABMUsuario
         return $resp;
     }
 
+    /**
+     * Permite agregar un rol a un usuario
+     * @throws Exception si no se pudo insertar el rol
+     */
     public function alta_rol($param)
     {
-        $resp = false;
         if (isset($param['idusuario']) && isset($param['idrol'])) {
             $elObjtTabla = new UsuarioRol();
             $elObjtTabla->setearConClave($param['idusuario'], $param['idrol']);
-            $resp = $elObjtTabla->insertar();
+            if (!$elObjtTabla->insertar()) {
+                throw new Exception('Error al insertar el rol');
+            }
         }
-        echo $resp;
-        return $resp;
     }
     /**
      * permite eliminar un objeto 
@@ -215,6 +246,21 @@ class ABMUsuario
                 }
             } else {
                 if ($objUsuario->estado()) {
+                    $resp = true;
+                }
+            }
+        }
+        return $resp;
+    }
+
+    public function habilitarUsuario($param) {
+        $resp = false;
+        $objUsuario = $this->cargarObjetoConClave($param);
+        $listadoProductos = $objUsuario->listar("idusuario=" . $param['idusuario']);
+        if (count($listadoProductos) > 0) {
+            $estadoUsuario = $listadoProductos[0]->getUsdeshabilitado();
+            if ($estadoUsuario != '0000-00-00 00:00:00') {
+                if ($objUsuario->estado('0000-00-00 00:00:00')) {
                     $resp = true;
                 }
             }

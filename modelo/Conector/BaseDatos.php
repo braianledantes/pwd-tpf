@@ -108,10 +108,10 @@ class BaseDatos extends PDO
     {
         $this->setError("");
         $this->setSQL($sql);
-        if (stristr($sql, "insert")) { // se desea NSERT ? 
+        if (stristr($sql, "insert")) { // se desea NSERT ?
             $resp =  $this->EjecutarInsert($sql);
         }
-        // se desea UPDATE o DELETE ? 
+        // se desea UPDATE o DELETE ?
         if (stristr($sql, "update") or stristr($sql, "delete")) {
             $resp =  $this->EjecutarDeleteUpdate($sql);
         }
