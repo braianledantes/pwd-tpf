@@ -44,7 +44,6 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                         <th scope='col' class='text-center'>ID</th>
                         <th scope='col' class='text-center'>Rol</th>
                         <th scope='col' class='text-center'>Nombre</th>
-                        <th scope='col' class='text-center'>Contraseña</th>
                         <th scope='col' class='text-center'>Mail</th>
                         <th scope='col' class='text-center'>Deshabilitado</th>
                         <th scope='col' class='text-center'>Modificar</th>
@@ -67,7 +66,6 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                         <td class='text-center'><?php echo $id ?></td>
                         <td class='text-center'><?php echo "<span style='font-style: italic;'>" . strtoupper($rol) . "</span>"; ?></td>
                         <td class='text-center'><?php echo $usuario->getUsnombre() ?></td>
-                        <td class='text-center'><?php echo md5($usuario->getUspass()) ?></td>
                         <td class='text-center'><?php echo $usuario->getUsmail() ?></td>
                         <td id="fechaDeshabilitado<?php echo $id ?>" class='text-center'><?php echo $usuario->getUsdeshabilitado() ?></td>
                         <form method='post' action='modificarUsuario.php'>
