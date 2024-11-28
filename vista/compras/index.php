@@ -42,7 +42,9 @@ $lista = $abmCompra->buscar(null);
                         <tr>
                             <th>Id</th>
                             <th>Id Usuario</th>
-                            <th>Fecha</th>
+                            <th>Fecha de Inicio</th>
+                            <th>último Estado</th>
+                            <th>Fecha Fin</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -68,13 +70,17 @@ $lista = $abmCompra->buscar(null);
                 success: function(response) {
                     if (response.status == 'success') {
                         let lista = response.data;
+                        console.log(lista)
                         $('#tbody').empty();
                         lista.forEach(compra => {
+                            console.log(compra);
                             let tr = document.createElement('tr');
                             tr.innerHTML = `
                                 <td>${compra.idcompra}</td>
                                 <td>${compra.objusuario.idusuario}</td>
-                                <td>${compra.cofecha}</td>
+                                <td>${compra.cofecha}</p></td>
+                                <td>${compra.ultimoestado.compraestadotipo.cetdescripcion}</td>
+                                <td>${compra.ultimoestado.cefechaini}</td>
                                 <td>
                                     <a href="./modificar.php?idcompra=${compra.idcompra}" class="btn btn-dark rounded-pill px-4">Ver</a>
                                 </td>
