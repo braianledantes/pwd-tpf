@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2024 a las 14:49:18
+-- Tiempo de generación: 28-11-2024 a las 16:06:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -140,6 +140,7 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (85, 'ABM de Usuarios', '/usuarios', NULL, NULL),
 (86, 'Compras', '/compras', NULL, NULL),
 (87, 'Lista Productos', '/listaproductos', NULL, NULL),
+(87, 'Mis Compras', '/miscompras', NULL, NULL),
 (88, 'Mi Carrito', '/carrito', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -294,141 +295,6 @@ ALTER TABLE `compraitem`
   ADD UNIQUE KEY `idcompraitem` (`idcompraitem`),
   ADD KEY `fkcompraitem_1` (`idcompra`),
   ADD KEY `fkcompraitem_2` (`idproducto`);
-
---
--- Indices de la tabla `menu`
---
-ALTER TABLE `menu`
-  ADD PRIMARY KEY (`idmenu`),
-  ADD UNIQUE KEY `idmenu` (`idmenu`),
-  ADD KEY `fkmenu_1` (`idpadre`);
-
---
--- Indices de la tabla `menurol`
---
-ALTER TABLE `menurol`
-  ADD PRIMARY KEY (`idmenu`,`idrol`),
-  ADD KEY `fkmenurol_2` (`idrol`);
-
---
--- Indices de la tabla `producto`
---
-ALTER TABLE `producto`
-  ADD PRIMARY KEY (`idproducto`),
-  ADD UNIQUE KEY `idproducto` (`idproducto`);
-
---
--- Indices de la tabla `rol`
---
-ALTER TABLE `rol`
-  ADD PRIMARY KEY (`idrol`),
-  ADD UNIQUE KEY `idrol` (`idrol`);
-
---
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`idusuario`),
-  ADD UNIQUE KEY `idusuario` (`idusuario`),
-  ADD UNIQUE KEY `usmail` (`usmail`);
-
---
--- Indices de la tabla `usuariorol`
---
-ALTER TABLE `usuariorol`
-  ADD PRIMARY KEY (`idusuario`,`idrol`),
-  ADD KEY `idusuario` (`idusuario`),
-  ADD KEY `idrol` (`idrol`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `compra`
---
-ALTER TABLE `compra`
-  MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
-
---
--- AUTO_INCREMENT de la tabla `compraestado`
---
-ALTER TABLE `compraestado`
-  MODIFY `idcompraestado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
-
---
--- AUTO_INCREMENT de la tabla `compraitem`
---
-ALTER TABLE `compraitem`
-  MODIFY `idcompraitem` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-
---
--- AUTO_INCREMENT de la tabla `menu`
---
-ALTER TABLE `menu`
-  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
-
---
--- AUTO_INCREMENT de la tabla `producto`
---
-ALTER TABLE `producto`
-  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
-
---
--- AUTO_INCREMENT de la tabla `rol`
---
-ALTER TABLE `rol`
-  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `compra`
---
-ALTER TABLE `compra`
-  ADD CONSTRAINT `fkcompra_1` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `compraestado`
---
-ALTER TABLE `compraestado`
-  ADD CONSTRAINT `fkcompraestado_1` FOREIGN KEY (`idcompra`) REFERENCES `compra` (`idcompra`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fkcompraestado_2` FOREIGN KEY (`idcompraestadotipo`) REFERENCES `compraestadotipo` (`idcompraestadotipo`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `compraitem`
---
-ALTER TABLE `compraitem`
-  ADD CONSTRAINT `fkcompraitem_1` FOREIGN KEY (`idcompra`) REFERENCES `compra` (`idcompra`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fkcompraitem_2` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `menu`
---
-ALTER TABLE `menu`
-  ADD CONSTRAINT `fkmenu_1` FOREIGN KEY (`idpadre`) REFERENCES `menu` (`idmenu`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `menurol`
---
-ALTER TABLE `menurol`
-  ADD CONSTRAINT `fkmenurol_1` FOREIGN KEY (`idmenu`) REFERENCES `menu` (`idmenu`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fkmenurol_2` FOREIGN KEY (`idrol`) REFERENCES `rol` (`idrol`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuariorol`
---
-ALTER TABLE `usuariorol`
-  ADD CONSTRAINT `fkmovimiento_1` FOREIGN KEY (`idrol`) REFERENCES `rol` (`idrol`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `usuariorol_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
