@@ -111,6 +111,18 @@ class ABMCompraEstado
             $param['cefechafin'] = date('Y-m-d H:i:s');
         }
 
+        // si el estado es 4 (cancelada) restaura el stock de los productos.
+        if ($param['idcompraestadotipo'] == 4) {
+            $abmCompraItem = new ABMCompraItem();
+            $items = $abmCompraItem->buscar(['idcompra' => $param['idcompra']]);
+            foreach ($items as $item) {
+                $abmProducto = new ABMProducto();
+                $producto = $abmProducto->buscar(['idproducto' => $item->getObjProducto()->getIdproducto()])[0];
+                $producto->setprocantstock($producto->getprocantstock() + $item->getCicantidad());
+                $producto->modificar();
+            }
+        }
+
         $compraEstado = $this->cargarObjeto($param);
         if ($compraEstado != null and $compraEstado->insertar()) {
             $resp = true;
