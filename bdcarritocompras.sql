@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2024 a las 16:06:49
+-- Tiempo de generación: 28-11-2024 a las 16:36:41
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,7 +40,8 @@ CREATE TABLE `compra` (
 INSERT INTO `compra` (`idcompra`, `cofecha`, `idusuario`) VALUES
 (81, '2024-11-21 13:47:28', 1),
 (82, '2024-11-21 13:48:14', 1),
-(83, '2024-11-21 16:13:15', 1);
+(83, '2024-11-21 16:13:15', 1),
+(84, '2024-11-28 15:36:04', 2);
 
 -- --------------------------------------------------------
 
@@ -61,14 +62,14 @@ CREATE TABLE `compraestado` (
 --
 
 INSERT INTO `compraestado` (`idcompraestado`, `idcompra`, `idcompraestadotipo`, `cefechaini`, `cefechafin`) VALUES
-(66, 82, 1, '2024-11-21 14:16:28', NULL),
-(67, 82, 1, '2024-11-21 14:16:38', NULL),
-(68, 82, 1, '2024-11-21 14:17:16', NULL),
-(69, 82, 2, '2024-11-21 14:17:23', NULL),
-(70, 82, 3, '2024-11-21 14:18:32', NULL),
-(71, 81, 1, '2024-11-21 14:21:19', NULL),
-(72, 83, 1, '2024-11-21 16:13:15', NULL),
-(73, 83, 2, '2024-11-21 16:14:32', NULL);
+(68, 82, 1, '2024-11-21 14:17:16', '2024-11-28 19:32:49'),
+(71, 81, 1, '2024-11-21 14:21:19', '2024-11-28 19:32:02'),
+(72, 83, 1, '2024-11-21 16:13:15', '2024-11-28 19:31:15'),
+(73, 83, 2, '2024-11-21 16:14:32', '2024-11-28 19:31:15'),
+(74, 83, 3, '2024-11-28 15:31:15', '2024-11-28 19:31:15'),
+(75, 81, 2, '2024-11-28 15:32:02', NULL),
+(76, 82, 2, '2024-11-28 15:32:49', NULL),
+(77, 84, 1, '2024-11-28 15:36:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -113,7 +114,9 @@ INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`
 (57, 41, 81, 1),
 (58, 42, 82, 1),
 (59, 42, 83, 1),
-(60, 50, 83, 1);
+(60, 50, 83, 1),
+(61, 50, 84, 3),
+(62, 51, 84, 3);
 
 -- --------------------------------------------------------
 
@@ -140,8 +143,8 @@ INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabi
 (85, 'ABM de Usuarios', '/usuarios', NULL, NULL),
 (86, 'Compras', '/compras', NULL, NULL),
 (87, 'Lista Productos', '/listaproductos', NULL, NULL),
-(87, 'Mis Compras', '/miscompras', NULL, NULL),
-(88, 'Mi Carrito', '/carrito', NULL, NULL);
+(88, 'Mi Carrito', '/carrito', NULL, NULL),
+(89, 'Mis Compras', '/miscompras', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -164,9 +167,14 @@ INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (84, 1),
 (84, 3),
 (85, 1),
+(86, 1),
 (86, 3),
+(87, 1),
 (87, 2),
-(88, 2);
+(88, 1),
+(88, 2),
+(89, 1),
+(89, 2);
 
 -- --------------------------------------------------------
 
@@ -190,8 +198,8 @@ CREATE TABLE `producto` (
 INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `procantstock`, `proprecio`, `prourlimagen`) VALUES
 (41, 'Producto sin imagen', 'un producto cualquiera que no tiene imagen', 409, 200, '/pwd-tpf/imagenes/productos/673e75a6cfa1e.jpg'),
 (42, 'Anillo', 'Un anillo de extremada calidad', 418, 10000, '/pwd-tpf/imagenes/productos/67390df1c1c18.png'),
-(50, 'Anillo 2', 'Un anillo de extremada calidad', 499, 10000, '/pwd-tpf/imagenes/productos/673910343543e.jpg'),
-(51, 'Anillo 5', 'Un anillo de extremada calidad', 510, 5000, '/pwd-tpf/imagenes/productos/673e7c0f4474a.jpg');
+(50, 'Anillo 2', 'Un anillo de extremada calidad', 496, 10000, '/pwd-tpf/imagenes/productos/673910343543e.jpg'),
+(51, 'Anillo 5', 'Un anillo de extremada calidad', 507, 5000, '/pwd-tpf/imagenes/productos/673e7c0f4474a.jpg');
 
 -- --------------------------------------------------------
 
@@ -232,10 +240,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
-(1, 'admin1234', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'admin@angelwingsjewelry.com', '0000-00-00 00:00:00'),
-(2, 'clara4938', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'clara.pelozo@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
+(1, 'braian1686', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'braian.ledantes@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
+(2, 'clara4938', '$2y$10$Fiqc9ebHmi0Ql4NXA/bJjea4fwpzY8SCDk7IcRVTFWujYm3cl8dBW', 'clara.pelozo@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
 (3, 'luci3075', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
-(46, 'braian1686', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'braian.ledantes@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00');
+(46, 'chutebnl', '$2y$10$Ldd9s8oC6REbpEbYb6Ihlu.0NI9xulPKgEB0S/jj3PxxgTd48wtTG', 'esponja2116@gmail.com', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -254,11 +262,9 @@ CREATE TABLE `usuariorol` (
 
 INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
 (1, 1),
-(1, 2),
-(1, 3),
-(2, 1),
-(3, 2),
-(46, 3);
+(2, 2),
+(3, 1),
+(46, 2);
 
 --
 -- Índices para tablas volcadas
@@ -295,6 +301,141 @@ ALTER TABLE `compraitem`
   ADD UNIQUE KEY `idcompraitem` (`idcompraitem`),
   ADD KEY `fkcompraitem_1` (`idcompra`),
   ADD KEY `fkcompraitem_2` (`idproducto`);
+
+--
+-- Indices de la tabla `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`idmenu`),
+  ADD UNIQUE KEY `idmenu` (`idmenu`),
+  ADD KEY `fkmenu_1` (`idpadre`);
+
+--
+-- Indices de la tabla `menurol`
+--
+ALTER TABLE `menurol`
+  ADD PRIMARY KEY (`idmenu`,`idrol`),
+  ADD KEY `fkmenurol_2` (`idrol`);
+
+--
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`idproducto`),
+  ADD UNIQUE KEY `idproducto` (`idproducto`);
+
+--
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`idrol`),
+  ADD UNIQUE KEY `idrol` (`idrol`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idusuario`),
+  ADD UNIQUE KEY `idusuario` (`idusuario`),
+  ADD UNIQUE KEY `usmail` (`usmail`);
+
+--
+-- Indices de la tabla `usuariorol`
+--
+ALTER TABLE `usuariorol`
+  ADD PRIMARY KEY (`idusuario`,`idrol`),
+  ADD KEY `idusuario` (`idusuario`),
+  ADD KEY `idrol` (`idrol`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `compra`
+--
+ALTER TABLE `compra`
+  MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+
+--
+-- AUTO_INCREMENT de la tabla `compraestado`
+--
+ALTER TABLE `compraestado`
+  MODIFY `idcompraestado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
+--
+-- AUTO_INCREMENT de la tabla `compraitem`
+--
+ALTER TABLE `compraitem`
+  MODIFY `idcompraitem` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT de la tabla `menu`
+--
+ALTER TABLE `menu`
+  MODIFY `idmenu` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+
+--
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT de la tabla `rol`
+--
+ALTER TABLE `rol`
+  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `compra`
+--
+ALTER TABLE `compra`
+  ADD CONSTRAINT `fkcompra_1` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `compraestado`
+--
+ALTER TABLE `compraestado`
+  ADD CONSTRAINT `fkcompraestado_1` FOREIGN KEY (`idcompra`) REFERENCES `compra` (`idcompra`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fkcompraestado_2` FOREIGN KEY (`idcompraestadotipo`) REFERENCES `compraestadotipo` (`idcompraestadotipo`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `compraitem`
+--
+ALTER TABLE `compraitem`
+  ADD CONSTRAINT `fkcompraitem_1` FOREIGN KEY (`idcompra`) REFERENCES `compra` (`idcompra`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fkcompraitem_2` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `menu`
+--
+ALTER TABLE `menu`
+  ADD CONSTRAINT `fkmenu_1` FOREIGN KEY (`idpadre`) REFERENCES `menu` (`idmenu`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `menurol`
+--
+ALTER TABLE `menurol`
+  ADD CONSTRAINT `fkmenurol_1` FOREIGN KEY (`idmenu`) REFERENCES `menu` (`idmenu`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fkmenurol_2` FOREIGN KEY (`idrol`) REFERENCES `rol` (`idrol`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usuariorol`
+--
+ALTER TABLE `usuariorol`
+  ADD CONSTRAINT `fkmovimiento_1` FOREIGN KEY (`idrol`) REFERENCES `rol` (`idrol`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuariorol_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
