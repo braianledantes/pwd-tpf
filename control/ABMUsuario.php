@@ -187,32 +187,41 @@ class ABMUsuario
         $objUs = new usuario();
         $objUs->setear($param['idusuario'], $param['usnombre'], $param['uspass'], $param['usmail'], $param['usdeshabilitado']);
         if ($objUs->modificar()) {
-            $suarioRol = new UsuarioRol();
-            $suarioRol->eliminarRolesDeUsuario($param['idusuario']);
-
-            // asigna los nuevos roles
-            $nuevosRoles = $param['roles'];
-            $abmUsuarioRol = new ABMUsuarioRol();
-            foreach ($nuevosRoles as $rol) {
-                $abmUsuarioRol->alta([
-                    'idusuario' => $param['idusuario'],
-                    'idrol' => $rol
-                ]);
-            }
+            $this->asignarNuevosRoles($param['idusuario'], $param['roles']);
             $resp = true;
         }
         return $resp;
     }
 
+    private function asignarNuevosRoles($idusuario, $nuevosRoles)
+    {
+        $usuarioRol = new UsuarioRol();
+        $usuarioRol->eliminarRolesDeUsuario($idusuario);
+        // asigna los roles al usuario
+        $abmUsuarioRol = new ABMUsuarioRol();
+        foreach ($nuevosRoles as $rol) {
+            $abmUsuarioRol->alta([
+                'idusuario' => $idusuario,
+                'idrol' => $rol
+            ]);
+        }
+    }
+
     public function modificacionSinContrasenia($param)
     {
-        $resp = false;
         $usuarios = $this->buscar(['idusuario' => $param['idusuario']]);
-        if (count($usuarios) > 0) {
-            $param['uspass'] = $usuarios[0]->getUspass();
-            $resp = $this->modificacion($param);
+        if (count($usuarios) <= 0) {
+            throw new Exception('El usuario no existe');
         }
-        return $resp;
+
+        $usuario = $usuarios[0];
+
+        $usuario->setUsnombre($param['usnombre']);
+        $usuario->setUsmail($param['usmail']);
+        $usuario->setUsdeshabilitado($param['usdeshabilitado']);
+
+        $usuario->modificar();
+        $this->asignarNuevosRoles($param['idusuario'], $param['roles']);
     }
 
     public function modificarNombreYMail($param)
