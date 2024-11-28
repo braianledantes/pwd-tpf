@@ -107,10 +107,6 @@ class ABMCompraEstado
         $param['cefechaini'] = null;
         $param['cefechafin'] = null;
 
-        if ($param['idcompraestadotipo'] >= 3) {
-            $param['cefechafin'] = date('Y-m-d H:i:s');
-        }
-
         // si el estado es 4 (cancelada) restaura el stock de los productos.
         if ($param['idcompraestadotipo'] == 4) {
             $abmCompraItem = new ABMCompraItem();

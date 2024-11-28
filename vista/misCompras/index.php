@@ -64,7 +64,6 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                                         <th>Compra ID</th>
                                         <th>Fecha de Inicio</th>
                                         <th>Ultimo Estado</th>
-                                        <th>Fecha Fin</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,7 +71,6 @@ if (!$session->estaActiva() || !$session->tieneAccesoAMenuActual()) {
                                         <td>${compra.idcompra}</p></td>
                                         <td>${compra.cofecha}</p></td>
                                         <td>${ultimoEstado.cetdescripcion}</td>
-                                        <td>${compra.ultimoestado.cefechaini}</td>
                                     </tr>
                                 </tbody>`;
                     

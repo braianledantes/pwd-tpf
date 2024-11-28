@@ -44,7 +44,6 @@ $lista = $abmCompra->buscar(null);
                             <th>Id Usuario</th>
                             <th>Fecha de Inicio</th>
                             <th>último Estado</th>
-                            <th>Fecha Fin</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -80,7 +79,6 @@ $lista = $abmCompra->buscar(null);
                                 <td>${compra.objusuario.idusuario}</td>
                                 <td>${compra.cofecha}</p></td>
                                 <td>${compra.ultimoestado.compraestadotipo.cetdescripcion}</td>
-                                <td>${compra.ultimoestado.cefechaini}</td>
                                 <td>
                                     <a href="./modificar.php?idcompra=${compra.idcompra}" class="btn btn-dark rounded-pill px-4">Ver</a>
                                 </td>
