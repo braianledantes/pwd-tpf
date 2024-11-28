@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2024 a las 17:32:16
+-- Tiempo de generación: 28-11-2024 a las 14:49:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -161,15 +161,11 @@ INSERT INTO `menurol` (`idmenu`, `idrol`) VALUES
 (82, 1),
 (83, 1),
 (84, 1),
+(84, 3),
 (85, 1),
-(86, 1),
 (86, 3),
-(87, 1),
 (87, 2),
-(87, 3),
-(88, 1),
-(88, 2),
-(88, 3);
+(88, 2);
 
 -- --------------------------------------------------------
 
@@ -235,10 +231,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
-(1, 'braian1686', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'braian.ledantes@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
-(2, 'clara4938', '$2y$10$Fiqc9ebHmi0Ql4NXA/bJjea4fwpzY8SCDk7IcRVTFWujYm3cl8dBW', 'clara.pelozo@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
-(3, 'luci3075', 'asdf1234', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
-(46, 'chutebnl', '$2y$10$Ldd9s8oC6REbpEbYb6Ihlu.0NI9xulPKgEB0S/jj3PxxgTd48wtTG', 'esponja2116@gmail.com', '0000-00-00 00:00:00');
+(1, 'admin1234', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'admin@angelwingsjewelry.com', '0000-00-00 00:00:00'),
+(2, 'clara4938', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'clara.pelozo@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
+(3, 'luci3075', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'luciana.romano@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00'),
+(46, 'braian1686', '$2y$10$jN7tLZm7lu4fdxsb9qxmE.mkQr1hURy6fIUGlSNbOnIoUJFm6YGIi', 'braian.ledantes@est.fi.uncoma.edu.ar', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -257,9 +253,11 @@ CREATE TABLE `usuariorol` (
 
 INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
 (1, 1),
-(2, 2),
-(3, 1),
-(46, 2);
+(1, 2),
+(1, 3),
+(2, 1),
+(3, 2),
+(46, 3);
 
 --
 -- Índices para tablas volcadas
@@ -435,4 +433,4 @@ COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CON
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
